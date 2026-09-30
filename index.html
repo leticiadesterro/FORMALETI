@@ -47,10 +47,9 @@
       width: 100%;
       min-height: 100%;
       overflow-x: hidden;
-
       background: var(--verde);
       color: var(--branco);
-
+      font-family: "Montserrat", Arial, sans-serif;
       -webkit-tap-highlight-color: transparent;
     }
 
@@ -79,19 +78,15 @@
 
     #animacao-principal {
       position: relative;
-
       width: 100%;
-
       height: 430vh;
       height: 430dvh;
-
       background: var(--verde);
     }
 
     #stage {
       position: sticky;
       top: 0;
-
       width: 100%;
 
       height: 100vh;
@@ -99,7 +94,6 @@
       height: 100dvh;
 
       overflow: hidden;
-
       background: var(--verde);
     }
 
@@ -123,7 +117,6 @@
     #imagem-15 {
       z-index: 4;
       opacity: 0;
-
       will-change: opacity;
     }
 
@@ -140,7 +133,6 @@
 
     #folha-14 {
       z-index: 6;
-
       opacity: 1;
 
       transform: translate3d(0, 0, 0);
@@ -150,7 +142,6 @@
 
     #folha-13 {
       z-index: 7;
-
       opacity: 1;
 
       transform: translate3d(0, 0, 0);
@@ -170,7 +161,6 @@
       z-index: 8;
 
       overflow: hidden;
-
       opacity: 0;
 
       pointer-events: none;
@@ -292,13 +282,10 @@
         sans-serif;
 
       font-size: 10px;
-
       font-weight: 600;
-
       letter-spacing: 2px;
 
       text-transform: uppercase;
-
       white-space: nowrap;
 
       pointer-events: none;
@@ -320,7 +307,6 @@
 
     #continuacao {
       position: relative;
-
       z-index: 20;
 
       width: 100%;
@@ -338,14 +324,10 @@
         no-repeat;
     }
 
-
-    /* transição preta discreta */
-
     #continuacao::before {
       content: "";
 
       position: absolute;
-
       z-index: 1;
 
       top: 0;
@@ -367,16 +349,14 @@
 
 
     /* =========================================================
-       CONVITE CENTRAL
+       CONTEÚDO CENTRALIZADO
     ========================================================= */
 
     .convite-minimal {
       position: relative;
-
       z-index: 5;
 
       width: min(100%, 620px);
-
       height: 100%;
 
       margin: 0 auto;
@@ -387,61 +367,63 @@
         env(safe-area-inset-bottom, 0px);
 
       display: flex;
-
       align-items: center;
       justify-content: center;
 
       text-align: center;
     }
 
-
-    /*
-       ESTE É O BLOCO QUE CENTRALIZA
-       TODO O CONVITE NA TELA
-    */
-
     .convite-conteudo {
       width: 100%;
-
-      transform: translateY(-1vh);
 
       display: flex;
       flex-direction: column;
 
       align-items: center;
+      justify-content: center;
+
+      transform: translateY(1vh);
     }
 
 
     /* =========================================================
        SAVE THE DATE
+       MONTSERRAT
     ========================================================= */
 
     .save-minimal {
       color: var(--ouro-claro);
 
       font-family:
-        "Bodoni Moda",
-        "Times New Roman",
-        serif;
+        "Montserrat",
+        Arial,
+        sans-serif;
 
       font-size:
         clamp(
-          20px,
-          5.6vw,
-          28px
+          13px,
+          3.6vw,
+          17px
         );
 
-      font-weight: 400;
+      font-weight: 500;
 
       line-height: 1;
 
-      letter-spacing: .08em;
+      letter-spacing:
+        clamp(
+          4px,
+          1.5vw,
+          7px
+        );
 
       text-transform: uppercase;
     }
 
 
-    /* pequeno ornamento */
+    /* =========================================================
+       ORNAMENTO
+    ========================================================= */
 
     .separador-superior {
       position: relative;
@@ -482,8 +464,8 @@
 
 
     /* =========================================================
-       DATA
-       CONTINUA MONTSERRAT
+       DATA PRINCIPAL
+       16 / 01 / 27 = BODONI MODA
     ========================================================= */
 
     .bloco-data {
@@ -504,20 +486,20 @@
       color: var(--branco);
 
       font-family:
-        "Montserrat",
-        Arial,
-        sans-serif;
+        "Bodoni Moda",
+        "Times New Roman",
+        serif;
 
       font-size:
         clamp(
-          60px,
-          17vw,
-          82px
+          64px,
+          18vw,
+          86px
         );
 
-      font-weight: 300;
+      font-weight: 400;
 
-      line-height: .82;
+      line-height: .78;
 
       letter-spacing: -4px;
 
@@ -526,20 +508,21 @@
 
     .data-vertical span {
       display: block;
-      line-height: .82;
+      line-height: .78;
     }
 
 
     /* =========================================================
-       BAILE
+       BAILE DE FORMATURA
+       MONTSERRAT
     ========================================================= */
 
     .bloco-baile {
       margin-top:
         clamp(
-          30px,
-          4.3vh,
-          43px
+          34px,
+          4.5vh,
+          46px
         );
 
       display: flex;
@@ -552,51 +535,61 @@
       color: var(--ouro-claro);
 
       font-family:
-        "Bodoni Moda",
-        "Times New Roman",
-        serif;
+        "Montserrat",
+        Arial,
+        sans-serif;
 
       font-size:
         clamp(
-          27px,
-          7.2vw,
-          38px
+          14px,
+          3.8vw,
+          19px
         );
 
-      font-weight: 400;
+      font-weight: 500;
 
-      line-height: 1.08;
+      line-height: 1.3;
 
-      letter-spacing: .01em;
+      letter-spacing:
+        clamp(
+          2.5px,
+          .9vw,
+          4.5px
+        );
+
+      text-transform: uppercase;
     }
 
     .local-baile {
-      margin-top: 8px;
+      margin-top: 12px;
 
       color: var(--branco);
 
       font-family:
-        "Bodoni Moda",
-        "Times New Roman",
-        serif;
+        "Montserrat",
+        Arial,
+        sans-serif;
 
       font-size:
         clamp(
-          16px,
-          4.2vw,
-          21px
+          10px,
+          2.8vw,
+          13px
         );
 
       font-weight: 400;
 
-      line-height: 1.1;
+      line-height: 1;
 
-      letter-spacing: .05em;
+      letter-spacing: 3px;
+
+      text-transform: uppercase;
     }
 
 
     /* =========================================================
        EVENTOS SECUNDÁRIOS
+       MONTSERRAT
     ========================================================= */
 
     .eventos-minimal {
@@ -604,9 +597,9 @@
 
       margin-top:
         clamp(
-          30px,
-          4.2vh,
-          43px
+          35px,
+          4.8vh,
+          48px
         );
 
       display: grid;
@@ -617,9 +610,9 @@
 
       gap:
         clamp(
-          22px,
-          7vw,
-          50px
+          18px,
+          5vw,
+          38px
         );
 
       align-items: start;
@@ -638,70 +631,80 @@
       color: var(--ouro-claro);
 
       font-family:
-        "Bodoni Moda",
-        "Times New Roman",
-        serif;
+        "Montserrat",
+        Arial,
+        sans-serif;
 
       font-size:
         clamp(
-          17px,
-          4.4vw,
-          22px
+          10px,
+          2.8vw,
+          13px
         );
 
-      font-weight: 400;
+      font-weight: 500;
 
-      line-height: 1.12;
+      line-height: 1.4;
+
+      letter-spacing:
+        clamp(
+          1.5px,
+          .6vw,
+          2.7px
+        );
+
+      text-transform: uppercase;
     }
 
     .evento-minimal time {
       display: block;
 
-      margin-top: 7px;
+      margin-top: 10px;
 
       color: var(--branco);
 
       font-family:
-        "Bodoni Moda",
-        "Times New Roman",
-        serif;
+        "Montserrat",
+        Arial,
+        sans-serif;
 
       font-size:
         clamp(
-          13px,
-          3.3vw,
-          16px
+          9px,
+          2.4vw,
+          11px
         );
 
       font-weight: 400;
 
       line-height: 1;
 
-      letter-spacing: .04em;
+      letter-spacing: 1.5px;
     }
 
 
     /* =========================================================
        BOTÃO
+       MONTSERRAT
     ========================================================= */
 
     .botao-rsvp-minimal {
       width: min(100%, 390px);
 
-      min-height: 55px;
+      min-height: 56px;
 
       margin-top:
         clamp(
-          29px,
-          4vh,
-          40px
+          35px,
+          4.8vh,
+          48px
         );
 
-      padding: 13px 18px;
+      padding: 14px 18px;
 
       border:
         1px solid
-        rgba(222, 183, 102, .82);
+        rgba(222, 183, 102, .85);
 
       background:
         rgba(2, 13, 8, .56);
@@ -709,22 +712,24 @@
       color: var(--ouro-claro);
 
       font-family:
-        "Bodoni Moda",
-        "Times New Roman",
-        serif;
+        "Montserrat",
+        Arial,
+        sans-serif;
 
       font-size:
         clamp(
-          16px,
-          4vw,
-          20px
+          10px,
+          2.7vw,
+          12px
         );
 
-      font-weight: 400;
+      font-weight: 600;
 
-      line-height: 1;
+      line-height: 1.2;
 
-      letter-spacing: .05em;
+      letter-spacing: 2.5px;
+
+      text-transform: uppercase;
 
       cursor: pointer;
 
@@ -744,17 +749,17 @@
       transform: scale(.985);
 
       background: var(--ouro-claro);
-
       color: var(--verde);
     }
 
 
     /* =========================================================
        FORMA LETI
+       MONTSERRAT
     ========================================================= */
 
     .forma-final {
-      margin-top: 13px;
+      margin-top: 14px;
 
       color: var(--ouro-claro);
 
@@ -796,7 +801,6 @@
 
     .revelar.visivel {
       opacity: 1;
-
       transform: translateY(0);
     }
 
@@ -807,7 +811,6 @@
 
     .tela-modal {
       position: fixed;
-
       z-index: 1000;
 
       inset: 0;
@@ -831,7 +834,6 @@
         no-repeat;
 
       opacity: 0;
-
       visibility: hidden;
 
       transform: translateY(14px);
@@ -845,7 +847,6 @@
     .tela-modal.aberto {
       opacity: 1;
       visibility: visible;
-
       transform: translateY(0);
     }
 
@@ -872,6 +873,11 @@
           55px +
           env(safe-area-inset-bottom, 0px)
         );
+
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
     }
 
     .rsvp-voltar {
@@ -889,7 +895,6 @@
         sans-serif;
 
       font-size: 11px;
-
       font-weight: 600;
 
       letter-spacing: 2px;
@@ -1017,7 +1022,6 @@
 
     .campo-rsvp textarea {
       min-height: 120px;
-
       resize: vertical;
     }
 
@@ -1034,7 +1038,6 @@
       padding: 14px 15px;
 
       display: flex;
-
       align-items: center;
 
       gap: 12px;
@@ -1074,7 +1077,7 @@
 
 
     /* =========================================================
-       BOTÕES FORM
+       BOTÕES DO FORMULÁRIO
     ========================================================= */
 
     .botao-enviar,
@@ -1092,7 +1095,6 @@
         sans-serif;
 
       font-size: 11px;
-
       font-weight: 600;
 
       letter-spacing: 2.5px;
@@ -1130,7 +1132,7 @@
 
 
     /* =========================================================
-       TELAS PÓS ENVIO
+       PÓS ENVIO
     ========================================================= */
 
     .tela-central {
@@ -1153,25 +1155,23 @@
         );
 
       display: flex;
-
       flex-direction: column;
 
       align-items: center;
       justify-content: center;
 
       text-align: center;
-    }
-
-    .mini-marca {
-      color: var(--ouro-claro);
 
       font-family:
         "Montserrat",
         Arial,
         sans-serif;
+    }
+
+    .mini-marca {
+      color: var(--ouro-claro);
 
       font-size: 10px;
-
       font-weight: 500;
 
       letter-spacing: 4px;
@@ -1183,11 +1183,6 @@
       margin-top: 34px;
 
       color: var(--ouro-claro);
-
-      font-family:
-        "Montserrat",
-        Arial,
-        sans-serif;
 
       font-size:
         clamp(
@@ -1210,11 +1205,6 @@
 
       color: var(--branco);
 
-      font-family:
-        "Montserrat",
-        Arial,
-        sans-serif;
-
       font-size:
         clamp(
           12px,
@@ -1231,7 +1221,6 @@
       margin-top: 48px;
 
       display: flex;
-
       flex-direction: column;
 
       gap: 13px;
@@ -1239,30 +1228,28 @@
 
 
     /* =========================================================
-       IPHONES / TELAS MAIS BAIXAS
+       TELAS BAIXAS
     ========================================================= */
 
     @media (max-height: 750px) {
 
       .convite-conteudo {
         transform:
-          translateY(-1vh)
+          translateY(1vh)
           scale(.90);
       }
 
     }
 
-
     @media (max-height: 670px) {
 
       .convite-conteudo {
         transform:
-          translateY(-1vh)
+          translateY(1vh)
           scale(.82);
       }
 
     }
-
 
     @media (max-width: 360px) {
 
@@ -1277,7 +1264,6 @@
       }
 
     }
-
 
     @media (min-width: 768px) {
 
@@ -1509,6 +1495,8 @@
       <form id="form-rsvp">
 
 
+        <!-- NOME PRIMEIRO -->
+
         <label class="campo-rsvp">
 
           <span>
@@ -1524,6 +1512,8 @@
 
         </label>
 
+
+        <!-- PRESENÇA -->
 
         <fieldset class="campo-rsvp">
 
@@ -1566,6 +1556,8 @@
         </fieldset>
 
 
+        <!-- HAVAIANAS -->
+
         <label class="campo-rsvp">
 
           <span>
@@ -1592,6 +1584,8 @@
 
         </label>
 
+
+        <!-- MENSAGEM -->
 
         <label class="campo-rsvp">
 
@@ -1710,7 +1704,7 @@
   </section>
 
 
-  <!-- GOOGLE FORMS -->
+  <!-- GOOGLE FORMS INVISÍVEL -->
 
   <iframe
     id="google-form-target"
@@ -1729,9 +1723,17 @@
 
   <script>
 
+    /* =========================================================
+       GOOGLE FORMS
+    ========================================================= */
+
     const GOOGLE_FORM_ACTION =
       "https://docs.google.com/forms/d/e/1FAIpQLSejMylO76VoWtWNbiHgJSzJbu15dI3I4nLhm6wOWNdAiYjmbA/formResponse";
 
+
+    /* =========================================================
+       ELEMENTOS
+    ========================================================= */
 
     const animationSection =
       document.getElementById("animacao-principal");
@@ -1779,6 +1781,10 @@
     let envioEmAndamento = false;
 
 
+    /* =========================================================
+       FUNÇÕES
+    ========================================================= */
+
     function clamp(value) {
 
       return Math.max(
@@ -1813,6 +1819,10 @@
 
     }
 
+
+    /* =========================================================
+       ENVELOPE
+    ========================================================= */
 
     function hideEnvelopeFrames() {
 
@@ -1862,7 +1872,9 @@
     }
 
 
-    /* BRILHOS PEQUENOS */
+    /* =========================================================
+       BRILHOS
+    ========================================================= */
 
     const quantidadeBrilhos = 26;
 
@@ -1915,6 +1927,10 @@
 
     }
 
+
+    /* =========================================================
+       ANIMAÇÃO PRINCIPAL
+    ========================================================= */
 
     function updateAnimation() {
 
@@ -2021,7 +2037,7 @@
       }
 
 
-      /* 13 */
+      /* 13 SAI */
 
       const p13 =
         easeInOut(
@@ -2043,7 +2059,7 @@
         1 - p13;
 
 
-      /* 14 */
+      /* 14 SAI */
 
       const p14 =
         easeInOut(
@@ -2149,7 +2165,9 @@
     );
 
 
-    /* REVELAÇÃO */
+    /* =========================================================
+       REVELAÇÃO
+    ========================================================= */
 
     const elementosRevelar =
       document.querySelectorAll(
@@ -2198,7 +2216,9 @@
     );
 
 
-    /* MODAIS */
+    /* =========================================================
+       MODAIS
+    ========================================================= */
 
     function abrirTela(tela) {
 
@@ -2274,6 +2294,10 @@
     }
 
 
+    /* =========================================================
+       RSVP
+    ========================================================= */
+
     document
       .getElementById("abrir-rsvp")
       .addEventListener(
@@ -2298,7 +2322,9 @@
       );
 
 
-    /* GOOGLE FORMS */
+    /* =========================================================
+       GOOGLE FORMS
+    ========================================================= */
 
     formRsvp.action =
       GOOGLE_FORM_ACTION;
@@ -2333,7 +2359,6 @@
               return;
             }
 
-
             envioEmAndamento =
               false;
 
@@ -2359,7 +2384,9 @@
     );
 
 
-    /* VOLTAR */
+    /* =========================================================
+       VOLTAR AO INÍCIO
+    ========================================================= */
 
     document
       .getElementById("voltar-inicio")
@@ -2378,7 +2405,9 @@
       );
 
 
-    /* CONCLUIR */
+    /* =========================================================
+       CONCLUIR
+    ========================================================= */
 
     document
       .getElementById("concluir")
@@ -2398,7 +2427,9 @@
       );
 
 
-    /* REINICIAR */
+    /* =========================================================
+       REINICIAR
+    ========================================================= */
 
     document
       .getElementById("reiniciar")
@@ -2424,7 +2455,9 @@
       );
 
 
-    /* PRELOAD */
+    /* =========================================================
+       PRELOAD
+    ========================================================= */
 
     [
       "01.png",
