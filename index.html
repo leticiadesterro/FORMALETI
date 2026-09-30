@@ -1,0 +1,3456 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
+  <meta name="theme-color" content="#020d08">
+
+  <title>Save the Date | Letícia Destêrro</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Montserrat:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    /* =========================================================
+       RESET
+    ========================================================= */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --verde: #020d08;
+      --verde-escuro: #010805;
+      --marfim: #f6efdf;
+      --marfim-suave: #ded3bd;
+      --ouro: #c89a46;
+      --ouro-claro: #deb766;
+    }
+
+    html {
+      width: 100%;
+      min-height: 100%;
+      background: var(--verde);
+      scroll-behavior: auto;
+    }
+
+    body {
+      width: 100%;
+      min-height: 100%;
+      overflow-x: hidden;
+      background: var(--verde);
+      color: var(--marfim);
+      -webkit-tap-highlight-color: transparent;
+      overscroll-behavior-x: none;
+    }
+
+    body.modal-aberto {
+      overflow: hidden;
+    }
+
+    img {
+      display: block;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      touch-action: manipulation;
+    }
+
+
+    /* =========================================================
+       ANIMAÇÃO PRINCIPAL
+    ========================================================= */
+
+    #animacao-principal {
+      position: relative;
+
+      width: 100%;
+
+      height: 430vh;
+      height: 430dvh;
+
+      background: var(--verde);
+    }
+
+    #stage {
+      position: sticky;
+      top: 0;
+
+      width: 100%;
+
+      height: 100vh;
+      height: 100svh;
+      height: 100dvh;
+
+      overflow: hidden;
+
+      background: var(--verde);
+    }
+
+
+    /* =========================================================
+       IMAGENS
+    ========================================================= */
+
+    .fullscreen-image {
+      position: absolute;
+      inset: 0;
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+      object-position: center center;
+
+      pointer-events: none;
+    }
+
+    #fundo {
+      z-index: 1;
+    }
+
+    #imagem-15 {
+      z-index: 4;
+
+      opacity: 0;
+
+      will-change: opacity;
+    }
+
+    #imagem-16 {
+      z-index: 5;
+
+      opacity: 0;
+
+      object-position: center center;
+
+      transform:
+        translate3d(
+          0,
+          -7.5%,
+          0
+        )
+        scale(1.01);
+
+      will-change:
+        opacity,
+        transform;
+    }
+
+    #folha-14 {
+      z-index: 6;
+
+      opacity: 1;
+
+      transform:
+        translate3d(
+          0,
+          0,
+          0
+        );
+
+      will-change:
+        transform,
+        opacity;
+    }
+
+    #folha-13 {
+      z-index: 7;
+
+      opacity: 1;
+
+      transform:
+        translate3d(
+          0,
+          0,
+          0
+        );
+
+      will-change:
+        transform,
+        opacity;
+    }
+
+
+    /* =========================================================
+       BRILHOS
+    ========================================================= */
+
+    #brilhos {
+      position: absolute;
+      inset: 0;
+
+      z-index: 8;
+
+      overflow: hidden;
+
+      opacity: 0;
+
+      pointer-events: none;
+
+      will-change: opacity;
+    }
+
+    .brilho {
+      position: absolute;
+
+      width: var(--tamanho);
+      height: auto;
+
+      opacity: 0;
+
+      pointer-events: none;
+
+      animation:
+        piscar
+        var(--duracao)
+        ease-in-out
+        var(--atraso)
+        infinite;
+
+      will-change:
+        opacity,
+        transform;
+    }
+
+    @keyframes piscar {
+
+      0% {
+        opacity: 0;
+        transform: scale(.70);
+      }
+
+      30% {
+        opacity: 0;
+        transform: scale(.82);
+      }
+
+      47% {
+        opacity: var(--intensidade);
+        transform: scale(1);
+      }
+
+      58% {
+        opacity: var(--intensidade);
+        transform: scale(1.06);
+      }
+
+      75% {
+        opacity: 0;
+        transform: scale(.82);
+      }
+
+      100% {
+        opacity: 0;
+        transform: scale(.70);
+      }
+    }
+
+
+    /* =========================================================
+       ENVELOPE
+
+       01 → 02 → 03 → 04 → 05
+
+       05 É A IMAGEM FINAL E DESLIZA PARA BAIXO.
+       NÃO EXISTE MAIS 06.PNG.
+    ========================================================= */
+
+    .frame-envelope {
+      z-index: 10;
+
+      display: none;
+    }
+
+    .frame-envelope.active {
+      display: block;
+    }
+
+    #envelope-final {
+      z-index: 10;
+
+      display: none;
+
+      transform:
+        translate3d(
+          0,
+          0,
+          0
+        );
+
+      will-change: transform;
+    }
+
+    #envelope-final.active {
+      display: block;
+    }
+
+
+    /* =========================================================
+       ROLE PARA REVELAR
+    ========================================================= */
+
+    #scroll-hint {
+      position: fixed;
+
+      z-index: 500;
+
+      left: 50%;
+
+      bottom:
+        calc(
+          22px +
+          env(
+            safe-area-inset-bottom,
+            0px
+          )
+        );
+
+      transform:
+        translateX(-50%);
+
+      min-width: 220px;
+      min-height: 62px;
+
+      padding:
+        11px
+        28px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 4px;
+
+      border:
+        1px solid
+        rgba(
+          222,
+          183,
+          102,
+          .90
+        );
+
+      border-radius: 999px;
+
+      background:
+        rgba(
+          2,
+          13,
+          8,
+          .91
+        );
+
+      backdrop-filter:
+        blur(12px);
+
+      -webkit-backdrop-filter:
+        blur(12px);
+
+      box-shadow:
+        0
+        8px
+        28px
+        rgba(
+          0,
+          0,
+          0,
+          .32
+        );
+
+      color:
+        var(--ouro-claro);
+
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
+      font-size: 11px;
+
+      font-weight: 600;
+
+      letter-spacing: 2.3px;
+
+      text-transform: uppercase;
+
+      white-space: nowrap;
+
+      pointer-events: none;
+
+      animation:
+        quicarCard
+        2.2s
+        ease-in-out
+        infinite;
+
+      transition:
+        opacity .5s ease,
+        visibility .5s ease;
+    }
+
+    #scroll-hint .seta {
+      font-size: 17px;
+      line-height: 1;
+    }
+
+    #scroll-hint.escondido {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    @keyframes quicarCard {
+
+      0%,
+      100% {
+        transform:
+          translateX(-50%)
+          translateY(0);
+      }
+
+      50% {
+        transform:
+          translateX(-50%)
+          translateY(7px);
+      }
+    }
+
+
+    /* =========================================================
+       PÁGINA FINAL
+    ========================================================= */
+
+    #continuacao {
+      position: relative;
+
+      z-index: 20;
+
+      width: 100%;
+
+      min-height: 100vh;
+      min-height: 100svh;
+      min-height: 100dvh;
+
+      overflow: hidden;
+
+      background:
+        var(--verde)
+        url("fundo final.png")
+        center center / cover
+        no-repeat;
+
+      color:
+        var(--marfim);
+    }
+
+    #continuacao::before {
+      content: "";
+
+      position: absolute;
+
+      z-index: 1;
+
+      top: -2px;
+      left: 0;
+
+      width: 100%;
+      height: 19vh;
+
+      pointer-events: none;
+
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, .98) 0%,
+          rgba(0, 0, 0, .78) 28%,
+          rgba(0, 0, 0, .36) 62%,
+          rgba(0, 0, 0, 0) 100%
+        );
+    }
+
+
+    /* =========================================================
+       CONVITE FINAL
+    ========================================================= */
+
+    .convite-minimal {
+      position: relative;
+
+      z-index: 5;
+
+      width:
+        min(
+          100%,
+          620px
+        );
+
+      height: 100vh;
+      height: 100svh;
+      height: 100dvh;
+
+      margin:
+        0
+        auto;
+
+      padding:
+        calc(
+          36px +
+          env(
+            safe-area-inset-top,
+            0px
+          )
+        )
+        clamp(
+          24px,
+          6vw,
+          48px
+        )
+        calc(
+          22px +
+          env(
+            safe-area-inset-bottom,
+            0px
+          )
+        );
+
+      display: grid;
+
+      grid-template-rows:
+        auto
+        .85fr
+        auto
+        .85fr
+        auto
+        .95fr
+        auto
+        .65fr
+        auto
+        auto;
+
+      align-items: center;
+
+      text-align: center;
+
+      overflow: hidden;
+    }
+
+
+    /* =========================================================
+       SAVE THE DATE
+
+       DESCIDO EM RELAÇÃO À VERSÃO ANTERIOR
+    ========================================================= */
+
+    .save-minimal {
+      grid-row: 1;
+
+      margin-top: 18px;
+
+      color:
+        var(--ouro-claro);
+
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
+      font-size:
+        clamp(
+          12px,
+          3.4vw,
+          16px
+        );
+
+      font-weight: 500;
+
+      letter-spacing:
+        clamp(
+          4px,
+          1.3vw,
+          7px
+        );
+
+      line-height: 1;
+
+      text-transform: uppercase;
+    }
+
+
+    /* =========================================================
+       DATA
+    ========================================================= */
+
+    .bloco-data {
+      grid-row: 3;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ornamento-data {
+      position: relative;
+
+      width: 1px;
+      height: 24px;
+
+      margin-bottom: 15px;
+
+      background:
+        linear-gradient(
+          to bottom,
+          transparent,
+          var(--ouro-claro)
+        );
+    }
+
+    .ornamento-data::after {
+      content: "";
+
+      position: absolute;
+
+      bottom: -2px;
+      left: 50%;
+
+      width: 5px;
+      height: 5px;
+
+      border:
+        1px solid
+        var(--ouro-claro);
+
+      background:
+        rgba(
+          2,
+          13,
+          8,
+          .8
+        );
+
+      transform:
+        translateX(-50%)
+        rotate(45deg);
+    }
+
+    .data-vertical {
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+      justify-content: center;
+
+      gap:
+        clamp(
+          4px,
+          1.2vh,
+          11px
+        );
+
+      color:
+        var(--marfim);
+
+      font-family:
+        "Bodoni Moda",
+        "Times New Roman",
+        serif;
+
+      font-size:
+        clamp(
+          59px,
+          17vw,
+          78px
+        );
+
+      font-weight: 400;
+
+      line-height: .82;
+
+      font-variant-numeric:
+        lining-nums;
+    }
+
+    .data-vertical span {
+      display: block;
+
+      line-height: .82;
+    }
+
+
+    /* =========================================================
+       BAILE
+    ========================================================= */
+
+    .bloco-baile {
+      grid-row: 5;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nome-baile {
+      color:
+        var(--marfim);
+
+      font-family:
+        "Bodoni Moda",
+        "Times New Roman",
+        serif;
+
+      font-size:
+        clamp(
+          28px,
+          7.8vw,
+          42px
+        );
+
+      font-weight: 400;
+
+      line-height: 1.05;
+    }
+
+    .local-baile {
+      margin-top: 10px;
+
+      color:
+        var(--ouro-claro);
+
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
+      font-size:
+        clamp(
+          9px,
+          2.7vw,
+          12px
+        );
+
+      font-weight: 500;
+
+      letter-spacing: 3px;
+
+      line-height: 1;
+
+      text-transform: uppercase;
+    }
+
+
+    /* =========================================================
+       EVENTOS
+    ========================================================= */
+
+    .eventos-minimal {
+      grid-row: 7;
+
+      width: 100%;
+
+      display: grid;
+
+      grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr);
+
+      gap:
+        clamp(
+          18px,
+          5vw,
+          40px
+        );
+    }
+
+    .evento-minimal {
+      position: relative;
+
+      min-width: 0;
+
+      padding-top: 17px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+    }
+
+    .evento-minimal::before {
+      content: "";
+
+      position: absolute;
+
+      top: 0;
+      left: 50%;
+
+      width: 65px;
+      height: 1px;
+
+      transform:
+        translateX(-50%);
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          var(--ouro-claro),
+          transparent
+        );
+    }
+
+    .evento-minimal h2 {
+      color:
+        var(--marfim);
+
+      font-family:
+        "Bodoni Moda",
+        "Times New Roman",
+        serif;
+
+      font-size:
+        clamp(
+          18px,
+          4.8vw,
+          25px
+        );
+
+      font-weight: 400;
+
+      line-height: 1.08;
+    }
+
+    .evento-minimal time {
+      display: block;
+
+      margin-top: 9px;
+
+      color:
+        var(--ouro-claro);
+
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
+      font-size:
+        clamp(
+          9px,
+          2.2vw,
+          11px
+        );
+
+      font-weight: 500;
+
+      letter-spacing: 1.5px;
+
+      line-height: 1;
+    }
+
+
+    /* =========================================================
+       BOTÃO PRINCIPAL
+    ========================================================= */
+
+    .botao-rsvp-minimal {
+      grid-row: 9;
+
+      justify-self: center;
+
+      width:
+        min(
+          100%,
+          400px
+        );
+
+      min-height: 62px;
+
+      padding:
+        15px
+        22px;
+
+      border:
+        1px solid
+        var(--ouro-claro);
+
+      background:
+        rgba(
+          2,
+          13,
+          8,
+          .74
+        );
+
+      color:
+        var(--ouro-claro);
+
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
+      font-size:
+        clamp(
+          11px,
+          2.8vw,
+          13px
+        );
+
+      font-weight: 600;
+
+      letter-spacing: 2.5px;
+
+      line-height: 1.2;
+
+      text-transform: uppercase;
+
+      cursor: pointer;
+
+      -webkit-appearance: none;
+      appearance: none;
+
+      backdrop-filter:
+        blur(8px);
+
+      -webkit-backdrop-filter:
+        blur(8px);
+
+      transition:
+        transform .2s ease,
+        background .2s ease,
+        color .2s ease;
+    }
+
+    .botao-rsvp-minimal:active {
+      transform:
+        scale(.98);
+
+      background:
+        var(--ouro);
+
+      color:
+        var(--verde);
+    }
+
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    .forma-final {
+      grid-row: 10;
+
+      margin-top: 14px;
+
+      color:
+        var(--ouro-claro);
+
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
+      font-size:
+        clamp(
+          10px,
+          2.5vw,
+          12px
+        );
+
+      font-weight: 500;
+
+      letter-spacing: 3px;
+
+      line-height: 1;
+
+      text-transform: uppercase;
+    }
+
+
+    /* =========================================================
+       REVELAÇÃO
+    ========================================================= */
+
+    .revelar {
+      opacity: 0;
+
+      transform:
+        translateY(10px);
+
+      transition:
+        opacity .8s ease,
+        transform .8s ease;
+    }
+
+    .revelar.visivel {
+      opacity: 1;
+
+      transform:
+        translateY(0);
+    }
+
+
+    /* =========================================================
+       MODAIS
+    ========================================================= */
+
+    .tela-modal {
+      position: fixed;
+
+      z-index: 1000;
+
+      inset: 0;
+
+      width: 100%;
+
+      height: 100vh;
+      height: 100dvh;
+
+      overflow-y: auto;
+
+      -webkit-overflow-scrolling: touch;
+
+      background:
+        linear-gradient(
+          rgba(1, 9, 6, .28),
+          rgba(1, 9, 6, .60)
+        ),
+        url("fundo final.png")
+        center top / cover
+        no-repeat;
+
+      opacity: 0;
+
+      visibility: hidden;
+
+      transform:
+        translateY(14px);
+
+      transition:
+        opacity .45s ease,
+        transform .45s ease,
+        visibility .45s ease;
+    }
+
+    .tela-modal.aberto {
+      opacity: 1;
+
+      visibility: visible;
+
+      transform:
+        translateY(0);
+    }
+
+
+    /* =========================================================
+       RSVP
+    ========================================================= */
+
+    .rsvp-pagina {
+      width:
+        min(
+          100%,
+          620px
+        );
+
+      min-height: 100vh;
+      min-height: 100dvh;
+
+      margin:
+        0
+        auto;
+
+      padding:
+        calc(
+          22px +
+          env(
+            safe-area-inset-top,
+            0px
+          )
+        )
+        clamp(
+          24px,
+          6vw,
+          48px
+        )
+        calc(
+          55px +
+          env(
+            safe-area-inset-bottom,
+            0px
+          )
+        );
+    }
+
+    .rsvp-voltar {
+      border: 0;
+
+      padding:
+        11px
+        0;
+
+      background:
+        transparent;
+
+      color:
+        var(--ouro-claro);
+
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
+      font-size: 11px;
+
+      font-weight: 600;
+
+      letter-spacing: 2px;
+
+      text-transform: uppercase;
+
+      cursor: pointer;
+    }
+
+    .rsvp-marca {
+      margin-top: 30px;
+      margin-bottom: 46px;
+
+      color:
+        var(--ouro-claro);
+
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
+      font-size:
+        clamp(
+          10px,
+          2.7vw,
+          12px
+        );
+
+      font-weight: 500;
+
+      letter-spacing: 4px;
+
+      line-height: 1;
+
+      text-align: center;
+
+      text-transform: uppercase;
+    }
+
+
+    /* =========================================================
+       FORMULÁRIO
+    ========================================================= */
+
+    #form-rsvp {
+      width: 100%;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 32px;
+    }
+
+    .campo-rsvp {
+      width: 100%;
+
+      min-width: 0;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 11px;
+
+      border: 0;
+    }
+
+    .campo-rsvp > span,
+    .campo-rsvp legend {
+      color:
+        var(--ouro-claro);
+
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
+      font-size:
+        clamp(
+          10px,
+          2.6vw,
+          12px
+        );
+
+      font-weight: 600;
+
+      line-height: 1.45;
+
+      letter-spacing: 1.5px;
+
+      text-transform: uppercase;
+    }
+
+    .campo-rsvp small {
+      opacity: .58;
+
+      font-size: 8px;
+    }
+
+
+    /* =========================================================
+       INPUTS
+    ========================================================= */
+
+    .campo-rsvp input[type="text"],
+    .campo-rsvp select,
+    .campo-rsvp textarea {
+      width: 100%;
+
+      min-height: 58px;
+
+      border:
+        1px solid
+        rgba(
+          222,
+          183,
+          102,
+          .58
+        );
+
+      border-radius: 0;
+
+      outline: none;
+
+      padding: 16px;
+
+      background:
+        rgba(
+          1,
+          10,
+          6,
+          .72
+        );
+
+      color:
+        var(--marfim);
+
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
+      font-size: 16px;
+
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .campo-rsvp input[type="text"]:focus,
+    .campo-rsvp select:focus,
+    .campo-rsvp textarea:focus {
+      border-color:
+        var(--ouro-claro);
+
+      box-shadow:
+        0
+        0
+        0
+        1px
+        rgba(
+          222,
+          183,
+          102,
+          .16
+        );
+    }
+
+    .campo-rsvp textarea {
+      min-height: 120px;
+
+      resize: vertical;
+    }
+
+    .campo-rsvp select option {
+      background:
+        var(--verde);
+
+      color:
+        var(--marfim);
+    }
+
+
+    /* =========================================================
+       OPÇÕES
+    ========================================================= */
+
+    .opcao-rsvp {
+      width: 100%;
+
+      min-height: 60px;
+
+      padding:
+        14px
+        15px;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      border:
+        1px solid
+        rgba(
+          222,
+          183,
+          102,
+          .42
+        );
+
+      background:
+        rgba(
+          1,
+          10,
+          6,
+          .64
+        );
+
+      color:
+        var(--marfim);
+
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
+      font-size:
+        clamp(
+          13px,
+          3.5vw,
+          15px
+        );
+
+      line-height: 1.35;
+
+      cursor: pointer;
+    }
+
+    .opcao-rsvp input {
+      width: 19px;
+      height: 19px;
+
+      flex-shrink: 0;
+
+      accent-color:
+        var(--ouro);
+    }
+
+
+    /* =========================================================
+       BOTÕES RSVP
+    ========================================================= */
+
+    .botao-enviar,
+    .botao-dourado {
+      width: 100%;
+
+      min-height: 64px;
+
+      border:
+        1px solid
+        var(--ouro-claro);
+
+      padding:
+        16px
+        20px;
+
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
+      font-size:
+        clamp(
+          10px,
+          2.7vw,
+          12px
+        );
+
+      font-weight: 600;
+
+      letter-spacing: 2.7px;
+
+      line-height: 1.2;
+
+      text-transform: uppercase;
+
+      cursor: pointer;
+
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .botao-enviar {
+      margin-top: 4px;
+
+      background:
+        #cda049;
+
+      color:
+        #07110b;
+    }
+
+    .botao-enviar:disabled {
+      opacity: .55;
+
+      cursor: wait;
+    }
+
+    .botao-dourado {
+      background:
+        var(--ouro);
+
+      color:
+        var(--verde);
+    }
+
+    .botao-contorno {
+      width: 100%;
+
+      min-height: 62px;
+
+      border:
+        1px solid
+        var(--ouro-claro);
+
+      padding:
+        15px
+        20px;
+
+      background:
+        rgba(
+          2,
+          13,
+          8,
+          .60
+        );
+
+      color:
+        var(--ouro-claro);
+
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
+      font-size: 10px;
+
+      font-weight: 600;
+
+      letter-spacing: 2.6px;
+
+      text-transform: uppercase;
+
+      cursor: pointer;
+    }
+
+
+    /* =========================================================
+       ERRO
+    ========================================================= */
+
+    #erro-envio {
+      display: none;
+
+      color:
+        var(--marfim);
+
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
+      font-size: 12px;
+
+      line-height: 1.5;
+
+      text-align: center;
+    }
+
+    #erro-envio.visivel {
+      display: block;
+    }
+
+
+    /* =========================================================
+       TELAS FINAIS
+    ========================================================= */
+
+    .tela-central {
+      width:
+        min(
+          100%,
+          620px
+        );
+
+      min-height: 100vh;
+      min-height: 100dvh;
+
+      margin:
+        0
+        auto;
+
+      padding:
+        calc(
+          35px +
+          env(
+            safe-area-inset-top,
+            0px
+          )
+        )
+        clamp(
+          28px,
+          7vw,
+          50px
+        )
+        calc(
+          35px +
+          env(
+            safe-area-inset-bottom,
+            0px
+          )
+        );
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+    }
+
+    .mini-marca {
+      color:
+        var(--ouro-claro);
+
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
+      font-size: 10px;
+
+      font-weight: 500;
+
+      letter-spacing: 4px;
+
+      text-transform: uppercase;
+    }
+
+    .titulo-pos-envio {
+      margin-top: 30px;
+
+      color:
+        var(--marfim);
+
+      font-family:
+        "Bodoni Moda",
+        "Times New Roman",
+        serif;
+
+      font-size:
+        clamp(
+          38px,
+          10vw,
+          54px
+        );
+
+      font-weight: 400;
+
+      line-height: 1.05;
+    }
+
+    .texto-pos-envio {
+      max-width: 360px;
+
+      margin-top: 18px;
+
+      color:
+        var(--marfim-suave);
+
+      font-family:
+        "Bodoni Moda",
+        "Times New Roman",
+        serif;
+
+      font-size:
+        clamp(
+          17px,
+          4.4vw,
+          20px
+        );
+
+      line-height: 1.45;
+    }
+
+    .acoes-pos-envio {
+      width:
+        min(
+          100%,
+          380px
+        );
+
+      margin-top: 48px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 13px;
+    }
+
+
+    /* =========================================================
+       TELAS BAIXAS
+    ========================================================= */
+
+    @media (max-height: 720px) {
+
+      .convite-minimal {
+        padding-top:
+          calc(
+            22px +
+            env(
+              safe-area-inset-top,
+              0px
+            )
+          );
+
+        padding-bottom:
+          calc(
+            14px +
+            env(
+              safe-area-inset-bottom,
+              0px
+            )
+          );
+
+        grid-template-rows:
+          auto
+          .55fr
+          auto
+          .55fr
+          auto
+          .60fr
+          auto
+          .45fr
+          auto
+          auto;
+      }
+
+      .save-minimal {
+        margin-top: 14px;
+      }
+
+      .ornamento-data {
+        height: 18px;
+
+        margin-bottom: 10px;
+      }
+
+      .data-vertical {
+        font-size:
+          clamp(
+            49px,
+            14vw,
+            62px
+          );
+
+        gap: 4px;
+      }
+
+      .nome-baile {
+        font-size:
+          clamp(
+            25px,
+            7vw,
+            34px
+          );
+      }
+
+      .evento-minimal {
+        padding-top: 12px;
+      }
+
+      .evento-minimal h2 {
+        font-size:
+          clamp(
+            16px,
+            4.5vw,
+            20px
+          );
+      }
+
+      .botao-rsvp-minimal {
+        min-height: 50px;
+      }
+
+      .forma-final {
+        margin-top: 9px;
+      }
+
+      .rsvp-marca {
+        margin-top: 20px;
+        margin-bottom: 34px;
+      }
+
+      #form-rsvp {
+        gap: 26px;
+      }
+    }
+
+
+    /* =========================================================
+       CELULARES ESTREITOS
+    ========================================================= */
+
+    @media (max-width: 360px) {
+
+      .convite-minimal,
+      .rsvp-pagina {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      #scroll-hint {
+        min-width: 200px;
+        min-height: 58px;
+
+        font-size: 10px;
+      }
+
+      .eventos-minimal {
+        gap: 12px;
+      }
+
+      .evento-minimal h2 {
+        font-size: 17px;
+      }
+    }
+
+
+    /* =========================================================
+       DESKTOP
+    ========================================================= */
+
+    @media (min-width: 768px) {
+
+      body {
+        background:
+          var(--verde-escuro);
+      }
+
+      .convite-minimal,
+      .rsvp-pagina,
+      .tela-central {
+        width:
+          min(
+            92vw,
+            620px
+          );
+      }
+    }
+
+
+    /* =========================================================
+       REDUÇÃO DE MOVIMENTO
+    ========================================================= */
+
+    @media (prefers-reduced-motion: reduce) {
+
+      #scroll-hint {
+        animation: none;
+      }
+
+      .revelar {
+        transition: none;
+      }
+
+      .brilho {
+        animation-duration: 8s;
+      }
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =======================================================
+       ROLE PARA REVELAR
+  ======================================================== -->
+
+  <div id="scroll-hint">
+
+    <span>
+      Role para revelar
+    </span>
+
+    <span class="seta">
+      ↓
+    </span>
+
+  </div>
+
+
+  <!-- =======================================================
+       ANIMAÇÃO PRINCIPAL
+  ======================================================== -->
+
+  <section id="animacao-principal">
+
+    <div id="stage">
+
+
+      <img
+        id="fundo"
+        class="fullscreen-image"
+        src="fundo.png"
+        alt=""
+        draggable="false"
+      >
+
+
+      <img
+        id="imagem-15"
+        class="fullscreen-image"
+        src="15.png"
+        alt=""
+        draggable="false"
+      >
+
+
+      <img
+        id="imagem-16"
+        class="fullscreen-image"
+        src="16.png"
+        alt=""
+        draggable="false"
+      >
+
+
+      <img
+        id="folha-14"
+        class="fullscreen-image"
+        src="14.png"
+        alt=""
+        draggable="false"
+      >
+
+
+      <img
+        id="folha-13"
+        class="fullscreen-image"
+        src="13.png"
+        alt=""
+        draggable="false"
+      >
+
+
+      <div id="brilhos"></div>
+
+
+      <!--
+        FRAMES DO ENVELOPE:
+        01 → 02 → 03 → 04
+      -->
+
+      <img
+        src="01.png"
+        class="fullscreen-image frame-envelope active"
+        alt=""
+        draggable="false"
+      >
+
+
+      <img
+        src="02.png"
+        class="fullscreen-image frame-envelope"
+        alt=""
+        draggable="false"
+      >
+
+
+      <img
+        src="03.png"
+        class="fullscreen-image frame-envelope"
+        alt=""
+        draggable="false"
+      >
+
+
+      <img
+        src="04.png"
+        class="fullscreen-image frame-envelope"
+        alt=""
+        draggable="false"
+      >
+
+
+      <!--
+        05 É A IMAGEM FINAL.
+        ELA PRÓPRIA DESLIZA PARA BAIXO.
+      -->
+
+      <img
+        id="envelope-final"
+        class="fullscreen-image"
+        src="05.png"
+        alt=""
+        draggable="false"
+      >
+
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       PÁGINA FINAL
+  ======================================================== -->
+
+  <section id="continuacao">
+
+    <main class="convite-minimal">
+
+
+      <p class="save-minimal revelar">
+        Save the Date
+      </p>
+
+
+      <div class="bloco-data revelar">
+
+        <div class="ornamento-data"></div>
+
+
+        <div class="data-vertical">
+
+          <span>16</span>
+
+          <span>01</span>
+
+          <span>27</span>
+
+        </div>
+
+      </div>
+
+
+      <div class="bloco-baile revelar">
+
+        <h1 class="nome-baile">
+          Baile de Formatura
+        </h1>
+
+        <p class="local-baile">
+          São Luís Hall
+        </p>
+
+      </div>
+
+
+      <section class="eventos-minimal">
+
+
+        <article class="evento-minimal revelar">
+
+          <h2>
+            Culto Ecumênico
+          </h2>
+
+          <time datetime="2027-01-11">
+            11 • 01 • 2027
+          </time>
+
+        </article>
+
+
+        <article class="evento-minimal revelar">
+
+          <h2>
+            Colação de Grau
+          </h2>
+
+          <time datetime="2027-01-12">
+            12 • 01 • 2027
+          </time>
+
+        </article>
+
+
+      </section>
+
+
+      <button
+        type="button"
+        id="abrir-rsvp"
+        class="botao-rsvp-minimal revelar"
+      >
+        Confirme sua presença
+      </button>
+
+
+      <p class="forma-final revelar">
+        Forma Leti • 2026
+      </p>
+
+
+    </main>
+
+  </section>
+
+
+  <!-- =======================================================
+       RSVP
+  ======================================================== -->
+
+  <section
+    id="tela-rsvp"
+    class="tela-modal"
+    aria-hidden="true"
+  >
+
+    <div class="rsvp-pagina">
+
+
+      <button
+        type="button"
+        id="fechar-rsvp"
+        class="rsvp-voltar"
+      >
+        ← Voltar
+      </button>
+
+
+      <p class="rsvp-marca">
+        Forma Leti • 2026
+      </p>
+
+
+      <form id="form-rsvp">
+
+
+        <!-- 1. NOME -->
+
+        <label class="campo-rsvp">
+
+          <span>
+            Nome do convidado
+          </span>
+
+          <input
+            id="nome-convidado"
+            type="text"
+            name="entry.62577334"
+            autocomplete="name"
+            required
+          >
+
+        </label>
+
+
+        <!-- 2. PRESENÇA -->
+
+        <fieldset class="campo-rsvp">
+
+          <legend>
+            Você estará presente?
+          </legend>
+
+
+          <label class="opcao-rsvp">
+
+            <input
+              type="radio"
+              name="entry.877086558"
+              value="Sim, confirmo minha presença."
+              required
+            >
+
+            <span>
+              Sim, confirmo minha presença
+            </span>
+
+          </label>
+
+
+          <label class="opcao-rsvp">
+
+            <input
+              type="radio"
+              name="entry.877086558"
+              value="Não poderei comparecer"
+              required
+            >
+
+            <span>
+              Não poderei comparecer
+            </span>
+
+          </label>
+
+        </fieldset>
+
+
+        <!-- 3. HAVAIANAS -->
+
+        <label class="campo-rsvp">
+
+          <span>
+            Numeração das Havaianas
+          </span>
+
+          <select
+            name="entry.240675889"
+            required
+          >
+
+            <option value="">
+              Selecione
+            </option>
+
+            <option value="33/34">
+              33/34
+            </option>
+
+            <option value="35/36">
+              35/36
+            </option>
+
+            <option value="37/38">
+              37/38
+            </option>
+
+            <option value="39/40">
+              39/40
+            </option>
+
+            <option value="41/42">
+              41/42
+            </option>
+
+            <option value="43/44">
+              43/44
+            </option>
+
+          </select>
+
+        </label>
+
+
+        <!-- 4. MENSAGEM -->
+
+        <label class="campo-rsvp">
+
+          <span>
+            Deixe uma mensagem
+            <small>
+              opcional
+            </small>
+          </span>
+
+          <textarea
+            name="entry.2606285"
+            rows="5"
+          ></textarea>
+
+        </label>
+
+
+        <p id="erro-envio">
+          Não foi possível concluir o envio.
+          Tente novamente.
+        </p>
+
+
+        <button
+          id="botao-enviar"
+          type="submit"
+          class="botao-enviar"
+        >
+          Enviar resposta
+        </button>
+
+
+      </form>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       RESPOSTA ENVIADA
+  ======================================================== -->
+
+  <section
+    id="tela-enviado"
+    class="tela-modal"
+    aria-hidden="true"
+  >
+
+    <div class="tela-central">
+
+
+      <p class="mini-marca">
+        Forma Leti • 2026
+      </p>
+
+
+      <h2 class="titulo-pos-envio">
+        Resposta enviada
+      </h2>
+
+
+      <p class="texto-pos-envio">
+        Sua resposta foi registrada.
+      </p>
+
+
+      <div class="acoes-pos-envio">
+
+
+        <button
+          type="button"
+          id="voltar-inicio"
+          class="botao-contorno"
+        >
+          Voltar ao início
+        </button>
+
+
+        <button
+          type="button"
+          id="concluir"
+          class="botao-dourado"
+        >
+          Concluir
+        </button>
+
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       AGRADECIMENTO
+  ======================================================== -->
+
+  <section
+    id="tela-agradecimento"
+    class="tela-modal"
+    aria-hidden="true"
+  >
+
+    <div class="tela-central">
+
+
+      <p class="mini-marca">
+        Forma Leti • 2026
+      </p>
+
+
+      <h2 class="titulo-pos-envio">
+        Obrigada
+      </h2>
+
+
+      <p
+        id="texto-agradecimento"
+        class="texto-pos-envio"
+      >
+        Obrigada por confirmar sua presença.
+        Aguardo você no meu evento.
+      </p>
+
+
+      <div class="acoes-pos-envio">
+
+        <button
+          type="button"
+          id="reiniciar"
+          class="botao-dourado"
+        >
+          Reiniciar
+        </button>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       GOOGLE FORMS
+  ======================================================== -->
+
+  <iframe
+    id="google-form-target"
+    name="google-form-target"
+    title="Envio do formulário"
+    style="
+      position:absolute;
+      width:1px;
+      height:1px;
+      border:0;
+      opacity:0;
+      pointer-events:none;
+    "
+  ></iframe>
+
+
+  <script>
+
+    /* =========================================================
+       GOOGLE FORMS
+    ========================================================= */
+
+    const GOOGLE_FORM_ACTION =
+      "https://docs.google.com/forms/d/e/1FAIpQLSejMylO76VoWtWNbiHgJSzJbu15dI3I4nLhm6wOWNdAiYjmbA/formResponse";
+
+
+    /* =========================================================
+       ELEMENTOS
+    ========================================================= */
+
+    const animationSection =
+      document.getElementById(
+        "animacao-principal"
+      );
+
+
+    const scrollHint =
+      document.getElementById(
+        "scroll-hint"
+      );
+
+
+    /*
+      AGORA EXISTEM SOMENTE
+      4 FRAMES ANTES DO FINAL:
+
+      01
+      02
+      03
+      04
+
+      05 = FINAL
+    */
+
+    const envelopeFrames =
+      document.querySelectorAll(
+        ".frame-envelope"
+      );
+
+
+    const envelopeFinal =
+      document.getElementById(
+        "envelope-final"
+      );
+
+
+    const folha13 =
+      document.getElementById(
+        "folha-13"
+      );
+
+
+    const folha14 =
+      document.getElementById(
+        "folha-14"
+      );
+
+
+    const imagem15 =
+      document.getElementById(
+        "imagem-15"
+      );
+
+
+    const imagem16 =
+      document.getElementById(
+        "imagem-16"
+      );
+
+
+    const brilhos =
+      document.getElementById(
+        "brilhos"
+      );
+
+
+    const telaRsvp =
+      document.getElementById(
+        "tela-rsvp"
+      );
+
+
+    const telaEnviado =
+      document.getElementById(
+        "tela-enviado"
+      );
+
+
+    const telaAgradecimento =
+      document.getElementById(
+        "tela-agradecimento"
+      );
+
+
+    const formRsvp =
+      document.getElementById(
+        "form-rsvp"
+      );
+
+
+    const botaoEnviar =
+      document.getElementById(
+        "botao-enviar"
+      );
+
+
+    const erroEnvio =
+      document.getElementById(
+        "erro-envio"
+      );
+
+
+    const nomeConvidado =
+      document.getElementById(
+        "nome-convidado"
+      );
+
+
+    let ticking = false;
+
+    let envioEmAndamento = false;
+
+    let ultimoNome = "";
+
+
+    /* =========================================================
+       FUNÇÕES AUXILIARES
+    ========================================================= */
+
+    function clamp(value) {
+
+      return Math.max(
+        0,
+        Math.min(
+          1,
+          value
+        )
+      );
+
+    }
+
+
+    function rangeProgress(
+      progress,
+      start,
+      end
+    ) {
+
+      return clamp(
+        (
+          progress -
+          start
+        )
+        /
+        (
+          end -
+          start
+        )
+      );
+
+    }
+
+
+    function easeInOut(value) {
+
+      return (
+        value *
+        value *
+        (
+          3 -
+          2 * value
+        )
+      );
+
+    }
+
+
+    /* =========================================================
+       ENVELOPE
+    ========================================================= */
+
+    function hideEnvelopeFrames() {
+
+      envelopeFrames.forEach(
+        function(frame) {
+
+          frame
+            .classList
+            .remove(
+              "active"
+            );
+
+        }
+      );
+
+    }
+
+
+    function showEnvelopeFrame(index) {
+
+      hideEnvelopeFrames();
+
+
+      envelopeFinal
+        .classList
+        .remove(
+          "active"
+        );
+
+
+      index =
+        Math.max(
+          0,
+          Math.min(
+            envelopeFrames.length - 1,
+            index
+          )
+        );
+
+
+      envelopeFrames[index]
+        .classList
+        .add(
+          "active"
+        );
+
+    }
+
+
+    function showEnvelopeFinal() {
+
+      hideEnvelopeFrames();
+
+
+      envelopeFinal
+        .classList
+        .add(
+          "active"
+        );
+
+    }
+
+
+    /* =========================================================
+       BRILHOS
+    ========================================================= */
+
+    const quantidadeBrilhos = 26;
+
+
+    for (
+      let i = 0;
+      i < quantidadeBrilhos;
+      i++
+    ) {
+
+      const brilho =
+        document.createElement(
+          "img"
+        );
+
+
+      brilho.src =
+        "brilho.png";
+
+
+      brilho.className =
+        "brilho";
+
+
+      brilho.alt =
+        "";
+
+
+      brilho.draggable =
+        false;
+
+
+      brilho.style.left =
+        (
+          2 +
+          Math.random() * 94
+        )
+        +
+        "%";
+
+
+      brilho.style.top =
+        (
+          2 +
+          Math.random() * 94
+        )
+        +
+        "%";
+
+
+      brilho.style.setProperty(
+        "--tamanho",
+        (
+          10 +
+          Math.random() * 36
+        )
+        +
+        "px"
+      );
+
+
+      brilho.style.setProperty(
+        "--duracao",
+        (
+          3.5 +
+          Math.random() * 4
+        )
+        +
+        "s"
+      );
+
+
+      brilho.style.setProperty(
+        "--atraso",
+        (
+          -Math.random() * 8
+        )
+        +
+        "s"
+      );
+
+
+      brilho.style.setProperty(
+        "--intensidade",
+        (
+          .35 +
+          Math.random() * .65
+        )
+      );
+
+
+      brilhos.appendChild(
+        brilho
+      );
+
+    }
+
+
+    /* =========================================================
+       ANIMAÇÃO PRINCIPAL
+
+       01 → 02 → 03 → 04 → 05
+
+       DEPOIS:
+       05 DESLIZA PARA BAIXO.
+    ========================================================= */
+
+    function updateAnimation() {
+
+
+      const rect =
+        animationSection
+          .getBoundingClientRect();
+
+
+      const viewportHeight =
+        window.innerHeight;
+
+
+      const totalScroll =
+        Math.max(
+          1,
+          animationSection.offsetHeight -
+          viewportHeight
+        );
+
+
+      const travelled =
+        -rect.top;
+
+
+      const progress =
+        clamp(
+          travelled /
+          totalScroll
+        );
+
+
+      /* =====================================================
+         ABERTURA
+
+         01 → 02 → 03 → 04 → 05
+      ===================================================== */
+
+      const openingProgress =
+        rangeProgress(
+          progress,
+          0,
+          .15
+        );
+
+
+      /*
+        Temos 5 estados:
+
+        0 = 01
+        1 = 02
+        2 = 03
+        3 = 04
+        4 = 05
+      */
+
+      let openingState =
+        Math.floor(
+          openingProgress *
+          5
+        );
+
+
+      openingState =
+        Math.min(
+          4,
+          openingState
+        );
+
+
+      if (
+        progress < .15
+      ) {
+
+        if (
+          openingState < 4
+        ) {
+
+          showEnvelopeFrame(
+            openingState
+          );
+
+        }
+
+        else {
+
+          showEnvelopeFinal();
+
+        }
+
+      }
+
+
+      /* =====================================================
+         05 DESLIZA PARA BAIXO
+      ===================================================== */
+
+      const envelopeExitProgress =
+        easeInOut(
+          rangeProgress(
+            progress,
+            .15,
+            .31
+          )
+        );
+
+
+      if (
+        progress >= .15
+      ) {
+
+        showEnvelopeFinal();
+
+
+        envelopeFinal.style.transform =
+          `translate3d(
+            0,
+            ${122 * envelopeExitProgress}%,
+            0
+          )`;
+
+      }
+
+      else {
+
+        envelopeFinal.style.transform =
+          "translate3d(0,0,0)";
+
+      }
+
+
+      if (
+        progress >= .31
+      ) {
+
+        envelopeFinal
+          .classList
+          .remove(
+            "active"
+          );
+
+      }
+
+
+      /* =====================================================
+         13 SAI PARA ESQUERDA
+      ===================================================== */
+
+      const folha13Progress =
+        easeInOut(
+          rangeProgress(
+            progress,
+            .31,
+            .48
+          )
+        );
+
+
+      folha13.style.transform =
+        `translate3d(
+          ${-120 * folha13Progress}%,
+          0,
+          0
+        )`;
+
+
+      folha13.style.opacity =
+        1 -
+        folha13Progress;
+
+
+      /* =====================================================
+         14 SAI PARA DIREITA
+      ===================================================== */
+
+      const folha14Progress =
+        easeInOut(
+          rangeProgress(
+            progress,
+            .48,
+            .65
+          )
+        );
+
+
+      folha14.style.transform =
+        `translate3d(
+          ${120 * folha14Progress}%,
+          0,
+          0
+        )`;
+
+
+      folha14.style.opacity =
+        1 -
+        folha14Progress;
+
+
+      /* =====================================================
+         FOTO 15
+      ===================================================== */
+
+      const foto15Progress =
+        easeInOut(
+          rangeProgress(
+            progress,
+            .31,
+            .65
+          )
+        );
+
+
+      imagem15.style.opacity =
+        foto15Progress;
+
+
+      brilhos.style.opacity =
+        foto15Progress;
+
+
+      /* =====================================================
+         IMAGEM 16
+      ===================================================== */
+
+      const imagem16Progress =
+        easeInOut(
+          rangeProgress(
+            progress,
+            .69,
+            .88
+          )
+        );
+
+
+      imagem16.style.opacity =
+        imagem16Progress;
+
+
+      /* =====================================================
+         CARD SOME NO FINAL
+      ===================================================== */
+
+      if (
+        progress >= .96
+      ) {
+
+        scrollHint
+          .classList
+          .add(
+            "escondido"
+          );
+
+      }
+
+      else {
+
+        scrollHint
+          .classList
+          .remove(
+            "escondido"
+          );
+
+      }
+
+
+      ticking = false;
+
+    }
+
+
+    /* =========================================================
+       SCROLL
+    ========================================================= */
+
+    window.addEventListener(
+      "scroll",
+      function() {
+
+        if (
+          !ticking
+        ) {
+
+          requestAnimationFrame(
+            updateAnimation
+          );
+
+
+          ticking = true;
+
+        }
+
+      },
+      {
+        passive: true
+      }
+    );
+
+
+    window.addEventListener(
+      "resize",
+      updateAnimation
+    );
+
+
+    window.addEventListener(
+      "orientationchange",
+      function() {
+
+        setTimeout(
+          updateAnimation,
+          120
+        );
+
+      }
+    );
+
+
+    /* =========================================================
+       REVELAÇÃO
+    ========================================================= */
+
+    const elementosRevelar =
+      document.querySelectorAll(
+        ".revelar"
+      );
+
+
+    const observer =
+      new IntersectionObserver(
+
+        function(entries) {
+
+          entries.forEach(
+            function(entry) {
+
+              if (
+                entry.isIntersecting
+              ) {
+
+                entry.target
+                  .classList
+                  .add(
+                    "visivel"
+                  );
+
+              }
+
+            }
+          );
+
+        },
+
+        {
+          threshold: .05
+        }
+
+      );
+
+
+    elementosRevelar.forEach(
+      function(elemento) {
+
+        observer.observe(
+          elemento
+        );
+
+      }
+    );
+
+
+    /* =========================================================
+       MODAIS
+    ========================================================= */
+
+    function abrirTela(tela) {
+
+      tela
+        .classList
+        .add(
+          "aberto"
+        );
+
+
+      tela.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+
+
+      tela.scrollTop = 0;
+
+
+      document.body
+        .classList
+        .add(
+          "modal-aberto"
+        );
+
+    }
+
+
+    function fecharTela(tela) {
+
+      tela
+        .classList
+        .remove(
+          "aberto"
+        );
+
+
+      tela.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+
+
+      if (
+        !document.querySelector(
+          ".tela-modal.aberto"
+        )
+      ) {
+
+        document.body
+          .classList
+          .remove(
+            "modal-aberto"
+          );
+
+      }
+
+    }
+
+
+    function fecharTodasAsTelas() {
+
+      document
+        .querySelectorAll(
+          ".tela-modal"
+        )
+        .forEach(
+          function(tela) {
+
+            tela
+              .classList
+              .remove(
+                "aberto"
+              );
+
+
+            tela.setAttribute(
+              "aria-hidden",
+              "true"
+            );
+
+          }
+        );
+
+
+      document.body
+        .classList
+        .remove(
+          "modal-aberto"
+        );
+
+    }
+
+
+    /* =========================================================
+       ABRIR RSVP
+    ========================================================= */
+
+    document
+      .getElementById(
+        "abrir-rsvp"
+      )
+      .addEventListener(
+        "click",
+        function() {
+
+          abrirTela(
+            telaRsvp
+          );
+
+        }
+      );
+
+
+    document
+      .getElementById(
+        "fechar-rsvp"
+      )
+      .addEventListener(
+        "click",
+        function() {
+
+          fecharTela(
+            telaRsvp
+          );
+
+        }
+      );
+
+
+    /* =========================================================
+       GOOGLE FORMS
+    ========================================================= */
+
+    formRsvp.action =
+      GOOGLE_FORM_ACTION;
+
+
+    formRsvp.method =
+      "POST";
+
+
+    formRsvp.target =
+      "google-form-target";
+
+
+    formRsvp.addEventListener(
+      "submit",
+      function() {
+
+
+        erroEnvio
+          .classList
+          .remove(
+            "visivel"
+          );
+
+
+        ultimoNome =
+          nomeConvidado
+            .value
+            .trim();
+
+
+        envioEmAndamento =
+          true;
+
+
+        botaoEnviar.disabled =
+          true;
+
+
+        botaoEnviar.textContent =
+          "Enviando...";
+
+
+        /*
+          NÃO TEM preventDefault().
+          O formulário realmente é enviado
+          ao Google Forms.
+        */
+
+
+        setTimeout(
+          function() {
+
+            if (
+              !envioEmAndamento
+            ) {
+
+              return;
+
+            }
+
+
+            envioEmAndamento =
+              false;
+
+
+            botaoEnviar.disabled =
+              false;
+
+
+            botaoEnviar.textContent =
+              "Enviar resposta";
+
+
+            fecharTela(
+              telaRsvp
+            );
+
+
+            abrirTela(
+              telaEnviado
+            );
+
+          },
+          900
+        );
+
+      }
+    );
+
+
+    /* =========================================================
+       VOLTAR AO INÍCIO
+    ========================================================= */
+
+    document
+      .getElementById(
+        "voltar-inicio"
+      )
+      .addEventListener(
+        "click",
+        function() {
+
+          fecharTodasAsTelas();
+
+
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          });
+
+        }
+      );
+
+
+    /* =========================================================
+       CONCLUIR
+    ========================================================= */
+
+    document
+      .getElementById(
+        "concluir"
+      )
+      .addEventListener(
+        "click",
+        function() {
+
+          fecharTela(
+            telaEnviado
+          );
+
+
+          abrirTela(
+            telaAgradecimento
+          );
+
+        }
+      );
+
+
+    /* =========================================================
+       REINICIAR
+    ========================================================= */
+
+    document
+      .getElementById(
+        "reiniciar"
+      )
+      .addEventListener(
+        "click",
+        function() {
+
+
+          fecharTodasAsTelas();
+
+
+          formRsvp.reset();
+
+
+          ultimoNome =
+            "";
+
+
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          });
+
+
+          setTimeout(
+            updateAnimation,
+            500
+          );
+
+        }
+      );
+
+
+    /* =========================================================
+       PRELOAD
+
+       06.PNG FOI REMOVIDA COMPLETAMENTE.
+    ========================================================= */
+
+    const imageFiles = [
+
+      "01.png",
+      "02.png",
+      "03.png",
+      "04.png",
+      "05.png",
+
+      "13.png",
+      "14.png",
+
+      "15.png",
+      "16.png",
+
+      "brilho.png",
+
+      "fundo.png",
+      "fundo final.png"
+
+    ];
+
+
+    imageFiles.forEach(
+      function(file) {
+
+        const image =
+          new Image();
+
+
+        image.src =
+          file;
+
+      }
+    );
+
+
+    /* =========================================================
+       INICIAR
+    ========================================================= */
+
+    updateAnimation();
+
+  </script>
+
+</body>
+
+</html>
