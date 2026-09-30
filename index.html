@@ -23,10 +23,6 @@
 
   <style>
 
-    /* =========================================================
-       RESET
-    ========================================================= */
-
     * {
       margin: 0;
       padding: 0;
@@ -83,12 +79,11 @@
 
 
     /* =========================================================
-       ANIMAÇÃO PRINCIPAL
+       ANIMAÇÃO
     ========================================================= */
 
     #animacao-principal {
       position: relative;
-
       width: 100%;
 
       height: 430vh;
@@ -112,11 +107,6 @@
       background: var(--verde);
     }
 
-
-    /* =========================================================
-       IMAGENS
-    ========================================================= */
-
     .fullscreen-image {
       position: absolute;
       inset: 0;
@@ -125,7 +115,7 @@
       height: 100%;
 
       object-fit: cover;
-      object-position: center center;
+      object-position: center;
 
       pointer-events: none;
     }
@@ -136,30 +126,19 @@
 
     #imagem-15 {
       z-index: 4;
-
       opacity: 0;
-
       will-change: opacity;
     }
 
     #imagem-16 {
       z-index: 5;
-
       opacity: 0;
 
-      object-position: center center;
-
       transform:
-        translate3d(
-          0,
-          -7.5%,
-          0
-        )
+        translate3d(0, -7.5%, 0)
         scale(1.01);
 
-      will-change:
-        opacity,
-        transform;
+      will-change: opacity, transform;
     }
 
     #folha-14 {
@@ -167,16 +146,9 @@
 
       opacity: 1;
 
-      transform:
-        translate3d(
-          0,
-          0,
-          0
-        );
+      transform: translate3d(0, 0, 0);
 
-      will-change:
-        transform,
-        opacity;
+      will-change: transform, opacity;
     }
 
     #folha-13 {
@@ -184,21 +156,15 @@
 
       opacity: 1;
 
-      transform:
-        translate3d(
-          0,
-          0,
-          0
-        );
+      transform: translate3d(0, 0, 0);
 
-      will-change:
-        transform,
-        opacity;
+      will-change: transform, opacity;
     }
 
 
     /* =========================================================
        BRILHOS
+       MENORES
     ========================================================= */
 
     #brilhos {
@@ -233,57 +199,50 @@
         var(--atraso)
         infinite;
 
-      will-change:
-        opacity,
-        transform;
+      will-change: opacity, transform;
     }
 
     @keyframes piscar {
 
       0% {
         opacity: 0;
-        transform: scale(.70);
+        transform: scale(.72);
       }
 
       30% {
         opacity: 0;
-        transform: scale(.82);
+        transform: scale(.84);
       }
 
-      47% {
+      48% {
         opacity: var(--intensidade);
         transform: scale(1);
       }
 
       58% {
         opacity: var(--intensidade);
-        transform: scale(1.06);
+        transform: scale(1.04);
       }
 
       75% {
         opacity: 0;
-        transform: scale(.82);
+        transform: scale(.84);
       }
 
       100% {
         opacity: 0;
-        transform: scale(.70);
+        transform: scale(.72);
       }
     }
 
 
     /* =========================================================
        ENVELOPE
-
        01 → 02 → 03 → 04 → 05
-
-       05 É A IMAGEM FINAL E DESLIZA PARA BAIXO.
-       NÃO EXISTE MAIS 06.PNG.
     ========================================================= */
 
     .frame-envelope {
       z-index: 10;
-
       display: none;
     }
 
@@ -296,12 +255,7 @@
 
       display: none;
 
-      transform:
-        translate3d(
-          0,
-          0,
-          0
-        );
+      transform: translate3d(0, 0, 0);
 
       will-change: transform;
     }
@@ -313,6 +267,7 @@
 
     /* =========================================================
        ROLE PARA REVELAR
+       SEM SETA
     ========================================================= */
 
     #scroll-hint {
@@ -325,69 +280,38 @@
       bottom:
         calc(
           22px +
-          env(
-            safe-area-inset-bottom,
-            0px
-          )
+          env(safe-area-inset-bottom, 0px)
         );
 
-      transform:
-        translateX(-50%);
+      transform: translateX(-50%);
 
       min-width: 220px;
-      min-height: 62px;
+      min-height: 54px;
 
-      padding:
-        11px
-        28px;
+      padding: 12px 28px;
 
       display: flex;
-
-      flex-direction: column;
 
       align-items: center;
       justify-content: center;
 
-      gap: 4px;
-
       border:
         1px solid
-        rgba(
-          222,
-          183,
-          102,
-          .90
-        );
+        rgba(222, 183, 102, .90);
 
       border-radius: 999px;
 
       background:
-        rgba(
-          2,
-          13,
-          8,
-          .91
-        );
+        rgba(2, 13, 8, .91);
 
-      backdrop-filter:
-        blur(12px);
-
-      -webkit-backdrop-filter:
-        blur(12px);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
 
       box-shadow:
-        0
-        8px
-        28px
-        rgba(
-          0,
-          0,
-          0,
-          .32
-        );
+        0 8px 28px
+        rgba(0, 0, 0, .32);
 
-      color:
-        var(--ouro-claro);
+      color: var(--ouro-claro);
 
       font-family:
         "Montserrat",
@@ -417,11 +341,6 @@
         visibility .5s ease;
     }
 
-    #scroll-hint .seta {
-      font-size: 17px;
-      line-height: 1;
-    }
-
     #scroll-hint.escondido {
       opacity: 0;
       visibility: hidden;
@@ -439,7 +358,7 @@
       50% {
         transform:
           translateX(-50%)
-          translateY(7px);
+          translateY(6px);
       }
     }
 
@@ -467,8 +386,7 @@
         center center / cover
         no-repeat;
 
-      color:
-        var(--marfim);
+      color: var(--marfim);
     }
 
     #continuacao::before {
@@ -498,7 +416,7 @@
 
 
     /* =========================================================
-       CONVITE FINAL
+       CONVITE
     ========================================================= */
 
     .convite-minimal {
@@ -506,52 +424,36 @@
 
       z-index: 5;
 
-      width:
-        min(
-          100%,
-          620px
-        );
+      width: min(100%, 620px);
 
       height: 100vh;
       height: 100svh;
       height: 100dvh;
 
-      margin:
-        0
-        auto;
+      margin: 0 auto;
 
       padding:
         calc(
           36px +
-          env(
-            safe-area-inset-top,
-            0px
-          )
+          env(safe-area-inset-top, 0px)
         )
-        clamp(
-          24px,
-          6vw,
-          48px
-        )
+        clamp(24px, 6vw, 48px)
         calc(
           22px +
-          env(
-            safe-area-inset-bottom,
-            0px
-          )
+          env(safe-area-inset-bottom, 0px)
         );
 
       display: grid;
 
       grid-template-rows:
         auto
-        .85fr
+        .70fr
         auto
-        .85fr
+        .78fr
         auto
-        .95fr
+        .92fr
         auto
-        .65fr
+        .60fr
         auto
         auto;
 
@@ -565,17 +467,21 @@
 
     /* =========================================================
        SAVE THE DATE
-
-       DESCIDO EM RELAÇÃO À VERSÃO ANTERIOR
+       DESCIDO MAIS
     ========================================================= */
 
     .save-minimal {
       grid-row: 1;
 
-      margin-top: 18px;
+      /*
+        Antes estava praticamente colado ao topo.
+        Agora desce aproximadamente duas alturas
+        da própria linha.
+      */
 
-      color:
-        var(--ouro-claro);
+      margin-top: 42px;
+
+      color: var(--ouro-claro);
 
       font-family:
         "Montserrat",
@@ -651,12 +557,7 @@
         var(--ouro-claro);
 
       background:
-        rgba(
-          2,
-          13,
-          8,
-          .8
-        );
+        rgba(2, 13, 8, .8);
 
       transform:
         translateX(-50%)
@@ -678,8 +579,7 @@
           11px
         );
 
-      color:
-        var(--marfim);
+      color: var(--marfim);
 
       font-family:
         "Bodoni Moda",
@@ -697,19 +597,18 @@
 
       line-height: .82;
 
-      font-variant-numeric:
-        lining-nums;
+      font-variant-numeric: lining-nums;
     }
 
     .data-vertical span {
       display: block;
-
       line-height: .82;
     }
 
 
     /* =========================================================
-       BAILE
+       BAILE DE FORMATURA
+       AGORA MONTSERRAT + DOURADO
     ========================================================= */
 
     .bloco-baile {
@@ -724,31 +623,38 @@
     }
 
     .nome-baile {
-      color:
-        var(--marfim);
+      color: var(--ouro-claro);
 
       font-family:
-        "Bodoni Moda",
-        "Times New Roman",
-        serif;
+        "Montserrat",
+        Arial,
+        sans-serif;
 
       font-size:
         clamp(
-          28px,
-          7.8vw,
-          42px
+          14px,
+          3.9vw,
+          19px
         );
 
-      font-weight: 400;
+      font-weight: 500;
 
-      line-height: 1.05;
+      line-height: 1.25;
+
+      letter-spacing:
+        clamp(
+          3px,
+          1vw,
+          5px
+        );
+
+      text-transform: uppercase;
     }
 
     .local-baile {
-      margin-top: 10px;
+      margin-top: 14px;
 
-      color:
-        var(--ouro-claro);
+      color: var(--marfim);
 
       font-family:
         "Montserrat",
@@ -820,8 +726,7 @@
       width: 65px;
       height: 1px;
 
-      transform:
-        translateX(-50%);
+      transform: translateX(-50%);
 
       background:
         linear-gradient(
@@ -833,8 +738,7 @@
     }
 
     .evento-minimal h2 {
-      color:
-        var(--marfim);
+      color: var(--marfim);
 
       font-family:
         "Bodoni Moda",
@@ -858,8 +762,7 @@
 
       margin-top: 9px;
 
-      color:
-        var(--ouro-claro);
+      color: var(--ouro-claro);
 
       font-family:
         "Montserrat",
@@ -890,32 +793,20 @@
 
       justify-self: center;
 
-      width:
-        min(
-          100%,
-          400px
-        );
+      width: min(100%, 400px);
 
       min-height: 62px;
 
-      padding:
-        15px
-        22px;
+      padding: 15px 22px;
 
       border:
         1px solid
         var(--ouro-claro);
 
       background:
-        rgba(
-          2,
-          13,
-          8,
-          .74
-        );
+        rgba(2, 13, 8, .74);
 
-      color:
-        var(--ouro-claro);
+      color: var(--ouro-claro);
 
       font-family:
         "Montserrat",
@@ -942,41 +833,24 @@
       -webkit-appearance: none;
       appearance: none;
 
-      backdrop-filter:
-        blur(8px);
-
-      -webkit-backdrop-filter:
-        blur(8px);
-
-      transition:
-        transform .2s ease,
-        background .2s ease,
-        color .2s ease;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
 
     .botao-rsvp-minimal:active {
-      transform:
-        scale(.98);
+      transform: scale(.98);
 
-      background:
-        var(--ouro);
+      background: var(--ouro);
 
-      color:
-        var(--verde);
+      color: var(--verde);
     }
-
-
-    /* =========================================================
-       FOOTER
-    ========================================================= */
 
     .forma-final {
       grid-row: 10;
 
       margin-top: 14px;
 
-      color:
-        var(--ouro-claro);
+      color: var(--ouro-claro);
 
       font-family:
         "Montserrat",
@@ -1007,8 +881,7 @@
     .revelar {
       opacity: 0;
 
-      transform:
-        translateY(10px);
+      transform: translateY(10px);
 
       transition:
         opacity .8s ease,
@@ -1017,9 +890,7 @@
 
     .revelar.visivel {
       opacity: 1;
-
-      transform:
-        translateY(0);
+      transform: translateY(0);
     }
 
 
@@ -1056,8 +927,7 @@
 
       visibility: hidden;
 
-      transform:
-        translateY(14px);
+      transform: translateY(14px);
 
       transition:
         opacity .45s ease,
@@ -1067,11 +937,9 @@
 
     .tela-modal.aberto {
       opacity: 1;
-
       visibility: visible;
 
-      transform:
-        translateY(0);
+      transform: translateY(0);
     }
 
 
@@ -1080,53 +948,33 @@
     ========================================================= */
 
     .rsvp-pagina {
-      width:
-        min(
-          100%,
-          620px
-        );
+      width: min(100%, 620px);
 
       min-height: 100vh;
       min-height: 100dvh;
 
-      margin:
-        0
-        auto;
+      margin: 0 auto;
 
       padding:
         calc(
           22px +
-          env(
-            safe-area-inset-top,
-            0px
-          )
+          env(safe-area-inset-top, 0px)
         )
-        clamp(
-          24px,
-          6vw,
-          48px
-        )
+        clamp(24px, 6vw, 48px)
         calc(
           55px +
-          env(
-            safe-area-inset-bottom,
-            0px
-          )
+          env(safe-area-inset-bottom, 0px)
         );
     }
 
     .rsvp-voltar {
       border: 0;
 
-      padding:
-        11px
-        0;
+      padding: 11px 0;
 
-      background:
-        transparent;
+      background: transparent;
 
-      color:
-        var(--ouro-claro);
+      color: var(--ouro-claro);
 
       font-family:
         "Montserrat",
@@ -1148,8 +996,7 @@
       margin-top: 30px;
       margin-bottom: 46px;
 
-      color:
-        var(--ouro-claro);
+      color: var(--ouro-claro);
 
       font-family:
         "Montserrat",
@@ -1173,11 +1020,6 @@
 
       text-transform: uppercase;
     }
-
-
-    /* =========================================================
-       FORMULÁRIO
-    ========================================================= */
 
     #form-rsvp {
       width: 100%;
@@ -1205,8 +1047,7 @@
 
     .campo-rsvp > span,
     .campo-rsvp legend {
-      color:
-        var(--ouro-claro);
+      color: var(--ouro-claro);
 
       font-family:
         "Montserrat",
@@ -1231,14 +1072,8 @@
 
     .campo-rsvp small {
       opacity: .58;
-
       font-size: 8px;
     }
-
-
-    /* =========================================================
-       INPUTS
-    ========================================================= */
 
     .campo-rsvp input[type="text"],
     .campo-rsvp select,
@@ -1249,12 +1084,7 @@
 
       border:
         1px solid
-        rgba(
-          222,
-          183,
-          102,
-          .58
-        );
+        rgba(222, 183, 102, .58);
 
       border-radius: 0;
 
@@ -1263,15 +1093,9 @@
       padding: 16px;
 
       background:
-        rgba(
-          1,
-          10,
-          6,
-          .72
-        );
+        rgba(1, 10, 6, .72);
 
-      color:
-        var(--marfim);
+      color: var(--marfim);
 
       font-family:
         "Montserrat",
@@ -1287,49 +1111,29 @@
     .campo-rsvp input[type="text"]:focus,
     .campo-rsvp select:focus,
     .campo-rsvp textarea:focus {
-      border-color:
-        var(--ouro-claro);
+      border-color: var(--ouro-claro);
 
       box-shadow:
-        0
-        0
-        0
-        1px
-        rgba(
-          222,
-          183,
-          102,
-          .16
-        );
+        0 0 0 1px
+        rgba(222, 183, 102, .16);
     }
 
     .campo-rsvp textarea {
       min-height: 120px;
-
       resize: vertical;
     }
 
     .campo-rsvp select option {
-      background:
-        var(--verde);
-
-      color:
-        var(--marfim);
+      background: var(--verde);
+      color: var(--marfim);
     }
-
-
-    /* =========================================================
-       OPÇÕES
-    ========================================================= */
 
     .opcao-rsvp {
       width: 100%;
 
       min-height: 60px;
 
-      padding:
-        14px
-        15px;
+      padding: 14px 15px;
 
       display: flex;
 
@@ -1339,23 +1143,12 @@
 
       border:
         1px solid
-        rgba(
-          222,
-          183,
-          102,
-          .42
-        );
+        rgba(222, 183, 102, .42);
 
       background:
-        rgba(
-          1,
-          10,
-          6,
-          .64
-        );
+        rgba(1, 10, 6, .64);
 
-      color:
-        var(--marfim);
+      color: var(--marfim);
 
       font-family:
         "Montserrat",
@@ -1380,13 +1173,12 @@
 
       flex-shrink: 0;
 
-      accent-color:
-        var(--ouro);
+      accent-color: var(--ouro);
     }
 
 
     /* =========================================================
-       BOTÕES RSVP
+       BOTÕES
     ========================================================= */
 
     .botao-enviar,
@@ -1399,9 +1191,7 @@
         1px solid
         var(--ouro-claro);
 
-      padding:
-        16px
-        20px;
+      padding: 16px 20px;
 
       font-family:
         "Montserrat",
@@ -1432,25 +1222,19 @@
     .botao-enviar {
       margin-top: 4px;
 
-      background:
-        #cda049;
+      background: #cda049;
 
-      color:
-        #07110b;
+      color: #07110b;
     }
 
     .botao-enviar:disabled {
       opacity: .55;
-
       cursor: wait;
     }
 
     .botao-dourado {
-      background:
-        var(--ouro);
-
-      color:
-        var(--verde);
+      background: var(--ouro);
+      color: var(--verde);
     }
 
     .botao-contorno {
@@ -1462,20 +1246,12 @@
         1px solid
         var(--ouro-claro);
 
-      padding:
-        15px
-        20px;
+      padding: 15px 20px;
 
       background:
-        rgba(
-          2,
-          13,
-          8,
-          .60
-        );
+        rgba(2, 13, 8, .60);
 
-      color:
-        var(--ouro-claro);
+      color: var(--ouro-claro);
 
       font-family:
         "Montserrat",
@@ -1501,8 +1277,7 @@
     #erro-envio {
       display: none;
 
-      color:
-        var(--marfim);
+      color: var(--marfim);
 
       font-family:
         "Montserrat",
@@ -1522,42 +1297,27 @@
 
 
     /* =========================================================
-       TELAS FINAIS
+       PÓS-ENVIO
+       MESMA LINGUAGEM DA MARCA
     ========================================================= */
 
     .tela-central {
-      width:
-        min(
-          100%,
-          620px
-        );
+      width: min(100%, 620px);
 
       min-height: 100vh;
       min-height: 100dvh;
 
-      margin:
-        0
-        auto;
+      margin: 0 auto;
 
       padding:
         calc(
           35px +
-          env(
-            safe-area-inset-top,
-            0px
-          )
+          env(safe-area-inset-top, 0px)
         )
-        clamp(
-          28px,
-          7vw,
-          50px
-        )
+        clamp(28px, 7vw, 50px)
         calc(
           35px +
-          env(
-            safe-area-inset-bottom,
-            0px
-          )
+          env(safe-area-inset-bottom, 0px)
         );
 
       display: flex;
@@ -1571,8 +1331,7 @@
     }
 
     .mini-marca {
-      color:
-        var(--ouro-claro);
+      color: var(--ouro-claro);
 
       font-family:
         "Montserrat",
@@ -1588,58 +1347,71 @@
       text-transform: uppercase;
     }
 
-    .titulo-pos-envio {
-      margin-top: 30px;
 
-      color:
-        var(--marfim);
+    /*
+       SUBSTITUI A BODONI GRANDE BRANCA
+       POR MONTSERRAT DOURADA
+    */
+
+    .titulo-pos-envio {
+      margin-top: 34px;
+
+      color: var(--ouro-claro);
 
       font-family:
-        "Bodoni Moda",
-        "Times New Roman",
-        serif;
+        "Montserrat",
+        Arial,
+        sans-serif;
 
       font-size:
         clamp(
-          38px,
-          10vw,
-          54px
+          16px,
+          4.5vw,
+          21px
         );
 
-      font-weight: 400;
+      font-weight: 500;
 
-      line-height: 1.05;
+      line-height: 1.4;
+
+      letter-spacing:
+        clamp(
+          3px,
+          1vw,
+          5px
+        );
+
+      text-transform: uppercase;
     }
 
     .texto-pos-envio {
       max-width: 360px;
 
-      margin-top: 18px;
+      margin-top: 20px;
 
-      color:
-        var(--marfim-suave);
+      color: var(--marfim);
 
       font-family:
-        "Bodoni Moda",
-        "Times New Roman",
-        serif;
+        "Montserrat",
+        Arial,
+        sans-serif;
 
       font-size:
         clamp(
-          17px,
-          4.4vw,
-          20px
+          12px,
+          3.3vw,
+          15px
         );
 
-      line-height: 1.45;
+      font-weight: 400;
+
+      line-height: 1.7;
+
+      letter-spacing: 1px;
     }
 
     .acoes-pos-envio {
-      width:
-        min(
-          100%,
-          380px
-        );
+      width: min(100%, 380px);
 
       margin-top: 48px;
 
@@ -1652,7 +1424,7 @@
 
 
     /* =========================================================
-       TELAS BAIXAS
+       TELAS MAIS BAIXAS
     ========================================================= */
 
     @media (max-height: 720px) {
@@ -1660,42 +1432,35 @@
       .convite-minimal {
         padding-top:
           calc(
-            22px +
-            env(
-              safe-area-inset-top,
-              0px
-            )
+            18px +
+            env(safe-area-inset-top, 0px)
           );
 
         padding-bottom:
           calc(
             14px +
-            env(
-              safe-area-inset-bottom,
-              0px
-            )
+            env(safe-area-inset-bottom, 0px)
           );
 
         grid-template-rows:
           auto
-          .55fr
-          auto
-          .55fr
-          auto
-          .60fr
-          auto
           .45fr
+          auto
+          .48fr
+          auto
+          .55fr
+          auto
+          .40fr
           auto
           auto;
       }
 
       .save-minimal {
-        margin-top: 14px;
+        margin-top: 34px;
       }
 
       .ornamento-data {
         height: 18px;
-
         margin-bottom: 10px;
       }
 
@@ -1713,9 +1478,9 @@
       .nome-baile {
         font-size:
           clamp(
-            25px,
-            7vw,
-            34px
+            12px,
+            3.5vw,
+            16px
           );
       }
 
@@ -1751,10 +1516,6 @@
     }
 
 
-    /* =========================================================
-       CELULARES ESTREITOS
-    ========================================================= */
-
     @media (max-width: 360px) {
 
       .convite-minimal,
@@ -1765,7 +1526,7 @@
 
       #scroll-hint {
         min-width: 200px;
-        min-height: 58px;
+        min-height: 52px;
 
         font-size: 10px;
       }
@@ -1780,32 +1541,19 @@
     }
 
 
-    /* =========================================================
-       DESKTOP
-    ========================================================= */
-
     @media (min-width: 768px) {
 
       body {
-        background:
-          var(--verde-escuro);
+        background: var(--verde-escuro);
       }
 
       .convite-minimal,
       .rsvp-pagina,
       .tela-central {
-        width:
-          min(
-            92vw,
-            620px
-          );
+        width: min(92vw, 620px);
       }
     }
 
-
-    /* =========================================================
-       REDUÇÃO DE MOVIMENTO
-    ========================================================= */
 
     @media (prefers-reduced-motion: reduce) {
 
@@ -1830,26 +1578,14 @@
 <body>
 
 
-  <!-- =======================================================
-       ROLE PARA REVELAR
-  ======================================================== -->
+  <!-- CARD SEM SETA -->
 
   <div id="scroll-hint">
-
-    <span>
-      Role para revelar
-    </span>
-
-    <span class="seta">
-      ↓
-    </span>
-
+    <span>Role para revelar</span>
   </div>
 
 
-  <!-- =======================================================
-       ANIMAÇÃO PRINCIPAL
-  ======================================================== -->
+  <!-- ANIMAÇÃO -->
 
   <section id="animacao-principal">
 
@@ -1904,11 +1640,6 @@
       <div id="brilhos"></div>
 
 
-      <!--
-        FRAMES DO ENVELOPE:
-        01 → 02 → 03 → 04
-      -->
-
       <img
         src="01.png"
         class="fullscreen-image frame-envelope active"
@@ -1941,10 +1672,7 @@
       >
 
 
-      <!--
-        05 É A IMAGEM FINAL.
-        ELA PRÓPRIA DESLIZA PARA BAIXO.
-      -->
+      <!-- 05 É O ENVELOPE FINAL -->
 
       <img
         id="envelope-final"
@@ -1960,9 +1688,7 @@
   </section>
 
 
-  <!-- =======================================================
-       PÁGINA FINAL
-  ======================================================== -->
+  <!-- PÁGINA FINAL -->
 
   <section id="continuacao">
 
@@ -1978,15 +1704,10 @@
 
         <div class="ornamento-data"></div>
 
-
         <div class="data-vertical">
-
           <span>16</span>
-
           <span>01</span>
-
           <span>27</span>
-
         </div>
 
       </div>
@@ -2056,9 +1777,7 @@
   </section>
 
 
-  <!-- =======================================================
-       RSVP
-  ======================================================== -->
+  <!-- RSVP -->
 
   <section
     id="tela-rsvp"
@@ -2200,9 +1919,7 @@
 
           <span>
             Deixe uma mensagem
-            <small>
-              opcional
-            </small>
+            <small>opcional</small>
           </span>
 
           <textarea
@@ -2235,9 +1952,7 @@
   </section>
 
 
-  <!-- =======================================================
-       RESPOSTA ENVIADA
-  ======================================================== -->
+  <!-- RESPOSTA ENVIADA -->
 
   <section
     id="tela-enviado"
@@ -2253,14 +1968,11 @@
       </p>
 
 
+      <!-- AGORA SOMENTE ISSO -->
+
       <h2 class="titulo-pos-envio">
         Resposta enviada
       </h2>
-
-
-      <p class="texto-pos-envio">
-        Sua resposta foi registrada.
-      </p>
 
 
       <div class="acoes-pos-envio">
@@ -2292,9 +2004,7 @@
   </section>
 
 
-  <!-- =======================================================
-       AGRADECIMENTO
-  ======================================================== -->
+  <!-- AGRADECIMENTO -->
 
   <section
     id="tela-agradecimento"
@@ -2315,16 +2025,13 @@
       </h2>
 
 
-      <p
-        id="texto-agradecimento"
-        class="texto-pos-envio"
-      >
-        Obrigada por confirmar sua presença.
-        Aguardo você no meu evento.
+      <p class="texto-pos-envio">
+        Por fazer parte deste momento.
       </p>
 
 
       <div class="acoes-pos-envio">
+
 
         <button
           type="button"
@@ -2334,6 +2041,7 @@
           Reiniciar
         </button>
 
+
       </div>
 
 
@@ -2342,9 +2050,7 @@
   </section>
 
 
-  <!-- =======================================================
-       GOOGLE FORMS
-  ======================================================== -->
+  <!-- GOOGLE FORMS INVISÍVEL -->
 
   <iframe
     id="google-form-target"
@@ -2380,118 +2086,88 @@
         "animacao-principal"
       );
 
-
     const scrollHint =
       document.getElementById(
         "scroll-hint"
       );
-
-
-    /*
-      AGORA EXISTEM SOMENTE
-      4 FRAMES ANTES DO FINAL:
-
-      01
-      02
-      03
-      04
-
-      05 = FINAL
-    */
 
     const envelopeFrames =
       document.querySelectorAll(
         ".frame-envelope"
       );
 
-
     const envelopeFinal =
       document.getElementById(
         "envelope-final"
       );
-
 
     const folha13 =
       document.getElementById(
         "folha-13"
       );
 
-
     const folha14 =
       document.getElementById(
         "folha-14"
       );
-
 
     const imagem15 =
       document.getElementById(
         "imagem-15"
       );
 
-
     const imagem16 =
       document.getElementById(
         "imagem-16"
       );
-
 
     const brilhos =
       document.getElementById(
         "brilhos"
       );
 
-
     const telaRsvp =
       document.getElementById(
         "tela-rsvp"
       );
-
 
     const telaEnviado =
       document.getElementById(
         "tela-enviado"
       );
 
-
     const telaAgradecimento =
       document.getElementById(
         "tela-agradecimento"
       );
-
 
     const formRsvp =
       document.getElementById(
         "form-rsvp"
       );
 
-
     const botaoEnviar =
       document.getElementById(
         "botao-enviar"
       );
-
 
     const erroEnvio =
       document.getElementById(
         "erro-envio"
       );
 
-
     const nomeConvidado =
       document.getElementById(
         "nome-convidado"
       );
 
-
     let ticking = false;
 
     let envioEmAndamento = false;
 
-    let ultimoNome = "";
-
 
     /* =========================================================
-       FUNÇÕES AUXILIARES
+       AUXILIARES
     ========================================================= */
 
     function clamp(value) {
@@ -2551,11 +2227,9 @@
       envelopeFrames.forEach(
         function(frame) {
 
-          frame
-            .classList
-            .remove(
-              "active"
-            );
+          frame.classList.remove(
+            "active"
+          );
 
         }
       );
@@ -2567,13 +2241,9 @@
 
       hideEnvelopeFrames();
 
-
-      envelopeFinal
-        .classList
-        .remove(
-          "active"
-        );
-
+      envelopeFinal.classList.remove(
+        "active"
+      );
 
       index =
         Math.max(
@@ -2583,7 +2253,6 @@
             index
           )
         );
-
 
       envelopeFrames[index]
         .classList
@@ -2598,7 +2267,6 @@
 
       hideEnvelopeFrames();
 
-
       envelopeFinal
         .classList
         .add(
@@ -2610,6 +2278,12 @@
 
     /* =========================================================
        BRILHOS
+
+       TAMANHO ANTIGO:
+       10px → 46px
+
+       NOVO:
+       5px → 19px
     ========================================================= */
 
     const quantidadeBrilhos = 26;
@@ -2626,22 +2300,17 @@
           "img"
         );
 
-
       brilho.src =
         "brilho.png";
-
 
       brilho.className =
         "brilho";
 
-
       brilho.alt =
         "";
 
-
       brilho.draggable =
         false;
-
 
       brilho.style.left =
         (
@@ -2650,7 +2319,6 @@
         )
         +
         "%";
-
 
       brilho.style.top =
         (
@@ -2661,11 +2329,15 @@
         "%";
 
 
+      /*
+        BRILHOS BEM MENORES
+      */
+
       brilho.style.setProperty(
         "--tamanho",
         (
-          10 +
-          Math.random() * 36
+          5 +
+          Math.random() * 14
         )
         +
         "px"
@@ -2710,12 +2382,7 @@
 
 
     /* =========================================================
-       ANIMAÇÃO PRINCIPAL
-
-       01 → 02 → 03 → 04 → 05
-
-       DEPOIS:
-       05 DESLIZA PARA BAIXO.
+       ANIMAÇÃO
     ========================================================= */
 
     function updateAnimation() {
@@ -2749,11 +2416,7 @@
         );
 
 
-      /* =====================================================
-         ABERTURA
-
-         01 → 02 → 03 → 04 → 05
-      ===================================================== */
+      /* 01 → 02 → 03 → 04 → 05 */
 
       const openingProgress =
         rangeProgress(
@@ -2762,16 +2425,6 @@
           .15
         );
 
-
-      /*
-        Temos 5 estados:
-
-        0 = 01
-        1 = 02
-        2 = 03
-        3 = 04
-        4 = 05
-      */
 
       let openingState =
         Math.floor(
@@ -2810,9 +2463,7 @@
       }
 
 
-      /* =====================================================
-         05 DESLIZA PARA BAIXO
-      ===================================================== */
+      /* 05 DESCE */
 
       const envelopeExitProgress =
         easeInOut(
@@ -2861,9 +2512,7 @@
       }
 
 
-      /* =====================================================
-         13 SAI PARA ESQUERDA
-      ===================================================== */
+      /* 13 SAI PARA ESQUERDA */
 
       const folha13Progress =
         easeInOut(
@@ -2888,9 +2537,7 @@
         folha13Progress;
 
 
-      /* =====================================================
-         14 SAI PARA DIREITA
-      ===================================================== */
+      /* 14 SAI PARA DIREITA */
 
       const folha14Progress =
         easeInOut(
@@ -2915,9 +2562,7 @@
         folha14Progress;
 
 
-      /* =====================================================
-         FOTO 15
-      ===================================================== */
+      /* FOTO */
 
       const foto15Progress =
         easeInOut(
@@ -2937,9 +2582,7 @@
         foto15Progress;
 
 
-      /* =====================================================
-         IMAGEM 16
-      ===================================================== */
+      /* 16 */
 
       const imagem16Progress =
         easeInOut(
@@ -2955,29 +2598,23 @@
         imagem16Progress;
 
 
-      /* =====================================================
-         CARD SOME NO FINAL
-      ===================================================== */
+      /* CARD SOME */
 
       if (
         progress >= .96
       ) {
 
-        scrollHint
-          .classList
-          .add(
-            "escondido"
-          );
+        scrollHint.classList.add(
+          "escondido"
+        );
 
       }
 
       else {
 
-        scrollHint
-          .classList
-          .remove(
-            "escondido"
-          );
+        scrollHint.classList.remove(
+          "escondido"
+        );
 
       }
 
@@ -3002,7 +2639,6 @@
           requestAnimationFrame(
             updateAnimation
           );
-
 
           ticking = true;
 
@@ -3093,21 +2729,16 @@
 
     function abrirTela(tela) {
 
-      tela
-        .classList
-        .add(
-          "aberto"
-        );
-
+      tela.classList.add(
+        "aberto"
+      );
 
       tela.setAttribute(
         "aria-hidden",
         "false"
       );
 
-
       tela.scrollTop = 0;
-
 
       document.body
         .classList
@@ -3120,18 +2751,14 @@
 
     function fecharTela(tela) {
 
-      tela
-        .classList
-        .remove(
-          "aberto"
-        );
-
+      tela.classList.remove(
+        "aberto"
+      );
 
       tela.setAttribute(
         "aria-hidden",
         "true"
       );
-
 
       if (
         !document.querySelector(
@@ -3159,12 +2786,9 @@
         .forEach(
           function(tela) {
 
-            tela
-              .classList
-              .remove(
-                "aberto"
-              );
-
+            tela.classList.remove(
+              "aberto"
+            );
 
             tela.setAttribute(
               "aria-hidden",
@@ -3173,7 +2797,6 @@
 
           }
         );
-
 
       document.body
         .classList
@@ -3185,7 +2808,7 @@
 
 
     /* =========================================================
-       ABRIR RSVP
+       RSVP
     ========================================================= */
 
     document
@@ -3227,10 +2850,8 @@
     formRsvp.action =
       GOOGLE_FORM_ACTION;
 
-
     formRsvp.method =
       "POST";
-
 
     formRsvp.target =
       "google-form-target";
@@ -3248,12 +2869,6 @@
           );
 
 
-        ultimoNome =
-          nomeConvidado
-            .value
-            .trim();
-
-
         envioEmAndamento =
           true;
 
@@ -3267,9 +2882,8 @@
 
 
         /*
-          NÃO TEM preventDefault().
-          O formulário realmente é enviado
-          ao Google Forms.
+          SEM preventDefault:
+          envia realmente ao Google Forms.
         */
 
 
@@ -3375,15 +2989,10 @@
         "click",
         function() {
 
-
           fecharTodasAsTelas();
 
 
           formRsvp.reset();
-
-
-          ultimoNome =
-            "";
 
 
           window.scrollTo({
@@ -3403,8 +3012,7 @@
 
     /* =========================================================
        PRELOAD
-
-       06.PNG FOI REMOVIDA COMPLETAMENTE.
+       SEM 06.PNG
     ========================================================= */
 
     const imageFiles = [
@@ -3434,7 +3042,6 @@
 
         const image =
           new Image();
-
 
         image.src =
           file;
