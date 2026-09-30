@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Montserrat:wght@300;400;500;600&display=swap"
     rel="stylesheet"
   >
 
@@ -32,7 +32,7 @@
     :root {
       --verde: #020d08;
       --verde-escuro: #010805;
-      --branco: #f5f1e8;
+      --branco: #f4efe5;
       --ouro: #c89a46;
       --ouro-claro: #deb766;
     }
@@ -47,9 +47,10 @@
       width: 100%;
       min-height: 100%;
       overflow-x: hidden;
+
       background: var(--verde);
       color: var(--branco);
-      font-family: "Montserrat", Arial, sans-serif;
+
       -webkit-tap-highlight-color: transparent;
     }
 
@@ -78,9 +79,12 @@
 
     #animacao-principal {
       position: relative;
+
       width: 100%;
+
       height: 430vh;
       height: 430dvh;
+
       background: var(--verde);
     }
 
@@ -95,6 +99,7 @@
       height: 100dvh;
 
       overflow: hidden;
+
       background: var(--verde);
     }
 
@@ -118,6 +123,7 @@
     #imagem-15 {
       z-index: 4;
       opacity: 0;
+
       will-change: opacity;
     }
 
@@ -134,15 +140,21 @@
 
     #folha-14 {
       z-index: 6;
+
       opacity: 1;
+
       transform: translate3d(0, 0, 0);
+
       will-change: transform, opacity;
     }
 
     #folha-13 {
       z-index: 7;
+
       opacity: 1;
+
       transform: translate3d(0, 0, 0);
+
       will-change: transform, opacity;
     }
 
@@ -154,12 +166,15 @@
     #brilhos {
       position: absolute;
       inset: 0;
+
       z-index: 8;
 
       overflow: hidden;
+
       opacity: 0;
 
       pointer-events: none;
+
       will-change: opacity;
     }
 
@@ -179,40 +194,22 @@
         ease-in-out
         var(--atraso)
         infinite;
-
-      will-change: opacity, transform;
     }
 
     @keyframes piscar {
 
-      0% {
-        opacity: 0;
-        transform: scale(.72);
-      }
-
-      30% {
-        opacity: 0;
-        transform: scale(.84);
-      }
-
-      48% {
-        opacity: var(--intensidade);
-        transform: scale(1);
-      }
-
-      58% {
-        opacity: var(--intensidade);
-        transform: scale(1.04);
-      }
-
-      75% {
-        opacity: 0;
-        transform: scale(.84);
-      }
-
+      0%,
+      30%,
+      75%,
       100% {
         opacity: 0;
-        transform: scale(.72);
+        transform: scale(.75);
+      }
+
+      48%,
+      58% {
+        opacity: var(--intensidade);
+        transform: scale(1);
       }
 
     }
@@ -234,6 +231,7 @@
 
     #envelope-final {
       z-index: 10;
+
       display: none;
 
       transform: translate3d(0, 0, 0);
@@ -248,7 +246,6 @@
 
     /* =========================================================
        ROLE PARA REVELAR
-       SEM SETA
     ========================================================= */
 
     #scroll-hint {
@@ -266,10 +263,10 @@
 
       transform: translateX(-50%);
 
-      min-width: 210px;
-      min-height: 52px;
+      min-width: 205px;
+      min-height: 50px;
 
-      padding: 12px 27px;
+      padding: 12px 25px;
 
       display: flex;
       align-items: center;
@@ -277,32 +274,34 @@
 
       border:
         1px solid
-        rgba(222, 183, 102, .9);
+        rgba(222, 183, 102, .85);
 
       border-radius: 999px;
 
       background:
-        rgba(2, 13, 8, .91);
+        rgba(2, 13, 8, .90);
 
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
 
       color: var(--ouro-claro);
 
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
       font-size: 10px;
+
       font-weight: 600;
-      letter-spacing: 2.2px;
+
+      letter-spacing: 2px;
 
       text-transform: uppercase;
+
       white-space: nowrap;
 
       pointer-events: none;
-
-      animation:
-        quicarCard
-        2.2s
-        ease-in-out
-        infinite;
 
       transition:
         opacity .5s ease,
@@ -314,37 +313,21 @@
       visibility: hidden;
     }
 
-    @keyframes quicarCard {
-
-      0%,
-      100% {
-        transform:
-          translateX(-50%)
-          translateY(0);
-      }
-
-      50% {
-        transform:
-          translateX(-50%)
-          translateY(5px);
-      }
-
-    }
-
 
     /* =========================================================
-       PÁGINA FINAL
+       SEGUNDA PÁGINA
     ========================================================= */
 
     #continuacao {
       position: relative;
+
       z-index: 20;
 
       width: 100%;
 
-      min-height: 100vh;
-      min-height: 100svh;
-      min-height: 100dvh;
+      height: 100vh;
+      height: 100svh;
+      height: 100dvh;
 
       overflow: hidden;
 
@@ -355,129 +338,119 @@
         no-repeat;
     }
 
+
+    /* transição preta discreta */
+
     #continuacao::before {
       content: "";
 
       position: absolute;
+
       z-index: 1;
 
-      top: -2px;
+      top: 0;
       left: 0;
 
       width: 100%;
-      height: 15vh;
+      height: 13vh;
 
       pointer-events: none;
 
       background:
         linear-gradient(
           to bottom,
-          rgba(0, 0, 0, .95) 0%,
-          rgba(0, 0, 0, .52) 45%,
-          rgba(0, 0, 0, 0) 100%
+          rgba(0, 0, 0, .88),
+          rgba(0, 0, 0, .35) 52%,
+          rgba(0, 0, 0, 0)
         );
     }
 
 
     /* =========================================================
-       NOVA DIAGRAMAÇÃO
+       CONVITE CENTRAL
     ========================================================= */
 
     .convite-minimal {
       position: relative;
+
       z-index: 5;
 
       width: min(100%, 620px);
 
-      height: 100vh;
-      height: 100svh;
-      height: 100dvh;
+      height: 100%;
 
       margin: 0 auto;
 
       padding:
-        calc(54px + env(safe-area-inset-top, 0px))
-        clamp(24px, 6vw, 48px)
-        calc(24px + env(safe-area-inset-bottom, 0px));
+        env(safe-area-inset-top, 0px)
+        clamp(26px, 7vw, 48px)
+        env(safe-area-inset-bottom, 0px);
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+    }
+
+
+    /*
+       ESTE É O BLOCO QUE CENTRALIZA
+       TODO O CONVITE NA TELA
+    */
+
+    .convite-conteudo {
+      width: 100%;
+
+      transform: translateY(-1vh);
 
       display: flex;
       flex-direction: column;
+
       align-items: center;
-
-      text-align: center;
-
-      overflow: hidden;
     }
 
 
     /* =========================================================
        SAVE THE DATE
-       MAIS PARA BAIXO
     ========================================================= */
 
     .save-minimal {
-      flex: 0 0 auto;
-
-      margin-top:
-        clamp(
-          35px,
-          7vh,
-          72px
-        );
-
       color: var(--ouro-claro);
+
+      font-family:
+        "Bodoni Moda",
+        "Times New Roman",
+        serif;
 
       font-size:
         clamp(
-          12px,
-          3.3vw,
-          16px
+          20px,
+          5.6vw,
+          28px
         );
 
-      font-weight: 500;
-
-      letter-spacing:
-        clamp(
-          4px,
-          1.5vw,
-          7px
-        );
+      font-weight: 400;
 
       line-height: 1;
+
+      letter-spacing: .08em;
 
       text-transform: uppercase;
     }
 
 
-    /* =========================================================
-       DATA
-       SANS-SERIF / BRANCA / SEPARADA
-    ========================================================= */
+    /* pequeno ornamento */
 
-    .bloco-data {
-      flex: 0 0 auto;
-
-      margin-top:
-        clamp(
-          42px,
-          6.5vh,
-          68px
-        );
-
-      display: flex;
-      flex-direction: column;
-
-      align-items: center;
-      justify-content: center;
-    }
-
-    .ornamento-data {
+    .separador-superior {
       position: relative;
 
       width: 1px;
-      height: 17px;
+      height: 21px;
 
-      margin-bottom: 14px;
+      margin-top: 22px;
+      margin-bottom: 17px;
 
       background:
         linear-gradient(
@@ -487,13 +460,13 @@
         );
     }
 
-    .ornamento-data::after {
+    .separador-superior::after {
       content: "";
 
       position: absolute;
 
-      bottom: -2px;
       left: 50%;
+      bottom: -2px;
 
       width: 5px;
       height: 5px;
@@ -507,6 +480,18 @@
         rotate(45deg);
     }
 
+
+    /* =========================================================
+       DATA
+       CONTINUA MONTSERRAT
+    ========================================================= */
+
+    .bloco-data {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .data-vertical {
       display: flex;
       flex-direction: column;
@@ -514,12 +499,7 @@
       align-items: center;
       justify-content: center;
 
-      gap:
-        clamp(
-          3px,
-          .7vh,
-          7px
-        );
+      gap: 0;
 
       color: var(--branco);
 
@@ -530,23 +510,23 @@
 
       font-size:
         clamp(
-          52px,
-          15vw,
-          72px
+          60px,
+          17vw,
+          82px
         );
 
       font-weight: 300;
 
-      line-height: .88;
+      line-height: .82;
 
-      letter-spacing: -3px;
+      letter-spacing: -4px;
 
       font-variant-numeric: lining-nums;
     }
 
     .data-vertical span {
       display: block;
-      line-height: .88;
+      line-height: .82;
     }
 
 
@@ -555,87 +535,78 @@
     ========================================================= */
 
     .bloco-baile {
-      flex: 0 0 auto;
-
       margin-top:
         clamp(
-          40px,
-          6vh,
-          62px
+          30px,
+          4.3vh,
+          43px
         );
 
       display: flex;
       flex-direction: column;
 
       align-items: center;
-      justify-content: center;
     }
 
     .nome-baile {
       color: var(--ouro-claro);
 
       font-family:
-        "Montserrat",
-        Arial,
-        sans-serif;
+        "Bodoni Moda",
+        "Times New Roman",
+        serif;
 
       font-size:
         clamp(
-          13px,
-          3.7vw,
-          18px
-        );
-
-      font-weight: 500;
-
-      line-height: 1.25;
-
-      letter-spacing:
-        clamp(
-          3px,
-          1.1vw,
-          5px
-        );
-
-      text-transform: uppercase;
-    }
-
-    .local-baile {
-      margin-top: 13px;
-
-      color: var(--branco);
-
-      font-size:
-        clamp(
-          10px,
-          2.7vw,
-          12px
+          27px,
+          7.2vw,
+          38px
         );
 
       font-weight: 400;
 
-      letter-spacing: 3.2px;
+      line-height: 1.08;
 
-      line-height: 1;
+      letter-spacing: .01em;
+    }
 
-      text-transform: uppercase;
+    .local-baile {
+      margin-top: 8px;
+
+      color: var(--branco);
+
+      font-family:
+        "Bodoni Moda",
+        "Times New Roman",
+        serif;
+
+      font-size:
+        clamp(
+          16px,
+          4.2vw,
+          21px
+        );
+
+      font-weight: 400;
+
+      line-height: 1.1;
+
+      letter-spacing: .05em;
     }
 
 
     /* =========================================================
-       EVENTOS
+       EVENTOS SECUNDÁRIOS
     ========================================================= */
 
     .eventos-minimal {
-      flex: 0 0 auto;
-
       width: 100%;
 
       margin-top:
         clamp(
-          45px,
-          7vh,
-          68px
+          30px,
+          4.2vh,
+          43px
         );
 
       display: grid;
@@ -646,9 +617,9 @@
 
       gap:
         clamp(
-          18px,
-          5vw,
-          40px
+          22px,
+          7vw,
+          50px
         );
 
       align-items: start;
@@ -661,44 +632,131 @@
       flex-direction: column;
 
       align-items: center;
-      justify-content: flex-start;
     }
 
     .evento-minimal h2 {
       color: var(--ouro-claro);
 
       font-family:
-        "Montserrat",
-        Arial,
-        sans-serif;
+        "Bodoni Moda",
+        "Times New Roman",
+        serif;
 
       font-size:
         clamp(
-          10px,
-          2.8vw,
-          13px
+          17px,
+          4.4vw,
+          22px
         );
 
-      font-weight: 500;
+      font-weight: 400;
 
-      line-height: 1.35;
-
-      letter-spacing:
-        clamp(
-          1.5px,
-          .6vw,
-          3px
-        );
-
-      text-transform: uppercase;
+      line-height: 1.12;
     }
 
     .evento-minimal time {
       display: block;
 
-      margin-top: 10px;
+      margin-top: 7px;
 
       color: var(--branco);
+
+      font-family:
+        "Bodoni Moda",
+        "Times New Roman",
+        serif;
+
+      font-size:
+        clamp(
+          13px,
+          3.3vw,
+          16px
+        );
+
+      font-weight: 400;
+
+      line-height: 1;
+
+      letter-spacing: .04em;
+    }
+
+
+    /* =========================================================
+       BOTÃO
+    ========================================================= */
+
+    .botao-rsvp-minimal {
+      width: min(100%, 390px);
+
+      min-height: 55px;
+
+      margin-top:
+        clamp(
+          29px,
+          4vh,
+          40px
+        );
+
+      padding: 13px 18px;
+
+      border:
+        1px solid
+        rgba(222, 183, 102, .82);
+
+      background:
+        rgba(2, 13, 8, .56);
+
+      color: var(--ouro-claro);
+
+      font-family:
+        "Bodoni Moda",
+        "Times New Roman",
+        serif;
+
+      font-size:
+        clamp(
+          16px,
+          4vw,
+          20px
+        );
+
+      font-weight: 400;
+
+      line-height: 1;
+
+      letter-spacing: .05em;
+
+      cursor: pointer;
+
+      -webkit-appearance: none;
+      appearance: none;
+
+      backdrop-filter: blur(7px);
+      -webkit-backdrop-filter: blur(7px);
+
+      transition:
+        background .25s ease,
+        color .25s ease,
+        transform .15s ease;
+    }
+
+    .botao-rsvp-minimal:active {
+      transform: scale(.985);
+
+      background: var(--ouro-claro);
+
+      color: var(--verde);
+    }
+
+
+    /* =========================================================
+       FORMA LETI
+    ========================================================= */
+
+    .forma-final {
+      margin-top: 13px;
+
+      color: var(--ouro-claro);
 
       font-family:
         "Montserrat",
@@ -708,97 +766,15 @@
       font-size:
         clamp(
           9px,
-          2.3vw,
-          11px
-        );
-
-      font-weight: 400;
-
-      letter-spacing: 1.5px;
-
-      line-height: 1;
-    }
-
-
-    /* =========================================================
-       BOTÃO
-       SUBIU
-    ========================================================= */
-
-    .botao-rsvp-minimal {
-      flex: 0 0 auto;
-
-      width: min(100%, 400px);
-
-      min-height: 58px;
-
-      margin-top:
-        clamp(
-          38px,
-          5.5vh,
-          58px
-        );
-
-      padding: 14px 20px;
-
-      border:
-        1px solid
-        var(--ouro-claro);
-
-      background:
-        rgba(2, 13, 8, .76);
-
-      color: var(--ouro-claro);
-
-      font-size:
-        clamp(
-          10px,
-          2.7vw,
-          12px
-        );
-
-      font-weight: 600;
-
-      letter-spacing: 2.5px;
-
-      line-height: 1.2;
-
-      text-transform: uppercase;
-
-      cursor: pointer;
-
-      -webkit-appearance: none;
-      appearance: none;
-
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-
-    .botao-rsvp-minimal:active {
-      transform: scale(.98);
-      background: var(--ouro);
-      color: var(--verde);
-    }
-
-    .forma-final {
-      flex: 0 0 auto;
-
-      margin-top: 15px;
-
-      color: var(--ouro-claro);
-
-      font-size:
-        clamp(
-          9px,
-          2.4vw,
+          2.5vw,
           11px
         );
 
       font-weight: 500;
 
-      letter-spacing: 3px;
-
       line-height: 1;
+
+      letter-spacing: 3px;
 
       text-transform: uppercase;
     }
@@ -810,6 +786,7 @@
 
     .revelar {
       opacity: 0;
+
       transform: translateY(8px);
 
       transition:
@@ -819,6 +796,7 @@
 
     .revelar.visivel {
       opacity: 1;
+
       transform: translateY(0);
     }
 
@@ -829,6 +807,7 @@
 
     .tela-modal {
       position: fixed;
+
       z-index: 1000;
 
       inset: 0;
@@ -852,6 +831,7 @@
         no-repeat;
 
       opacity: 0;
+
       visibility: hidden;
 
       transform: translateY(14px);
@@ -865,6 +845,7 @@
     .tela-modal.aberto {
       opacity: 1;
       visibility: visible;
+
       transform: translateY(0);
     }
 
@@ -882,20 +863,33 @@
       margin: 0 auto;
 
       padding:
-        calc(22px + env(safe-area-inset-top, 0px))
+        calc(
+          22px +
+          env(safe-area-inset-top, 0px)
+        )
         clamp(24px, 6vw, 48px)
-        calc(55px + env(safe-area-inset-bottom, 0px));
+        calc(
+          55px +
+          env(safe-area-inset-bottom, 0px)
+        );
     }
 
     .rsvp-voltar {
       border: 0;
+
       padding: 11px 0;
 
       background: transparent;
 
       color: var(--ouro-claro);
 
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
       font-size: 11px;
+
       font-weight: 600;
 
       letter-spacing: 2px;
@@ -911,6 +905,11 @@
 
       color: var(--ouro-claro);
 
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
       font-size:
         clamp(
           10px,
@@ -921,8 +920,6 @@
       font-weight: 500;
 
       letter-spacing: 4px;
-
-      line-height: 1;
 
       text-align: center;
 
@@ -940,7 +937,6 @@
 
     .campo-rsvp {
       width: 100%;
-      min-width: 0;
 
       display: flex;
       flex-direction: column;
@@ -953,6 +949,11 @@
     .campo-rsvp > span,
     .campo-rsvp legend {
       color: var(--ouro-claro);
+
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
 
       font-size:
         clamp(
@@ -997,24 +998,26 @@
 
       color: var(--branco);
 
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
       font-size: 16px;
 
       -webkit-appearance: none;
       appearance: none;
     }
 
-    .campo-rsvp input[type="text"]:focus,
+    .campo-rsvp input:focus,
     .campo-rsvp select:focus,
     .campo-rsvp textarea:focus {
       border-color: var(--ouro-claro);
-
-      box-shadow:
-        0 0 0 1px
-        rgba(222, 183, 102, .16);
     }
 
     .campo-rsvp textarea {
       min-height: 120px;
+
       resize: vertical;
     }
 
@@ -1031,6 +1034,7 @@
       padding: 14px 15px;
 
       display: flex;
+
       align-items: center;
 
       gap: 12px;
@@ -1044,14 +1048,17 @@
 
       color: var(--branco);
 
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
       font-size:
         clamp(
           13px,
           3.5vw,
           15px
         );
-
-      line-height: 1.35;
 
       cursor: pointer;
     }
@@ -1067,104 +1074,63 @@
 
 
     /* =========================================================
-       BOTÕES DO FORMULÁRIO
+       BOTÕES FORM
     ========================================================= */
 
     .botao-enviar,
-    .botao-dourado {
-      width: 100%;
-
-      min-height: 64px;
-
-      border:
-        1px solid
-        var(--ouro-claro);
-
-      padding: 16px 20px;
-
-      font-size:
-        clamp(
-          10px,
-          2.7vw,
-          12px
-        );
-
-      font-weight: 600;
-
-      letter-spacing: 2.7px;
-
-      line-height: 1.2;
-
-      text-transform: uppercase;
-
-      cursor: pointer;
-
-      -webkit-appearance: none;
-      appearance: none;
-    }
-
-    .botao-enviar {
-      margin-top: 4px;
-
-      background: #cda049;
-
-      color: #07110b;
-    }
-
-    .botao-enviar:disabled {
-      opacity: .55;
-      cursor: wait;
-    }
-
-    .botao-dourado {
-      background: var(--ouro);
-      color: var(--verde);
-    }
-
+    .botao-dourado,
     .botao-contorno {
       width: 100%;
 
       min-height: 62px;
 
-      border:
-        1px solid
-        var(--ouro-claro);
-
       padding: 15px 20px;
 
-      background:
-        rgba(2, 13, 8, .60);
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
 
-      color: var(--ouro-claro);
+      font-size: 11px;
 
-      font-size: 10px;
       font-weight: 600;
 
-      letter-spacing: 2.6px;
+      letter-spacing: 2.5px;
 
       text-transform: uppercase;
 
       cursor: pointer;
     }
 
-    #erro-envio {
-      display: none;
+    .botao-enviar,
+    .botao-dourado {
+      border:
+        1px solid
+        var(--ouro-claro);
 
-      color: var(--branco);
+      background: var(--ouro);
 
-      font-size: 12px;
-      line-height: 1.5;
-
-      text-align: center;
+      color: var(--verde);
     }
 
-    #erro-envio.visivel {
-      display: block;
+    .botao-contorno {
+      border:
+        1px solid
+        var(--ouro-claro);
+
+      background:
+        rgba(2, 13, 8, .60);
+
+      color: var(--ouro-claro);
+    }
+
+    .botao-enviar:disabled {
+      opacity: .55;
     }
 
 
     /* =========================================================
-       PÓS-ENVIO
+       TELAS PÓS ENVIO
     ========================================================= */
 
     .tela-central {
@@ -1176,11 +1142,18 @@
       margin: 0 auto;
 
       padding:
-        calc(35px + env(safe-area-inset-top, 0px))
+        calc(
+          35px +
+          env(safe-area-inset-top, 0px)
+        )
         clamp(28px, 7vw, 50px)
-        calc(35px + env(safe-area-inset-bottom, 0px));
+        calc(
+          35px +
+          env(safe-area-inset-bottom, 0px)
+        );
 
       display: flex;
+
       flex-direction: column;
 
       align-items: center;
@@ -1192,7 +1165,13 @@
     .mini-marca {
       color: var(--ouro-claro);
 
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
       font-size: 10px;
+
       font-weight: 500;
 
       letter-spacing: 4px;
@@ -1205,6 +1184,11 @@
 
       color: var(--ouro-claro);
 
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
       font-size:
         clamp(
           17px,
@@ -1214,14 +1198,7 @@
 
       font-weight: 500;
 
-      line-height: 1.4;
-
-      letter-spacing:
-        clamp(
-          3px,
-          1vw,
-          5px
-        );
+      letter-spacing: 4px;
 
       text-transform: uppercase;
     }
@@ -1233,6 +1210,11 @@
 
       color: var(--branco);
 
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
       font-size:
         clamp(
           12px,
@@ -1240,11 +1222,7 @@
           15px
         );
 
-      font-weight: 400;
-
       line-height: 1.7;
-
-      letter-spacing: 1px;
     }
 
     .acoes-pos-envio {
@@ -1253,6 +1231,7 @@
       margin-top: 48px;
 
       display: flex;
+
       flex-direction: column;
 
       gap: 13px;
@@ -1260,58 +1239,26 @@
 
 
     /* =========================================================
-       TELAS MAIS BAIXAS
+       IPHONES / TELAS MAIS BAIXAS
     ========================================================= */
 
     @media (max-height: 750px) {
 
-      .convite-minimal {
-        padding-top:
-          calc(
-            25px +
-            env(safe-area-inset-top, 0px)
-          );
+      .convite-conteudo {
+        transform:
+          translateY(-1vh)
+          scale(.90);
       }
 
-      .save-minimal {
-        margin-top: 22px;
-      }
+    }
 
-      .bloco-data {
-        margin-top: 28px;
-      }
 
-      .ornamento-data {
-        height: 12px;
-        margin-bottom: 10px;
-      }
+    @media (max-height: 670px) {
 
-      .data-vertical {
-        font-size:
-          clamp(
-            44px,
-            13vw,
-            58px
-          );
-
-        gap: 2px;
-      }
-
-      .bloco-baile {
-        margin-top: 28px;
-      }
-
-      .eventos-minimal {
-        margin-top: 32px;
-      }
-
-      .botao-rsvp-minimal {
-        margin-top: 30px;
-        min-height: 50px;
-      }
-
-      .forma-final {
-        margin-top: 10px;
+      .convite-conteudo {
+        transform:
+          translateY(-1vh)
+          scale(.82);
       }
 
     }
@@ -1326,25 +1273,13 @@
       }
 
       .eventos-minimal {
-        gap: 12px;
-      }
-
-      .evento-minimal h2 {
-        font-size: 9px;
-      }
-
-      #scroll-hint {
-        min-width: 195px;
+        gap: 16px;
       }
 
     }
 
 
     @media (min-width: 768px) {
-
-      body {
-        background: var(--verde-escuro);
-      }
 
       .convite-minimal,
       .rsvp-pagina,
@@ -1362,13 +1297,13 @@
 
 
   <div id="scroll-hint">
-    <span>Role para revelar</span>
+    Role para revelar
   </div>
 
 
-  <!-- =======================================================
+  <!-- =====================================================
        ANIMAÇÃO
-  ======================================================== -->
+  ====================================================== -->
 
   <section id="animacao-principal">
 
@@ -1448,100 +1383,105 @@
   </section>
 
 
-  <!-- =======================================================
-       PÁGINA FINAL
-  ======================================================== -->
+  <!-- =====================================================
+       SEGUNDA PÁGINA
+  ====================================================== -->
 
   <section id="continuacao">
 
     <main class="convite-minimal">
 
-
-      <p class="save-minimal revelar">
-        Save the Date
-      </p>
+      <div class="convite-conteudo">
 
 
-      <div class="bloco-data revelar">
-
-        <div class="ornamento-data"></div>
-
-        <div class="data-vertical">
-          <span>16</span>
-          <span>01</span>
-          <span>27</span>
-        </div>
-
-      </div>
-
-
-      <div class="bloco-baile revelar">
-
-        <h1 class="nome-baile">
-          Baile de Formatura
-        </h1>
-
-        <p class="local-baile">
-          São Luís Hall
+        <p class="save-minimal revelar">
+          Save the Date
         </p>
 
+
+        <div class="separador-superior revelar"></div>
+
+
+        <div class="bloco-data revelar">
+
+          <div class="data-vertical">
+            <span>16</span>
+            <span>01</span>
+            <span>27</span>
+          </div>
+
+        </div>
+
+
+        <div class="bloco-baile revelar">
+
+          <h1 class="nome-baile">
+            Baile de Formatura
+          </h1>
+
+          <p class="local-baile">
+            São Luís Hall
+          </p>
+
+        </div>
+
+
+        <section class="eventos-minimal">
+
+
+          <article class="evento-minimal revelar">
+
+            <h2>
+              Culto Ecumênico
+            </h2>
+
+            <time datetime="2027-01-11">
+              11 • 01 • 2027
+            </time>
+
+          </article>
+
+
+          <article class="evento-minimal revelar">
+
+            <h2>
+              Colação de Grau
+            </h2>
+
+            <time datetime="2027-01-12">
+              12 • 01 • 2027
+            </time>
+
+          </article>
+
+
+        </section>
+
+
+        <button
+          type="button"
+          id="abrir-rsvp"
+          class="botao-rsvp-minimal revelar"
+        >
+          Confirme sua presença
+        </button>
+
+
+        <p class="forma-final revelar">
+          Forma Leti • 2026
+        </p>
+
+
       </div>
-
-
-      <section class="eventos-minimal">
-
-
-        <article class="evento-minimal revelar">
-
-          <h2>
-            Culto Ecumênico
-          </h2>
-
-          <time datetime="2027-01-11">
-            11 • 01 • 2027
-          </time>
-
-        </article>
-
-
-        <article class="evento-minimal revelar">
-
-          <h2>
-            Colação de Grau
-          </h2>
-
-          <time datetime="2027-01-12">
-            12 • 01 • 2027
-          </time>
-
-        </article>
-
-
-      </section>
-
-
-      <button
-        type="button"
-        id="abrir-rsvp"
-        class="botao-rsvp-minimal revelar"
-      >
-        Confirme sua presença
-      </button>
-
-
-      <p class="forma-final revelar">
-        Forma Leti • 2026
-      </p>
-
 
     </main>
 
   </section>
 
 
-  <!-- =======================================================
+  <!-- =====================================================
        RSVP
-  ======================================================== -->
+  ====================================================== -->
 
   <section
     id="tela-rsvp"
@@ -1569,8 +1509,6 @@
       <form id="form-rsvp">
 
 
-        <!-- NOME PRIMEIRO -->
-
         <label class="campo-rsvp">
 
           <span>
@@ -1578,7 +1516,6 @@
           </span>
 
           <input
-            id="nome-convidado"
             type="text"
             name="entry.62577334"
             autocomplete="name"
@@ -1587,8 +1524,6 @@
 
         </label>
 
-
-        <!-- PRESENÇA -->
 
         <fieldset class="campo-rsvp">
 
@@ -1631,8 +1566,6 @@
         </fieldset>
 
 
-        <!-- HAVAIANAS -->
-
         <label class="campo-rsvp">
 
           <span>
@@ -1648,36 +1581,17 @@
               Selecione
             </option>
 
-            <option value="33/34">
-              33/34
-            </option>
-
-            <option value="35/36">
-              35/36
-            </option>
-
-            <option value="37/38">
-              37/38
-            </option>
-
-            <option value="39/40">
-              39/40
-            </option>
-
-            <option value="41/42">
-              41/42
-            </option>
-
-            <option value="43/44">
-              43/44
-            </option>
+            <option value="33/34">33/34</option>
+            <option value="35/36">35/36</option>
+            <option value="37/38">37/38</option>
+            <option value="39/40">39/40</option>
+            <option value="41/42">41/42</option>
+            <option value="43/44">43/44</option>
 
           </select>
 
         </label>
 
-
-        <!-- MENSAGEM -->
 
         <label class="campo-rsvp">
 
@@ -1692,12 +1606,6 @@
           ></textarea>
 
         </label>
-
-
-        <p id="erro-envio">
-          Não foi possível concluir o envio.
-          Tente novamente.
-        </p>
 
 
         <button
@@ -1716,9 +1624,9 @@
   </section>
 
 
-  <!-- =======================================================
+  <!-- =====================================================
        RESPOSTA ENVIADA
-  ======================================================== -->
+  ====================================================== -->
 
   <section
     id="tela-enviado"
@@ -1761,9 +1669,9 @@
   </section>
 
 
-  <!-- =======================================================
+  <!-- =====================================================
        AGRADECIMENTO
-  ======================================================== -->
+  ====================================================== -->
 
   <section
     id="tela-agradecimento"
@@ -1802,7 +1710,7 @@
   </section>
 
 
-  <!-- GOOGLE FORMS INVISÍVEL -->
+  <!-- GOOGLE FORMS -->
 
   <iframe
     id="google-form-target"
@@ -1821,17 +1729,9 @@
 
   <script>
 
-    /* =========================================================
-       GOOGLE FORMS
-    ========================================================= */
-
     const GOOGLE_FORM_ACTION =
       "https://docs.google.com/forms/d/e/1FAIpQLSejMylO76VoWtWNbiHgJSzJbu15dI3I4nLhm6wOWNdAiYjmbA/formResponse";
 
-
-    /* =========================================================
-       ELEMENTOS
-    ========================================================= */
 
     const animationSection =
       document.getElementById("animacao-principal");
@@ -1879,10 +1779,6 @@
     let envioEmAndamento = false;
 
 
-    /* =========================================================
-       AUXILIARES
-    ========================================================= */
-
     function clamp(value) {
 
       return Math.max(
@@ -1918,10 +1814,6 @@
     }
 
 
-    /* =========================================================
-       ENVELOPE
-    ========================================================= */
-
     function hideEnvelopeFrames() {
 
       envelopeFrames.forEach(
@@ -1939,7 +1831,9 @@
 
       hideEnvelopeFrames();
 
-      envelopeFinal.classList.remove("active");
+      envelopeFinal
+        .classList
+        .remove("active");
 
       index =
         Math.max(
@@ -1968,9 +1862,7 @@
     }
 
 
-    /* =========================================================
-       BRILHOS PEQUENOS
-    ========================================================= */
+    /* BRILHOS PEQUENOS */
 
     const quantidadeBrilhos = 26;
 
@@ -1984,10 +1876,14 @@
       const brilho =
         document.createElement("img");
 
-      brilho.src = "brilho.png";
-      brilho.className = "brilho";
-      brilho.alt = "";
-      brilho.draggable = false;
+      brilho.src =
+        "brilho.png";
+
+      brilho.className =
+        "brilho";
+
+      brilho.alt =
+        "";
 
       brilho.style.left =
         (2 + Math.random() * 94) + "%";
@@ -1997,7 +1893,7 @@
 
       brilho.style.setProperty(
         "--tamanho",
-        (5 + Math.random() * 14) + "px"
+        (4 + Math.random() * 11) + "px"
       );
 
       brilho.style.setProperty(
@@ -2012,17 +1908,13 @@
 
       brilho.style.setProperty(
         "--intensidade",
-        (.35 + Math.random() * .65)
+        (.35 + Math.random() * .60)
       );
 
       brilhos.appendChild(brilho);
 
     }
 
-
-    /* =========================================================
-       ANIMAÇÃO
-    ========================================================= */
 
     function updateAnimation() {
 
@@ -2040,17 +1932,14 @@
           viewportHeight
         );
 
-      const travelled =
-        -rect.top;
-
       const progress =
         clamp(
-          travelled /
+          (-rect.top) /
           totalScroll
         );
 
 
-      /* ABERTURA 01 → 05 */
+      /* 01 → 05 */
 
       const openingProgress =
         rangeProgress(
@@ -2092,7 +1981,7 @@
 
       /* 05 DESCE */
 
-      const envelopeExitProgress =
+      const envelopeExit =
         easeInOut(
           rangeProgress(
             progress,
@@ -2109,7 +1998,7 @@
         envelopeFinal.style.transform =
           `translate3d(
             0,
-            ${122 * envelopeExitProgress}%,
+            ${122 * envelopeExit}%,
             0
           )`;
 
@@ -2132,9 +2021,9 @@
       }
 
 
-      /* 13 SAI */
+      /* 13 */
 
-      const folha13Progress =
+      const p13 =
         easeInOut(
           rangeProgress(
             progress,
@@ -2145,18 +2034,18 @@
 
       folha13.style.transform =
         `translate3d(
-          ${-120 * folha13Progress}%,
+          ${-120 * p13}%,
           0,
           0
         )`;
 
       folha13.style.opacity =
-        1 - folha13Progress;
+        1 - p13;
 
 
-      /* 14 SAI */
+      /* 14 */
 
-      const folha14Progress =
+      const p14 =
         easeInOut(
           rangeProgress(
             progress,
@@ -2167,18 +2056,18 @@
 
       folha14.style.transform =
         `translate3d(
-          ${120 * folha14Progress}%,
+          ${120 * p14}%,
           0,
           0
         )`;
 
       folha14.style.opacity =
-        1 - folha14Progress;
+        1 - p14;
 
 
       /* FOTO */
 
-      const foto15Progress =
+      const foto =
         easeInOut(
           rangeProgress(
             progress,
@@ -2188,15 +2077,15 @@
         );
 
       imagem15.style.opacity =
-        foto15Progress;
+        foto;
 
       brilhos.style.opacity =
-        foto15Progress;
+        foto;
 
 
       /* IMAGEM 16 */
 
-      const imagem16Progress =
+      const logo =
         easeInOut(
           rangeProgress(
             progress,
@@ -2206,7 +2095,7 @@
         );
 
       imagem16.style.opacity =
-        imagem16Progress;
+        logo;
 
 
       /* CARD */
@@ -2248,7 +2137,9 @@
         }
 
       },
-      { passive: true }
+      {
+        passive: true
+      }
     );
 
 
@@ -2258,9 +2149,7 @@
     );
 
 
-    /* =========================================================
-       REVELAÇÃO
-    ========================================================= */
+    /* REVELAÇÃO */
 
     const elementosRevelar =
       document.querySelectorAll(
@@ -2276,7 +2165,9 @@
           entries.forEach(
             function(entry) {
 
-              if (entry.isIntersecting) {
+              if (
+                entry.isIntersecting
+              ) {
 
                 entry.target
                   .classList
@@ -2299,19 +2190,21 @@
     elementosRevelar.forEach(
       function(elemento) {
 
-        observer.observe(elemento);
+        observer.observe(
+          elemento
+        );
 
       }
     );
 
 
-    /* =========================================================
-       MODAIS
-    ========================================================= */
+    /* MODAIS */
 
     function abrirTela(tela) {
 
-      tela.classList.add("aberto");
+      tela.classList.add(
+        "aberto"
+      );
 
       tela.setAttribute(
         "aria-hidden",
@@ -2329,7 +2222,9 @@
 
     function fecharTela(tela) {
 
-      tela.classList.remove("aberto");
+      tela.classList.remove(
+        "aberto"
+      );
 
       tela.setAttribute(
         "aria-hidden",
@@ -2354,11 +2249,15 @@
     function fecharTodasAsTelas() {
 
       document
-        .querySelectorAll(".tela-modal")
+        .querySelectorAll(
+          ".tela-modal"
+        )
         .forEach(
           function(tela) {
 
-            tela.classList.remove("aberto");
+            tela.classList.remove(
+              "aberto"
+            );
 
             tela.setAttribute(
               "aria-hidden",
@@ -2374,10 +2273,6 @@
 
     }
 
-
-    /* =========================================================
-       ABRIR / FECHAR RSVP
-    ========================================================= */
 
     document
       .getElementById("abrir-rsvp")
@@ -2403,9 +2298,7 @@
       );
 
 
-    /* =========================================================
-       ENVIO GOOGLE FORMS
-    ========================================================= */
+    /* GOOGLE FORMS */
 
     formRsvp.action =
       GOOGLE_FORM_ACTION;
@@ -2421,9 +2314,11 @@
       "submit",
       function() {
 
-        envioEmAndamento = true;
+        envioEmAndamento =
+          true;
 
-        botaoEnviar.disabled = true;
+        botaoEnviar.disabled =
+          true;
 
         botaoEnviar.textContent =
           "Enviando...";
@@ -2432,20 +2327,29 @@
         setTimeout(
           function() {
 
-            if (!envioEmAndamento) {
+            if (
+              !envioEmAndamento
+            ) {
               return;
             }
 
-            envioEmAndamento = false;
 
-            botaoEnviar.disabled = false;
+            envioEmAndamento =
+              false;
+
+            botaoEnviar.disabled =
+              false;
 
             botaoEnviar.textContent =
               "Enviar resposta";
 
-            fecharTela(telaRsvp);
+            fecharTela(
+              telaRsvp
+            );
 
-            abrirTela(telaEnviado);
+            abrirTela(
+              telaEnviado
+            );
 
           },
           900
@@ -2455,9 +2359,7 @@
     );
 
 
-    /* =========================================================
-       VOLTAR AO INÍCIO
-    ========================================================= */
+    /* VOLTAR */
 
     document
       .getElementById("voltar-inicio")
@@ -2476,9 +2378,7 @@
       );
 
 
-    /* =========================================================
-       CONCLUIR
-    ========================================================= */
+    /* CONCLUIR */
 
     document
       .getElementById("concluir")
@@ -2486,7 +2386,9 @@
         "click",
         function() {
 
-          fecharTela(telaEnviado);
+          fecharTela(
+            telaEnviado
+          );
 
           abrirTela(
             telaAgradecimento
@@ -2496,9 +2398,7 @@
       );
 
 
-    /* =========================================================
-       REINICIAR
-    ========================================================= */
+    /* REINICIAR */
 
     document
       .getElementById("reiniciar")
@@ -2524,37 +2424,29 @@
       );
 
 
-    /* =========================================================
-       PRELOAD
-    ========================================================= */
+    /* PRELOAD */
 
-    const imageFiles = [
-
+    [
       "01.png",
       "02.png",
       "03.png",
       "04.png",
       "05.png",
-
       "13.png",
       "14.png",
       "15.png",
       "16.png",
-
       "brilho.png",
       "fundo.png",
       "fundo final.png"
-
-    ];
-
-
-    imageFiles.forEach(
+    ].forEach(
       function(file) {
 
         const image =
           new Image();
 
-        image.src = file;
+        image.src =
+          file;
 
       }
     );
