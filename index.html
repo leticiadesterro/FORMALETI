@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Montserrat:wght@400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap"
     rel="stylesheet"
   >
 
@@ -32,8 +32,7 @@
     :root {
       --verde: #020d08;
       --verde-escuro: #010805;
-      --marfim: #f6efdf;
-      --marfim-suave: #ded3bd;
+      --branco: #f5f1e8;
       --ouro: #c89a46;
       --ouro-claro: #deb766;
     }
@@ -42,7 +41,6 @@
       width: 100%;
       min-height: 100%;
       background: var(--verde);
-      scroll-behavior: auto;
     }
 
     body {
@@ -50,9 +48,9 @@
       min-height: 100%;
       overflow-x: hidden;
       background: var(--verde);
-      color: var(--marfim);
+      color: var(--branco);
+      font-family: "Montserrat", Arial, sans-serif;
       -webkit-tap-highlight-color: transparent;
-      overscroll-behavior-x: none;
     }
 
     body.modal-aberto {
@@ -73,10 +71,6 @@
       font: inherit;
     }
 
-    button {
-      touch-action: manipulation;
-    }
-
 
     /* =========================================================
        ANIMAÇÃO
@@ -85,10 +79,8 @@
     #animacao-principal {
       position: relative;
       width: 100%;
-
       height: 430vh;
       height: 430dvh;
-
       background: var(--verde);
     }
 
@@ -103,7 +95,6 @@
       height: 100dvh;
 
       overflow: hidden;
-
       background: var(--verde);
     }
 
@@ -143,42 +134,32 @@
 
     #folha-14 {
       z-index: 6;
-
       opacity: 1;
-
       transform: translate3d(0, 0, 0);
-
       will-change: transform, opacity;
     }
 
     #folha-13 {
       z-index: 7;
-
       opacity: 1;
-
       transform: translate3d(0, 0, 0);
-
       will-change: transform, opacity;
     }
 
 
     /* =========================================================
        BRILHOS
-       MENORES
     ========================================================= */
 
     #brilhos {
       position: absolute;
       inset: 0;
-
       z-index: 8;
 
       overflow: hidden;
-
       opacity: 0;
 
       pointer-events: none;
-
       will-change: opacity;
     }
 
@@ -233,6 +214,7 @@
         opacity: 0;
         transform: scale(.72);
       }
+
     }
 
 
@@ -252,7 +234,6 @@
 
     #envelope-final {
       z-index: 10;
-
       display: none;
 
       transform: translate3d(0, 0, 0);
@@ -285,19 +266,18 @@
 
       transform: translateX(-50%);
 
-      min-width: 220px;
-      min-height: 54px;
+      min-width: 210px;
+      min-height: 52px;
 
-      padding: 12px 28px;
+      padding: 12px 27px;
 
       display: flex;
-
       align-items: center;
       justify-content: center;
 
       border:
         1px solid
-        rgba(222, 183, 102, .90);
+        rgba(222, 183, 102, .9);
 
       border-radius: 999px;
 
@@ -307,25 +287,13 @@
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
 
-      box-shadow:
-        0 8px 28px
-        rgba(0, 0, 0, .32);
-
       color: var(--ouro-claro);
 
-      font-family:
-        "Montserrat",
-        Arial,
-        sans-serif;
-
-      font-size: 11px;
-
+      font-size: 10px;
       font-weight: 600;
-
-      letter-spacing: 2.3px;
+      letter-spacing: 2.2px;
 
       text-transform: uppercase;
-
       white-space: nowrap;
 
       pointer-events: none;
@@ -358,8 +326,9 @@
       50% {
         transform:
           translateX(-50%)
-          translateY(6px);
+          translateY(5px);
       }
+
     }
 
 
@@ -369,7 +338,6 @@
 
     #continuacao {
       position: relative;
-
       z-index: 20;
 
       width: 100%;
@@ -385,43 +353,38 @@
         url("fundo final.png")
         center center / cover
         no-repeat;
-
-      color: var(--marfim);
     }
 
     #continuacao::before {
       content: "";
 
       position: absolute;
-
       z-index: 1;
 
       top: -2px;
       left: 0;
 
       width: 100%;
-      height: 19vh;
+      height: 15vh;
 
       pointer-events: none;
 
       background:
         linear-gradient(
           to bottom,
-          rgba(0, 0, 0, .98) 0%,
-          rgba(0, 0, 0, .78) 28%,
-          rgba(0, 0, 0, .36) 62%,
+          rgba(0, 0, 0, .95) 0%,
+          rgba(0, 0, 0, .52) 45%,
           rgba(0, 0, 0, 0) 100%
         );
     }
 
 
     /* =========================================================
-       CONVITE
+       NOVA DIAGRAMAÇÃO
     ========================================================= */
 
     .convite-minimal {
       position: relative;
-
       z-index: 5;
 
       width: min(100%, 620px);
@@ -433,30 +396,12 @@
       margin: 0 auto;
 
       padding:
-        calc(
-          36px +
-          env(safe-area-inset-top, 0px)
-        )
+        calc(54px + env(safe-area-inset-top, 0px))
         clamp(24px, 6vw, 48px)
-        calc(
-          22px +
-          env(safe-area-inset-bottom, 0px)
-        );
+        calc(24px + env(safe-area-inset-bottom, 0px));
 
-      display: grid;
-
-      grid-template-rows:
-        auto
-        .70fr
-        auto
-        .78fr
-        auto
-        .92fr
-        auto
-        .60fr
-        auto
-        auto;
-
+      display: flex;
+      flex-direction: column;
       align-items: center;
 
       text-align: center;
@@ -467,31 +412,25 @@
 
     /* =========================================================
        SAVE THE DATE
-       DESCIDO MAIS
+       MAIS PARA BAIXO
     ========================================================= */
 
     .save-minimal {
-      grid-row: 1;
+      flex: 0 0 auto;
 
-      /*
-        Antes estava praticamente colado ao topo.
-        Agora desce aproximadamente duas alturas
-        da própria linha.
-      */
-
-      margin-top: 42px;
+      margin-top:
+        clamp(
+          35px,
+          7vh,
+          72px
+        );
 
       color: var(--ouro-claro);
-
-      font-family:
-        "Montserrat",
-        Arial,
-        sans-serif;
 
       font-size:
         clamp(
           12px,
-          3.4vw,
+          3.3vw,
           16px
         );
 
@@ -500,7 +439,7 @@
       letter-spacing:
         clamp(
           4px,
-          1.3vw,
+          1.5vw,
           7px
         );
 
@@ -512,13 +451,20 @@
 
     /* =========================================================
        DATA
+       SANS-SERIF / BRANCA / SEPARADA
     ========================================================= */
 
     .bloco-data {
-      grid-row: 3;
+      flex: 0 0 auto;
+
+      margin-top:
+        clamp(
+          42px,
+          6.5vh,
+          68px
+        );
 
       display: flex;
-
       flex-direction: column;
 
       align-items: center;
@@ -529,9 +475,9 @@
       position: relative;
 
       width: 1px;
-      height: 24px;
+      height: 17px;
 
-      margin-bottom: 15px;
+      margin-bottom: 14px;
 
       background:
         linear-gradient(
@@ -556,9 +502,6 @@
         1px solid
         var(--ouro-claro);
 
-      background:
-        rgba(2, 13, 8, .8);
-
       transform:
         translateX(-50%)
         rotate(45deg);
@@ -566,7 +509,6 @@
 
     .data-vertical {
       display: flex;
-
       flex-direction: column;
 
       align-items: center;
@@ -574,48 +516,55 @@
 
       gap:
         clamp(
-          4px,
-          1.2vh,
-          11px
+          3px,
+          .7vh,
+          7px
         );
 
-      color: var(--marfim);
+      color: var(--branco);
 
       font-family:
-        "Bodoni Moda",
-        "Times New Roman",
-        serif;
+        "Montserrat",
+        Arial,
+        sans-serif;
 
       font-size:
         clamp(
-          59px,
-          17vw,
-          78px
+          52px,
+          15vw,
+          72px
         );
 
-      font-weight: 400;
+      font-weight: 300;
 
-      line-height: .82;
+      line-height: .88;
+
+      letter-spacing: -3px;
 
       font-variant-numeric: lining-nums;
     }
 
     .data-vertical span {
       display: block;
-      line-height: .82;
+      line-height: .88;
     }
 
 
     /* =========================================================
-       BAILE DE FORMATURA
-       AGORA MONTSERRAT + DOURADO
+       BAILE
     ========================================================= */
 
     .bloco-baile {
-      grid-row: 5;
+      flex: 0 0 auto;
+
+      margin-top:
+        clamp(
+          40px,
+          6vh,
+          62px
+        );
 
       display: flex;
-
       flex-direction: column;
 
       align-items: center;
@@ -632,9 +581,9 @@
 
       font-size:
         clamp(
-          14px,
-          3.9vw,
-          19px
+          13px,
+          3.7vw,
+          18px
         );
 
       font-weight: 500;
@@ -644,7 +593,7 @@
       letter-spacing:
         clamp(
           3px,
-          1vw,
+          1.1vw,
           5px
         );
 
@@ -652,25 +601,20 @@
     }
 
     .local-baile {
-      margin-top: 14px;
+      margin-top: 13px;
 
-      color: var(--marfim);
-
-      font-family:
-        "Montserrat",
-        Arial,
-        sans-serif;
+      color: var(--branco);
 
       font-size:
         clamp(
-          9px,
+          10px,
           2.7vw,
           12px
         );
 
-      font-weight: 500;
+      font-weight: 400;
 
-      letter-spacing: 3px;
+      letter-spacing: 3.2px;
 
       line-height: 1;
 
@@ -683,9 +627,16 @@
     ========================================================= */
 
     .eventos-minimal {
-      grid-row: 7;
+      flex: 0 0 auto;
 
       width: 100%;
+
+      margin-top:
+        clamp(
+          45px,
+          7vh,
+          68px
+        );
 
       display: grid;
 
@@ -699,70 +650,55 @@
           5vw,
           40px
         );
+
+      align-items: start;
     }
 
     .evento-minimal {
-      position: relative;
-
       min-width: 0;
 
-      padding-top: 17px;
-
       display: flex;
-
       flex-direction: column;
 
       align-items: center;
-    }
-
-    .evento-minimal::before {
-      content: "";
-
-      position: absolute;
-
-      top: 0;
-      left: 50%;
-
-      width: 65px;
-      height: 1px;
-
-      transform: translateX(-50%);
-
-      background:
-        linear-gradient(
-          90deg,
-          transparent,
-          var(--ouro-claro),
-          transparent
-        );
+      justify-content: flex-start;
     }
 
     .evento-minimal h2 {
-      color: var(--marfim);
+      color: var(--ouro-claro);
 
       font-family:
-        "Bodoni Moda",
-        "Times New Roman",
-        serif;
+        "Montserrat",
+        Arial,
+        sans-serif;
 
       font-size:
         clamp(
-          18px,
-          4.8vw,
-          25px
+          10px,
+          2.8vw,
+          13px
         );
 
-      font-weight: 400;
+      font-weight: 500;
 
-      line-height: 1.08;
+      line-height: 1.35;
+
+      letter-spacing:
+        clamp(
+          1.5px,
+          .6vw,
+          3px
+        );
+
+      text-transform: uppercase;
     }
 
     .evento-minimal time {
       display: block;
 
-      margin-top: 9px;
+      margin-top: 10px;
 
-      color: var(--ouro-claro);
+      color: var(--branco);
 
       font-family:
         "Montserrat",
@@ -772,11 +708,11 @@
       font-size:
         clamp(
           9px,
-          2.2vw,
+          2.3vw,
           11px
         );
 
-      font-weight: 500;
+      font-weight: 400;
 
       letter-spacing: 1.5px;
 
@@ -785,39 +721,40 @@
 
 
     /* =========================================================
-       BOTÃO PRINCIPAL
+       BOTÃO
+       SUBIU
     ========================================================= */
 
     .botao-rsvp-minimal {
-      grid-row: 9;
-
-      justify-self: center;
+      flex: 0 0 auto;
 
       width: min(100%, 400px);
 
-      min-height: 62px;
+      min-height: 58px;
 
-      padding: 15px 22px;
+      margin-top:
+        clamp(
+          38px,
+          5.5vh,
+          58px
+        );
+
+      padding: 14px 20px;
 
       border:
         1px solid
         var(--ouro-claro);
 
       background:
-        rgba(2, 13, 8, .74);
+        rgba(2, 13, 8, .76);
 
       color: var(--ouro-claro);
 
-      font-family:
-        "Montserrat",
-        Arial,
-        sans-serif;
-
       font-size:
         clamp(
-          11px,
-          2.8vw,
-          13px
+          10px,
+          2.7vw,
+          12px
         );
 
       font-weight: 600;
@@ -839,29 +776,22 @@
 
     .botao-rsvp-minimal:active {
       transform: scale(.98);
-
       background: var(--ouro);
-
       color: var(--verde);
     }
 
     .forma-final {
-      grid-row: 10;
+      flex: 0 0 auto;
 
-      margin-top: 14px;
+      margin-top: 15px;
 
       color: var(--ouro-claro);
 
-      font-family:
-        "Montserrat",
-        Arial,
-        sans-serif;
-
       font-size:
         clamp(
-          10px,
-          2.5vw,
-          12px
+          9px,
+          2.4vw,
+          11px
         );
 
       font-weight: 500;
@@ -880,8 +810,7 @@
 
     .revelar {
       opacity: 0;
-
-      transform: translateY(10px);
+      transform: translateY(8px);
 
       transition:
         opacity .8s ease,
@@ -900,7 +829,6 @@
 
     .tela-modal {
       position: fixed;
-
       z-index: 1000;
 
       inset: 0;
@@ -924,7 +852,6 @@
         no-repeat;
 
       opacity: 0;
-
       visibility: hidden;
 
       transform: translateY(14px);
@@ -938,7 +865,6 @@
     .tela-modal.aberto {
       opacity: 1;
       visibility: visible;
-
       transform: translateY(0);
     }
 
@@ -956,33 +882,20 @@
       margin: 0 auto;
 
       padding:
-        calc(
-          22px +
-          env(safe-area-inset-top, 0px)
-        )
+        calc(22px + env(safe-area-inset-top, 0px))
         clamp(24px, 6vw, 48px)
-        calc(
-          55px +
-          env(safe-area-inset-bottom, 0px)
-        );
+        calc(55px + env(safe-area-inset-bottom, 0px));
     }
 
     .rsvp-voltar {
       border: 0;
-
       padding: 11px 0;
 
       background: transparent;
 
       color: var(--ouro-claro);
 
-      font-family:
-        "Montserrat",
-        Arial,
-        sans-serif;
-
       font-size: 11px;
-
       font-weight: 600;
 
       letter-spacing: 2px;
@@ -994,14 +907,9 @@
 
     .rsvp-marca {
       margin-top: 30px;
-      margin-bottom: 46px;
+      margin-bottom: 42px;
 
       color: var(--ouro-claro);
-
-      font-family:
-        "Montserrat",
-        Arial,
-        sans-serif;
 
       font-size:
         clamp(
@@ -1025,19 +933,16 @@
       width: 100%;
 
       display: flex;
-
       flex-direction: column;
 
-      gap: 32px;
+      gap: 30px;
     }
 
     .campo-rsvp {
       width: 100%;
-
       min-width: 0;
 
       display: flex;
-
       flex-direction: column;
 
       gap: 11px;
@@ -1048,11 +953,6 @@
     .campo-rsvp > span,
     .campo-rsvp legend {
       color: var(--ouro-claro);
-
-      font-family:
-        "Montserrat",
-        Arial,
-        sans-serif;
 
       font-size:
         clamp(
@@ -1095,12 +995,7 @@
       background:
         rgba(1, 10, 6, .72);
 
-      color: var(--marfim);
-
-      font-family:
-        "Montserrat",
-        Arial,
-        sans-serif;
+      color: var(--branco);
 
       font-size: 16px;
 
@@ -1125,7 +1020,7 @@
 
     .campo-rsvp select option {
       background: var(--verde);
-      color: var(--marfim);
+      color: var(--branco);
     }
 
     .opcao-rsvp {
@@ -1136,7 +1031,6 @@
       padding: 14px 15px;
 
       display: flex;
-
       align-items: center;
 
       gap: 12px;
@@ -1148,12 +1042,7 @@
       background:
         rgba(1, 10, 6, .64);
 
-      color: var(--marfim);
-
-      font-family:
-        "Montserrat",
-        Arial,
-        sans-serif;
+      color: var(--branco);
 
       font-size:
         clamp(
@@ -1178,7 +1067,7 @@
 
 
     /* =========================================================
-       BOTÕES
+       BOTÕES DO FORMULÁRIO
     ========================================================= */
 
     .botao-enviar,
@@ -1192,11 +1081,6 @@
         var(--ouro-claro);
 
       padding: 16px 20px;
-
-      font-family:
-        "Montserrat",
-        Arial,
-        sans-serif;
 
       font-size:
         clamp(
@@ -1253,13 +1137,7 @@
 
       color: var(--ouro-claro);
 
-      font-family:
-        "Montserrat",
-        Arial,
-        sans-serif;
-
       font-size: 10px;
-
       font-weight: 600;
 
       letter-spacing: 2.6px;
@@ -1269,23 +1147,12 @@
       cursor: pointer;
     }
 
-
-    /* =========================================================
-       ERRO
-    ========================================================= */
-
     #erro-envio {
       display: none;
 
-      color: var(--marfim);
-
-      font-family:
-        "Montserrat",
-        Arial,
-        sans-serif;
+      color: var(--branco);
 
       font-size: 12px;
-
       line-height: 1.5;
 
       text-align: center;
@@ -1298,7 +1165,6 @@
 
     /* =========================================================
        PÓS-ENVIO
-       MESMA LINGUAGEM DA MARCA
     ========================================================= */
 
     .tela-central {
@@ -1310,18 +1176,11 @@
       margin: 0 auto;
 
       padding:
-        calc(
-          35px +
-          env(safe-area-inset-top, 0px)
-        )
+        calc(35px + env(safe-area-inset-top, 0px))
         clamp(28px, 7vw, 50px)
-        calc(
-          35px +
-          env(safe-area-inset-bottom, 0px)
-        );
+        calc(35px + env(safe-area-inset-bottom, 0px));
 
       display: flex;
-
       flex-direction: column;
 
       align-items: center;
@@ -1333,13 +1192,7 @@
     .mini-marca {
       color: var(--ouro-claro);
 
-      font-family:
-        "Montserrat",
-        Arial,
-        sans-serif;
-
       font-size: 10px;
-
       font-weight: 500;
 
       letter-spacing: 4px;
@@ -1347,27 +1200,16 @@
       text-transform: uppercase;
     }
 
-
-    /*
-       SUBSTITUI A BODONI GRANDE BRANCA
-       POR MONTSERRAT DOURADA
-    */
-
     .titulo-pos-envio {
       margin-top: 34px;
 
       color: var(--ouro-claro);
 
-      font-family:
-        "Montserrat",
-        Arial,
-        sans-serif;
-
       font-size:
         clamp(
-          16px,
+          17px,
           4.5vw,
-          21px
+          22px
         );
 
       font-weight: 500;
@@ -1389,12 +1231,7 @@
 
       margin-top: 20px;
 
-      color: var(--marfim);
-
-      font-family:
-        "Montserrat",
-        Arial,
-        sans-serif;
+      color: var(--branco);
 
       font-size:
         clamp(
@@ -1416,7 +1253,6 @@
       margin-top: 48px;
 
       display: flex;
-
       flex-direction: column;
 
       gap: 13px;
@@ -1427,92 +1263,57 @@
        TELAS MAIS BAIXAS
     ========================================================= */
 
-    @media (max-height: 720px) {
+    @media (max-height: 750px) {
 
       .convite-minimal {
         padding-top:
           calc(
-            18px +
+            25px +
             env(safe-area-inset-top, 0px)
           );
-
-        padding-bottom:
-          calc(
-            14px +
-            env(safe-area-inset-bottom, 0px)
-          );
-
-        grid-template-rows:
-          auto
-          .45fr
-          auto
-          .48fr
-          auto
-          .55fr
-          auto
-          .40fr
-          auto
-          auto;
       }
 
       .save-minimal {
-        margin-top: 34px;
+        margin-top: 22px;
+      }
+
+      .bloco-data {
+        margin-top: 28px;
       }
 
       .ornamento-data {
-        height: 18px;
+        height: 12px;
         margin-bottom: 10px;
       }
 
       .data-vertical {
         font-size:
           clamp(
-            49px,
-            14vw,
-            62px
+            44px,
+            13vw,
+            58px
           );
 
-        gap: 4px;
+        gap: 2px;
       }
 
-      .nome-baile {
-        font-size:
-          clamp(
-            12px,
-            3.5vw,
-            16px
-          );
+      .bloco-baile {
+        margin-top: 28px;
       }
 
-      .evento-minimal {
-        padding-top: 12px;
-      }
-
-      .evento-minimal h2 {
-        font-size:
-          clamp(
-            16px,
-            4.5vw,
-            20px
-          );
+      .eventos-minimal {
+        margin-top: 32px;
       }
 
       .botao-rsvp-minimal {
+        margin-top: 30px;
         min-height: 50px;
       }
 
       .forma-final {
-        margin-top: 9px;
+        margin-top: 10px;
       }
 
-      .rsvp-marca {
-        margin-top: 20px;
-        margin-bottom: 34px;
-      }
-
-      #form-rsvp {
-        gap: 26px;
-      }
     }
 
 
@@ -1524,20 +1325,18 @@
         padding-right: 20px;
       }
 
-      #scroll-hint {
-        min-width: 200px;
-        min-height: 52px;
-
-        font-size: 10px;
-      }
-
       .eventos-minimal {
         gap: 12px;
       }
 
       .evento-minimal h2 {
-        font-size: 17px;
+        font-size: 9px;
       }
+
+      #scroll-hint {
+        min-width: 195px;
+      }
+
     }
 
 
@@ -1552,90 +1351,63 @@
       .tela-central {
         width: min(92vw, 620px);
       }
-    }
 
-
-    @media (prefers-reduced-motion: reduce) {
-
-      #scroll-hint {
-        animation: none;
-      }
-
-      .revelar {
-        transition: none;
-      }
-
-      .brilho {
-        animation-duration: 8s;
-      }
     }
 
   </style>
-
 </head>
 
 
 <body>
 
 
-  <!-- CARD SEM SETA -->
-
   <div id="scroll-hint">
     <span>Role para revelar</span>
   </div>
 
 
-  <!-- ANIMAÇÃO -->
+  <!-- =======================================================
+       ANIMAÇÃO
+  ======================================================== -->
 
   <section id="animacao-principal">
 
     <div id="stage">
-
 
       <img
         id="fundo"
         class="fullscreen-image"
         src="fundo.png"
         alt=""
-        draggable="false"
       >
-
 
       <img
         id="imagem-15"
         class="fullscreen-image"
         src="15.png"
         alt=""
-        draggable="false"
       >
-
 
       <img
         id="imagem-16"
         class="fullscreen-image"
         src="16.png"
         alt=""
-        draggable="false"
       >
-
 
       <img
         id="folha-14"
         class="fullscreen-image"
         src="14.png"
         alt=""
-        draggable="false"
       >
-
 
       <img
         id="folha-13"
         class="fullscreen-image"
         src="13.png"
         alt=""
-        draggable="false"
       >
-
 
       <div id="brilhos"></div>
 
@@ -1644,51 +1416,41 @@
         src="01.png"
         class="fullscreen-image frame-envelope active"
         alt=""
-        draggable="false"
       >
-
 
       <img
         src="02.png"
         class="fullscreen-image frame-envelope"
         alt=""
-        draggable="false"
       >
-
 
       <img
         src="03.png"
         class="fullscreen-image frame-envelope"
         alt=""
-        draggable="false"
       >
-
 
       <img
         src="04.png"
         class="fullscreen-image frame-envelope"
         alt=""
-        draggable="false"
       >
-
-
-      <!-- 05 É O ENVELOPE FINAL -->
 
       <img
         id="envelope-final"
         class="fullscreen-image"
         src="05.png"
         alt=""
-        draggable="false"
       >
-
 
     </div>
 
   </section>
 
 
-  <!-- PÁGINA FINAL -->
+  <!-- =======================================================
+       PÁGINA FINAL
+  ======================================================== -->
 
   <section id="continuacao">
 
@@ -1777,7 +1539,9 @@
   </section>
 
 
-  <!-- RSVP -->
+  <!-- =======================================================
+       RSVP
+  ======================================================== -->
 
   <section
     id="tela-rsvp"
@@ -1805,7 +1569,7 @@
       <form id="form-rsvp">
 
 
-        <!-- 1. NOME -->
+        <!-- NOME PRIMEIRO -->
 
         <label class="campo-rsvp">
 
@@ -1824,7 +1588,7 @@
         </label>
 
 
-        <!-- 2. PRESENÇA -->
+        <!-- PRESENÇA -->
 
         <fieldset class="campo-rsvp">
 
@@ -1867,7 +1631,7 @@
         </fieldset>
 
 
-        <!-- 3. HAVAIANAS -->
+        <!-- HAVAIANAS -->
 
         <label class="campo-rsvp">
 
@@ -1913,7 +1677,7 @@
         </label>
 
 
-        <!-- 4. MENSAGEM -->
+        <!-- MENSAGEM -->
 
         <label class="campo-rsvp">
 
@@ -1952,7 +1716,9 @@
   </section>
 
 
-  <!-- RESPOSTA ENVIADA -->
+  <!-- =======================================================
+       RESPOSTA ENVIADA
+  ======================================================== -->
 
   <section
     id="tela-enviado"
@@ -1962,21 +1728,15 @@
 
     <div class="tela-central">
 
-
       <p class="mini-marca">
         Forma Leti • 2026
       </p>
-
-
-      <!-- AGORA SOMENTE ISSO -->
 
       <h2 class="titulo-pos-envio">
         Resposta enviada
       </h2>
 
-
       <div class="acoes-pos-envio">
-
 
         <button
           type="button"
@@ -1986,7 +1746,6 @@
           Voltar ao início
         </button>
 
-
         <button
           type="button"
           id="concluir"
@@ -1995,16 +1754,16 @@
           Concluir
         </button>
 
-
       </div>
-
 
     </div>
 
   </section>
 
 
-  <!-- AGRADECIMENTO -->
+  <!-- =======================================================
+       AGRADECIMENTO
+  ======================================================== -->
 
   <section
     id="tela-agradecimento"
@@ -2014,24 +1773,19 @@
 
     <div class="tela-central">
 
-
       <p class="mini-marca">
         Forma Leti • 2026
       </p>
-
 
       <h2 class="titulo-pos-envio">
         Obrigada
       </h2>
 
-
       <p class="texto-pos-envio">
         Por fazer parte deste momento.
       </p>
 
-
       <div class="acoes-pos-envio">
-
 
         <button
           type="button"
@@ -2041,9 +1795,7 @@
           Reiniciar
         </button>
 
-
       </div>
-
 
     </div>
 
@@ -2082,87 +1834,48 @@
     ========================================================= */
 
     const animationSection =
-      document.getElementById(
-        "animacao-principal"
-      );
+      document.getElementById("animacao-principal");
 
     const scrollHint =
-      document.getElementById(
-        "scroll-hint"
-      );
+      document.getElementById("scroll-hint");
 
     const envelopeFrames =
-      document.querySelectorAll(
-        ".frame-envelope"
-      );
+      document.querySelectorAll(".frame-envelope");
 
     const envelopeFinal =
-      document.getElementById(
-        "envelope-final"
-      );
+      document.getElementById("envelope-final");
 
     const folha13 =
-      document.getElementById(
-        "folha-13"
-      );
+      document.getElementById("folha-13");
 
     const folha14 =
-      document.getElementById(
-        "folha-14"
-      );
+      document.getElementById("folha-14");
 
     const imagem15 =
-      document.getElementById(
-        "imagem-15"
-      );
+      document.getElementById("imagem-15");
 
     const imagem16 =
-      document.getElementById(
-        "imagem-16"
-      );
+      document.getElementById("imagem-16");
 
     const brilhos =
-      document.getElementById(
-        "brilhos"
-      );
+      document.getElementById("brilhos");
 
     const telaRsvp =
-      document.getElementById(
-        "tela-rsvp"
-      );
+      document.getElementById("tela-rsvp");
 
     const telaEnviado =
-      document.getElementById(
-        "tela-enviado"
-      );
+      document.getElementById("tela-enviado");
 
     const telaAgradecimento =
-      document.getElementById(
-        "tela-agradecimento"
-      );
+      document.getElementById("tela-agradecimento");
 
     const formRsvp =
-      document.getElementById(
-        "form-rsvp"
-      );
+      document.getElementById("form-rsvp");
 
     const botaoEnviar =
-      document.getElementById(
-        "botao-enviar"
-      );
-
-    const erroEnvio =
-      document.getElementById(
-        "erro-envio"
-      );
-
-    const nomeConvidado =
-      document.getElementById(
-        "nome-convidado"
-      );
+      document.getElementById("botao-enviar");
 
     let ticking = false;
-
     let envioEmAndamento = false;
 
 
@@ -2174,10 +1887,7 @@
 
       return Math.max(
         0,
-        Math.min(
-          1,
-          value
-        )
+        Math.min(1, value)
       );
 
     }
@@ -2190,15 +1900,8 @@
     ) {
 
       return clamp(
-        (
-          progress -
-          start
-        )
-        /
-        (
-          end -
-          start
-        )
+        (progress - start) /
+        (end - start)
       );
 
     }
@@ -2209,10 +1912,7 @@
       return (
         value *
         value *
-        (
-          3 -
-          2 * value
-        )
+        (3 - 2 * value)
       );
 
     }
@@ -2227,9 +1927,7 @@
       envelopeFrames.forEach(
         function(frame) {
 
-          frame.classList.remove(
-            "active"
-          );
+          frame.classList.remove("active");
 
         }
       );
@@ -2241,9 +1939,7 @@
 
       hideEnvelopeFrames();
 
-      envelopeFinal.classList.remove(
-        "active"
-      );
+      envelopeFinal.classList.remove("active");
 
       index =
         Math.max(
@@ -2256,9 +1952,7 @@
 
       envelopeFrames[index]
         .classList
-        .add(
-          "active"
-        );
+        .add("active");
 
     }
 
@@ -2269,21 +1963,13 @@
 
       envelopeFinal
         .classList
-        .add(
-          "active"
-        );
+        .add("active");
 
     }
 
 
     /* =========================================================
-       BRILHOS
-
-       TAMANHO ANTIGO:
-       10px → 46px
-
-       NOVO:
-       5px → 19px
+       BRILHOS PEQUENOS
     ========================================================= */
 
     const quantidadeBrilhos = 26;
@@ -2296,87 +1982,40 @@
     ) {
 
       const brilho =
-        document.createElement(
-          "img"
-        );
+        document.createElement("img");
 
-      brilho.src =
-        "brilho.png";
-
-      brilho.className =
-        "brilho";
-
-      brilho.alt =
-        "";
-
-      brilho.draggable =
-        false;
+      brilho.src = "brilho.png";
+      brilho.className = "brilho";
+      brilho.alt = "";
+      brilho.draggable = false;
 
       brilho.style.left =
-        (
-          2 +
-          Math.random() * 94
-        )
-        +
-        "%";
+        (2 + Math.random() * 94) + "%";
 
       brilho.style.top =
-        (
-          2 +
-          Math.random() * 94
-        )
-        +
-        "%";
-
-
-      /*
-        BRILHOS BEM MENORES
-      */
+        (2 + Math.random() * 94) + "%";
 
       brilho.style.setProperty(
         "--tamanho",
-        (
-          5 +
-          Math.random() * 14
-        )
-        +
-        "px"
+        (5 + Math.random() * 14) + "px"
       );
-
 
       brilho.style.setProperty(
         "--duracao",
-        (
-          3.5 +
-          Math.random() * 4
-        )
-        +
-        "s"
+        (3.5 + Math.random() * 4) + "s"
       );
-
 
       brilho.style.setProperty(
         "--atraso",
-        (
-          -Math.random() * 8
-        )
-        +
-        "s"
+        (-Math.random() * 8) + "s"
       );
-
 
       brilho.style.setProperty(
         "--intensidade",
-        (
-          .35 +
-          Math.random() * .65
-        )
+        (.35 + Math.random() * .65)
       );
 
-
-      brilhos.appendChild(
-        brilho
-      );
+      brilhos.appendChild(brilho);
 
     }
 
@@ -2387,15 +2026,12 @@
 
     function updateAnimation() {
 
-
       const rect =
         animationSection
           .getBoundingClientRect();
 
-
       const viewportHeight =
         window.innerHeight;
-
 
       const totalScroll =
         Math.max(
@@ -2404,10 +2040,8 @@
           viewportHeight
         );
 
-
       const travelled =
         -rect.top;
-
 
       const progress =
         clamp(
@@ -2416,7 +2050,7 @@
         );
 
 
-      /* 01 → 02 → 03 → 04 → 05 */
+      /* ABERTURA 01 → 05 */
 
       const openingProgress =
         rangeProgress(
@@ -2425,13 +2059,10 @@
           .15
         );
 
-
       let openingState =
         Math.floor(
-          openingProgress *
-          5
+          openingProgress * 5
         );
-
 
       openingState =
         Math.min(
@@ -2440,13 +2071,9 @@
         );
 
 
-      if (
-        progress < .15
-      ) {
+      if (progress < .15) {
 
-        if (
-          openingState < 4
-        ) {
+        if (openingState < 4) {
 
           showEnvelopeFrame(
             openingState
@@ -2475,12 +2102,9 @@
         );
 
 
-      if (
-        progress >= .15
-      ) {
+      if (progress >= .15) {
 
         showEnvelopeFinal();
-
 
         envelopeFinal.style.transform =
           `translate3d(
@@ -2499,20 +2123,16 @@
       }
 
 
-      if (
-        progress >= .31
-      ) {
+      if (progress >= .31) {
 
         envelopeFinal
           .classList
-          .remove(
-            "active"
-          );
+          .remove("active");
 
       }
 
 
-      /* 13 SAI PARA ESQUERDA */
+      /* 13 SAI */
 
       const folha13Progress =
         easeInOut(
@@ -2523,7 +2143,6 @@
           )
         );
 
-
       folha13.style.transform =
         `translate3d(
           ${-120 * folha13Progress}%,
@@ -2531,13 +2150,11 @@
           0
         )`;
 
-
       folha13.style.opacity =
-        1 -
-        folha13Progress;
+        1 - folha13Progress;
 
 
-      /* 14 SAI PARA DIREITA */
+      /* 14 SAI */
 
       const folha14Progress =
         easeInOut(
@@ -2548,7 +2165,6 @@
           )
         );
 
-
       folha14.style.transform =
         `translate3d(
           ${120 * folha14Progress}%,
@@ -2556,10 +2172,8 @@
           0
         )`;
 
-
       folha14.style.opacity =
-        1 -
-        folha14Progress;
+        1 - folha14Progress;
 
 
       /* FOTO */
@@ -2573,16 +2187,14 @@
           )
         );
 
-
       imagem15.style.opacity =
         foto15Progress;
-
 
       brilhos.style.opacity =
         foto15Progress;
 
 
-      /* 16 */
+      /* IMAGEM 16 */
 
       const imagem16Progress =
         easeInOut(
@@ -2593,28 +2205,25 @@
           )
         );
 
-
       imagem16.style.opacity =
         imagem16Progress;
 
 
-      /* CARD SOME */
+      /* CARD */
 
-      if (
-        progress >= .96
-      ) {
+      if (progress >= .96) {
 
-        scrollHint.classList.add(
-          "escondido"
-        );
+        scrollHint
+          .classList
+          .add("escondido");
 
       }
 
       else {
 
-        scrollHint.classList.remove(
-          "escondido"
-        );
+        scrollHint
+          .classList
+          .remove("escondido");
 
       }
 
@@ -2624,17 +2233,11 @@
     }
 
 
-    /* =========================================================
-       SCROLL
-    ========================================================= */
-
     window.addEventListener(
       "scroll",
       function() {
 
-        if (
-          !ticking
-        ) {
+        if (!ticking) {
 
           requestAnimationFrame(
             updateAnimation
@@ -2645,28 +2248,13 @@
         }
 
       },
-      {
-        passive: true
-      }
+      { passive: true }
     );
 
 
     window.addEventListener(
       "resize",
       updateAnimation
-    );
-
-
-    window.addEventListener(
-      "orientationchange",
-      function() {
-
-        setTimeout(
-          updateAnimation,
-          120
-        );
-
-      }
     );
 
 
@@ -2688,15 +2276,11 @@
           entries.forEach(
             function(entry) {
 
-              if (
-                entry.isIntersecting
-              ) {
+              if (entry.isIntersecting) {
 
                 entry.target
                   .classList
-                  .add(
-                    "visivel"
-                  );
+                  .add("visivel");
 
               }
 
@@ -2715,9 +2299,7 @@
     elementosRevelar.forEach(
       function(elemento) {
 
-        observer.observe(
-          elemento
-        );
+        observer.observe(elemento);
 
       }
     );
@@ -2729,9 +2311,7 @@
 
     function abrirTela(tela) {
 
-      tela.classList.add(
-        "aberto"
-      );
+      tela.classList.add("aberto");
 
       tela.setAttribute(
         "aria-hidden",
@@ -2742,18 +2322,14 @@
 
       document.body
         .classList
-        .add(
-          "modal-aberto"
-        );
+        .add("modal-aberto");
 
     }
 
 
     function fecharTela(tela) {
 
-      tela.classList.remove(
-        "aberto"
-      );
+      tela.classList.remove("aberto");
 
       tela.setAttribute(
         "aria-hidden",
@@ -2768,9 +2344,7 @@
 
         document.body
           .classList
-          .remove(
-            "modal-aberto"
-          );
+          .remove("modal-aberto");
 
       }
 
@@ -2780,15 +2354,11 @@
     function fecharTodasAsTelas() {
 
       document
-        .querySelectorAll(
-          ".tela-modal"
-        )
+        .querySelectorAll(".tela-modal")
         .forEach(
           function(tela) {
 
-            tela.classList.remove(
-              "aberto"
-            );
+            tela.classList.remove("aberto");
 
             tela.setAttribute(
               "aria-hidden",
@@ -2800,51 +2370,41 @@
 
       document.body
         .classList
-        .remove(
-          "modal-aberto"
-        );
+        .remove("modal-aberto");
 
     }
 
 
     /* =========================================================
-       RSVP
+       ABRIR / FECHAR RSVP
     ========================================================= */
 
     document
-      .getElementById(
-        "abrir-rsvp"
-      )
+      .getElementById("abrir-rsvp")
       .addEventListener(
         "click",
         function() {
 
-          abrirTela(
-            telaRsvp
-          );
+          abrirTela(telaRsvp);
 
         }
       );
 
 
     document
-      .getElementById(
-        "fechar-rsvp"
-      )
+      .getElementById("fechar-rsvp")
       .addEventListener(
         "click",
         function() {
 
-          fecharTela(
-            telaRsvp
-          );
+          fecharTela(telaRsvp);
 
         }
       );
 
 
     /* =========================================================
-       GOOGLE FORMS
+       ENVIO GOOGLE FORMS
     ========================================================= */
 
     formRsvp.action =
@@ -2861,64 +2421,31 @@
       "submit",
       function() {
 
+        envioEmAndamento = true;
 
-        erroEnvio
-          .classList
-          .remove(
-            "visivel"
-          );
-
-
-        envioEmAndamento =
-          true;
-
-
-        botaoEnviar.disabled =
-          true;
-
+        botaoEnviar.disabled = true;
 
         botaoEnviar.textContent =
           "Enviando...";
 
 
-        /*
-          SEM preventDefault:
-          envia realmente ao Google Forms.
-        */
-
-
         setTimeout(
           function() {
 
-            if (
-              !envioEmAndamento
-            ) {
-
+            if (!envioEmAndamento) {
               return;
-
             }
 
+            envioEmAndamento = false;
 
-            envioEmAndamento =
-              false;
-
-
-            botaoEnviar.disabled =
-              false;
-
+            botaoEnviar.disabled = false;
 
             botaoEnviar.textContent =
               "Enviar resposta";
 
+            fecharTela(telaRsvp);
 
-            fecharTela(
-              telaRsvp
-            );
-
-
-            abrirTela(
-              telaEnviado
-            );
+            abrirTela(telaEnviado);
 
           },
           900
@@ -2933,15 +2460,12 @@
     ========================================================= */
 
     document
-      .getElementById(
-        "voltar-inicio"
-      )
+      .getElementById("voltar-inicio")
       .addEventListener(
         "click",
         function() {
 
           fecharTodasAsTelas();
-
 
           window.scrollTo({
             top: 0,
@@ -2957,17 +2481,12 @@
     ========================================================= */
 
     document
-      .getElementById(
-        "concluir"
-      )
+      .getElementById("concluir")
       .addEventListener(
         "click",
         function() {
 
-          fecharTela(
-            telaEnviado
-          );
-
+          fecharTela(telaEnviado);
 
           abrirTela(
             telaAgradecimento
@@ -2982,24 +2501,19 @@
     ========================================================= */
 
     document
-      .getElementById(
-        "reiniciar"
-      )
+      .getElementById("reiniciar")
       .addEventListener(
         "click",
         function() {
 
           fecharTodasAsTelas();
 
-
           formRsvp.reset();
-
 
           window.scrollTo({
             top: 0,
             behavior: "smooth"
           });
-
 
           setTimeout(
             updateAnimation,
@@ -3012,7 +2526,6 @@
 
     /* =========================================================
        PRELOAD
-       SEM 06.PNG
     ========================================================= */
 
     const imageFiles = [
@@ -3025,12 +2538,10 @@
 
       "13.png",
       "14.png",
-
       "15.png",
       "16.png",
 
       "brilho.png",
-
       "fundo.png",
       "fundo final.png"
 
@@ -3043,16 +2554,11 @@
         const image =
           new Image();
 
-        image.src =
-          file;
+        image.src = file;
 
       }
     );
 
-
-    /* =========================================================
-       INICIAR
-    ========================================================= */
 
     updateAnimation();
 
