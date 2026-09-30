@@ -47,10 +47,21 @@
       width: 100%;
       min-height: 100%;
       overflow-x: hidden;
+
       background: var(--verde);
       color: var(--branco);
-      font-family: "Montserrat", Arial, sans-serif;
+
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
       -webkit-tap-highlight-color: transparent;
+    }
+
+    body.animacao-bloqueada {
+      overflow: hidden;
+      touch-action: none;
     }
 
     body.modal-aberto {
@@ -59,6 +70,7 @@
 
     img {
       display: block;
+
       user-select: none;
       -webkit-user-select: none;
       -webkit-user-drag: none;
@@ -73,20 +85,29 @@
 
 
     /* =========================================================
-       ANIMAÇÃO
+       PRIMEIRA TELA / ANIMAÇÃO AUTOMÁTICA
     ========================================================= */
 
     #animacao-principal {
       position: relative;
+
       width: 100%;
-      height: 430vh;
-      height: 430dvh;
+
+      /*
+        Depois da animação automática, existe aproximadamente
+        uma tela de scroll para revelar 16.png antes do convite.
+      */
+
+      height: 200vh;
+      height: 200dvh;
+
       background: var(--verde);
     }
 
     #stage {
       position: sticky;
       top: 0;
+
       width: 100%;
 
       height: 100vh;
@@ -94,7 +115,14 @@
       height: 100dvh;
 
       overflow: hidden;
+
       background: var(--verde);
+
+      cursor: pointer;
+    }
+
+    #stage.animacao-concluida {
+      cursor: default;
     }
 
     .fullscreen-image {
@@ -116,37 +144,77 @@
 
     #imagem-15 {
       z-index: 4;
+
       opacity: 0;
+
+      transition:
+        opacity 1.15s ease;
+
       will-change: opacity;
+    }
+
+    #imagem-15.visivel {
+      opacity: 1;
     }
 
     #imagem-16 {
       z-index: 5;
+
       opacity: 0;
 
       transform:
         translate3d(0, -7.5%, 0)
         scale(1.01);
 
-      will-change: opacity, transform;
+      will-change: opacity;
     }
 
     #folha-14 {
       z-index: 6;
+
       opacity: 1;
 
-      transform: translate3d(0, 0, 0);
+      transform:
+        translate3d(0, 0, 0);
 
-      will-change: transform, opacity;
+      transition:
+        transform 1.05s cubic-bezier(.65, 0, .35, 1),
+        opacity .9s ease;
+
+      will-change:
+        transform,
+        opacity;
+    }
+
+    #folha-14.sair {
+      transform:
+        translate3d(120%, 0, 0);
+
+      opacity: 0;
     }
 
     #folha-13 {
       z-index: 7;
+
       opacity: 1;
 
-      transform: translate3d(0, 0, 0);
+      transform:
+        translate3d(0, 0, 0);
 
-      will-change: transform, opacity;
+      transition:
+        transform 1.05s cubic-bezier(.65, 0, .35, 1),
+        opacity .9s ease;
+
+      will-change:
+        transform,
+        opacity;
+    }
+
+    #folha-13.sair {
+      transform:
+        translate3d(-120%, 0, 0);
+
+      opacity: 0;
     }
 
 
@@ -161,11 +229,19 @@
       z-index: 8;
 
       overflow: hidden;
+
       opacity: 0;
 
       pointer-events: none;
 
+      transition:
+        opacity 1.1s ease;
+
       will-change: opacity;
+    }
+
+    #brilhos.visivel {
+      opacity: 1;
     }
 
     .brilho {
@@ -193,7 +269,7 @@
       75%,
       100% {
         opacity: 0;
-        transform: scale(.75);
+        transform: scale(.72);
       }
 
       48%,
@@ -206,12 +282,12 @@
 
 
     /* =========================================================
-       ENVELOPE
-       01 → 02 → 03 → 04 → 05
+       ENVELOPE 01 → 02 → 03 → 04 → 05
     ========================================================= */
 
     .frame-envelope {
       z-index: 10;
+
       display: none;
     }
 
@@ -224,7 +300,8 @@
 
       display: none;
 
-      transform: translate3d(0, 0, 0);
+      transform:
+        translate3d(0, 0, 0);
 
       will-change: transform;
     }
@@ -233,9 +310,127 @@
       display: block;
     }
 
+    #envelope-final.descendo {
+      transition:
+        transform 1.15s
+        cubic-bezier(.55, .05, .35, 1);
+
+      transform:
+        translate3d(0, 122%, 0);
+    }
+
 
     /* =========================================================
-       ROLE PARA REVELAR
+       TOQUE PARA REVELAR
+    ========================================================= */
+
+    #toque-revelar {
+      position: fixed;
+
+      z-index: 500;
+
+      left: 50%;
+
+      bottom:
+        calc(
+          27px +
+          env(safe-area-inset-bottom, 0px)
+        );
+
+      transform:
+        translateX(-50%);
+
+      min-width: 220px;
+      min-height: 52px;
+
+      padding:
+        13px
+        27px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      border:
+        1px solid
+        rgba(222, 183, 102, .82);
+
+      border-radius: 999px;
+
+      background:
+        rgba(2, 13, 8, .88);
+
+      backdrop-filter:
+        blur(12px);
+
+      -webkit-backdrop-filter:
+        blur(12px);
+
+      color:
+        var(--ouro-claro);
+
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
+      font-size: 10px;
+
+      font-weight: 600;
+
+      line-height: 1;
+
+      letter-spacing: 2.2px;
+
+      text-transform: uppercase;
+
+      white-space: nowrap;
+
+      pointer-events: none;
+
+      animation:
+        respirar 2.1s
+        ease-in-out
+        infinite;
+
+      transition:
+        opacity .4s ease,
+        visibility .4s ease;
+    }
+
+    #toque-revelar.escondido {
+      opacity: 0;
+      visibility: hidden;
+
+      animation: none;
+    }
+
+    @keyframes respirar {
+
+      0%,
+      100% {
+        transform:
+          translateX(-50%)
+          scale(1);
+
+        opacity: .78;
+      }
+
+      50% {
+        transform:
+          translateX(-50%)
+          scale(1.025);
+
+        opacity: 1;
+      }
+
+    }
+
+
+    /* =========================================================
+       ROLE PARA CONTINUAR
+       SÓ APARECE DEPOIS DA FOTO 15
     ========================================================= */
 
     #scroll-hint {
@@ -247,34 +442,42 @@
 
       bottom:
         calc(
-          22px +
+          27px +
           env(safe-area-inset-bottom, 0px)
         );
 
-      transform: translateX(-50%);
+      transform:
+        translateX(-50%);
 
       min-width: 205px;
       min-height: 50px;
 
-      padding: 12px 25px;
+      padding:
+        12px
+        25px;
 
       display: flex;
+
       align-items: center;
       justify-content: center;
 
       border:
         1px solid
-        rgba(222, 183, 102, .85);
+        rgba(222, 183, 102, .82);
 
       border-radius: 999px;
 
       background:
-        rgba(2, 13, 8, .90);
+        rgba(2, 13, 8, .88);
 
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter:
+        blur(12px);
 
-      color: var(--ouro-claro);
+      -webkit-backdrop-filter:
+        blur(12px);
+
+      color:
+        var(--ouro-claro);
 
       font-family:
         "Montserrat",
@@ -282,17 +485,28 @@
         sans-serif;
 
       font-size: 10px;
+
       font-weight: 600;
+
       letter-spacing: 2px;
 
       text-transform: uppercase;
+
       white-space: nowrap;
 
       pointer-events: none;
 
+      opacity: 0;
+      visibility: hidden;
+
       transition:
         opacity .5s ease,
         visibility .5s ease;
+    }
+
+    #scroll-hint.visivel {
+      opacity: 1;
+      visibility: visible;
     }
 
     #scroll-hint.escondido {
@@ -307,6 +521,7 @@
 
     #continuacao {
       position: relative;
+
       z-index: 20;
 
       width: 100%;
@@ -328,6 +543,7 @@
       content: "";
 
       position: absolute;
+
       z-index: 1;
 
       top: 0;
@@ -349,24 +565,38 @@
 
 
     /* =========================================================
-       CONTEÚDO CENTRALIZADO
+       CONTEÚDO CENTRAL
     ========================================================= */
 
     .convite-minimal {
       position: relative;
+
       z-index: 5;
 
-      width: min(100%, 620px);
+      width:
+        min(100%, 620px);
+
       height: 100%;
 
       margin: 0 auto;
 
       padding:
-        env(safe-area-inset-top, 0px)
-        clamp(26px, 7vw, 48px)
-        env(safe-area-inset-bottom, 0px);
+        env(
+          safe-area-inset-top,
+          0px
+        )
+        clamp(
+          26px,
+          7vw,
+          48px
+        )
+        env(
+          safe-area-inset-bottom,
+          0px
+        );
 
       display: flex;
+
       align-items: center;
       justify-content: center;
 
@@ -377,12 +607,14 @@
       width: 100%;
 
       display: flex;
+
       flex-direction: column;
 
       align-items: center;
       justify-content: center;
 
-      transform: translateY(1vh);
+      transform:
+        translateY(1vh);
     }
 
 
@@ -392,7 +624,8 @@
     ========================================================= */
 
     .save-minimal {
-      color: var(--ouro-claro);
+      color:
+        var(--ouro-claro);
 
       font-family:
         "Montserrat",
@@ -417,7 +650,8 @@
           7px
         );
 
-      text-transform: uppercase;
+      text-transform:
+        uppercase;
     }
 
 
@@ -464,26 +698,27 @@
 
 
     /* =========================================================
-       DATA PRINCIPAL
-       16 / 01 / 27 = BODONI MODA
+       16 / 01 / 27
+       BODONI MODA
     ========================================================= */
 
     .bloco-data {
       display: flex;
+
       align-items: center;
       justify-content: center;
     }
 
     .data-vertical {
       display: flex;
+
       flex-direction: column;
 
       align-items: center;
       justify-content: center;
 
-      gap: 0;
-
-      color: var(--branco);
+      color:
+        var(--branco);
 
       font-family:
         "Bodoni Moda",
@@ -503,17 +738,19 @@
 
       letter-spacing: -4px;
 
-      font-variant-numeric: lining-nums;
+      font-variant-numeric:
+        lining-nums;
     }
 
     .data-vertical span {
       display: block;
+
       line-height: .78;
     }
 
 
     /* =========================================================
-       BAILE DE FORMATURA
+       BAILE
        MONTSERRAT
     ========================================================= */
 
@@ -526,13 +763,15 @@
         );
 
       display: flex;
+
       flex-direction: column;
 
       align-items: center;
     }
 
     .nome-baile {
-      color: var(--ouro-claro);
+      color:
+        var(--ouro-claro);
 
       font-family:
         "Montserrat",
@@ -557,13 +796,15 @@
           4.5px
         );
 
-      text-transform: uppercase;
+      text-transform:
+        uppercase;
     }
 
     .local-baile {
       margin-top: 12px;
 
-      color: var(--branco);
+      color:
+        var(--branco);
 
       font-family:
         "Montserrat",
@@ -583,12 +824,13 @@
 
       letter-spacing: 3px;
 
-      text-transform: uppercase;
+      text-transform:
+        uppercase;
     }
 
 
     /* =========================================================
-       EVENTOS SECUNDÁRIOS
+       EVENTOS
        MONTSERRAT
     ========================================================= */
 
@@ -622,13 +864,15 @@
       min-width: 0;
 
       display: flex;
+
       flex-direction: column;
 
       align-items: center;
     }
 
     .evento-minimal h2 {
-      color: var(--ouro-claro);
+      color:
+        var(--ouro-claro);
 
       font-family:
         "Montserrat",
@@ -653,7 +897,8 @@
           2.7px
         );
 
-      text-transform: uppercase;
+      text-transform:
+        uppercase;
     }
 
     .evento-minimal time {
@@ -661,7 +906,8 @@
 
       margin-top: 10px;
 
-      color: var(--branco);
+      color:
+        var(--branco);
 
       font-family:
         "Montserrat",
@@ -684,12 +930,12 @@
 
 
     /* =========================================================
-       BOTÃO
-       MONTSERRAT
+       BOTÃO RSVP
     ========================================================= */
 
     .botao-rsvp-minimal {
-      width: min(100%, 390px);
+      width:
+        min(100%, 390px);
 
       min-height: 56px;
 
@@ -700,16 +946,29 @@
           48px
         );
 
-      padding: 14px 18px;
+      padding:
+        14px
+        18px;
 
       border:
         1px solid
-        rgba(222, 183, 102, .85);
+        rgba(
+          222,
+          183,
+          102,
+          .85
+        );
 
       background:
-        rgba(2, 13, 8, .56);
+        rgba(
+          2,
+          13,
+          8,
+          .56
+        );
 
-      color: var(--ouro-claro);
+      color:
+        var(--ouro-claro);
 
       font-family:
         "Montserrat",
@@ -729,15 +988,21 @@
 
       letter-spacing: 2.5px;
 
-      text-transform: uppercase;
+      text-transform:
+        uppercase;
 
       cursor: pointer;
 
-      -webkit-appearance: none;
+      -webkit-appearance:
+        none;
+
       appearance: none;
 
-      backdrop-filter: blur(7px);
-      -webkit-backdrop-filter: blur(7px);
+      backdrop-filter:
+        blur(7px);
+
+      -webkit-backdrop-filter:
+        blur(7px);
 
       transition:
         background .25s ease,
@@ -746,22 +1011,26 @@
     }
 
     .botao-rsvp-minimal:active {
-      transform: scale(.985);
+      transform:
+        scale(.985);
 
-      background: var(--ouro-claro);
-      color: var(--verde);
+      background:
+        var(--ouro-claro);
+
+      color:
+        var(--verde);
     }
 
 
     /* =========================================================
        FORMA LETI
-       MONTSERRAT
     ========================================================= */
 
     .forma-final {
       margin-top: 14px;
 
-      color: var(--ouro-claro);
+      color:
+        var(--ouro-claro);
 
       font-family:
         "Montserrat",
@@ -781,7 +1050,8 @@
 
       letter-spacing: 3px;
 
-      text-transform: uppercase;
+      text-transform:
+        uppercase;
     }
 
 
@@ -792,7 +1062,8 @@
     .revelar {
       opacity: 0;
 
-      transform: translateY(8px);
+      transform:
+        translateY(8px);
 
       transition:
         opacity .8s ease,
@@ -801,7 +1072,9 @@
 
     .revelar.visivel {
       opacity: 1;
-      transform: translateY(0);
+
+      transform:
+        translateY(0);
     }
 
 
@@ -811,6 +1084,7 @@
 
     .tela-modal {
       position: fixed;
+
       z-index: 1000;
 
       inset: 0;
@@ -822,7 +1096,8 @@
 
       overflow-y: auto;
 
-      -webkit-overflow-scrolling: touch;
+      -webkit-overflow-scrolling:
+        touch;
 
       background:
         linear-gradient(
@@ -834,9 +1109,11 @@
         no-repeat;
 
       opacity: 0;
+
       visibility: hidden;
 
-      transform: translateY(14px);
+      transform:
+        translateY(14px);
 
       transition:
         opacity .45s ease,
@@ -846,8 +1123,11 @@
 
     .tela-modal.aberto {
       opacity: 1;
+
       visibility: visible;
-      transform: translateY(0);
+
+      transform:
+        translateY(0);
     }
 
 
@@ -856,7 +1136,8 @@
     ========================================================= */
 
     .rsvp-pagina {
-      width: min(100%, 620px);
+      width:
+        min(100%, 620px);
 
       min-height: 100vh;
       min-height: 100dvh;
@@ -866,18 +1147,23 @@
       padding:
         calc(
           22px +
-          env(safe-area-inset-top, 0px)
+          env(
+            safe-area-inset-top,
+            0px
+          )
         )
-        clamp(24px, 6vw, 48px)
+        clamp(
+          24px,
+          6vw,
+          48px
+        )
         calc(
           55px +
-          env(safe-area-inset-bottom, 0px)
+          env(
+            safe-area-inset-bottom,
+            0px
+          )
         );
-
-      font-family:
-        "Montserrat",
-        Arial,
-        sans-serif;
     }
 
     .rsvp-voltar {
@@ -885,9 +1171,11 @@
 
       padding: 11px 0;
 
-      background: transparent;
+      background:
+        transparent;
 
-      color: var(--ouro-claro);
+      color:
+        var(--ouro-claro);
 
       font-family:
         "Montserrat",
@@ -895,11 +1183,13 @@
         sans-serif;
 
       font-size: 11px;
+
       font-weight: 600;
 
       letter-spacing: 2px;
 
-      text-transform: uppercase;
+      text-transform:
+        uppercase;
 
       cursor: pointer;
     }
@@ -908,7 +1198,8 @@
       margin-top: 30px;
       margin-bottom: 42px;
 
-      color: var(--ouro-claro);
+      color:
+        var(--ouro-claro);
 
       font-family:
         "Montserrat",
@@ -928,13 +1219,15 @@
 
       text-align: center;
 
-      text-transform: uppercase;
+      text-transform:
+        uppercase;
     }
 
     #form-rsvp {
       width: 100%;
 
       display: flex;
+
       flex-direction: column;
 
       gap: 30px;
@@ -944,6 +1237,7 @@
       width: 100%;
 
       display: flex;
+
       flex-direction: column;
 
       gap: 11px;
@@ -953,7 +1247,8 @@
 
     .campo-rsvp > span,
     .campo-rsvp legend {
-      color: var(--ouro-claro);
+      color:
+        var(--ouro-claro);
 
       font-family:
         "Montserrat",
@@ -973,11 +1268,13 @@
 
       letter-spacing: 1.5px;
 
-      text-transform: uppercase;
+      text-transform:
+        uppercase;
     }
 
     .campo-rsvp small {
       opacity: .58;
+
       font-size: 8px;
     }
 
@@ -990,7 +1287,12 @@
 
       border:
         1px solid
-        rgba(222, 183, 102, .58);
+        rgba(
+          222,
+          183,
+          102,
+          .58
+        );
 
       border-radius: 0;
 
@@ -999,9 +1301,15 @@
       padding: 16px;
 
       background:
-        rgba(1, 10, 6, .72);
+        rgba(
+          1,
+          10,
+          6,
+          .72
+        );
 
-      color: var(--branco);
+      color:
+        var(--branco);
 
       font-family:
         "Montserrat",
@@ -1010,24 +1318,31 @@
 
       font-size: 16px;
 
-      -webkit-appearance: none;
+      -webkit-appearance:
+        none;
+
       appearance: none;
     }
 
     .campo-rsvp input:focus,
     .campo-rsvp select:focus,
     .campo-rsvp textarea:focus {
-      border-color: var(--ouro-claro);
+      border-color:
+        var(--ouro-claro);
     }
 
     .campo-rsvp textarea {
       min-height: 120px;
+
       resize: vertical;
     }
 
     .campo-rsvp select option {
-      background: var(--verde);
-      color: var(--branco);
+      background:
+        var(--verde);
+
+      color:
+        var(--branco);
     }
 
     .opcao-rsvp {
@@ -1035,21 +1350,35 @@
 
       min-height: 60px;
 
-      padding: 14px 15px;
+      padding:
+        14px
+        15px;
 
       display: flex;
+
       align-items: center;
 
       gap: 12px;
 
       border:
         1px solid
-        rgba(222, 183, 102, .42);
+        rgba(
+          222,
+          183,
+          102,
+          .42
+        );
 
       background:
-        rgba(1, 10, 6, .64);
+        rgba(
+          1,
+          10,
+          6,
+          .64
+        );
 
-      color: var(--branco);
+      color:
+        var(--branco);
 
       font-family:
         "Montserrat",
@@ -1072,12 +1401,13 @@
 
       flex-shrink: 0;
 
-      accent-color: var(--ouro);
+      accent-color:
+        var(--ouro);
     }
 
 
     /* =========================================================
-       BOTÕES DO FORMULÁRIO
+       BOTÕES
     ========================================================= */
 
     .botao-enviar,
@@ -1087,7 +1417,9 @@
 
       min-height: 62px;
 
-      padding: 15px 20px;
+      padding:
+        15px
+        20px;
 
       font-family:
         "Montserrat",
@@ -1095,11 +1427,13 @@
         sans-serif;
 
       font-size: 11px;
+
       font-weight: 600;
 
       letter-spacing: 2.5px;
 
-      text-transform: uppercase;
+      text-transform:
+        uppercase;
 
       cursor: pointer;
     }
@@ -1110,9 +1444,11 @@
         1px solid
         var(--ouro-claro);
 
-      background: var(--ouro);
+      background:
+        var(--ouro);
 
-      color: var(--verde);
+      color:
+        var(--verde);
     }
 
     .botao-contorno {
@@ -1121,9 +1457,15 @@
         var(--ouro-claro);
 
       background:
-        rgba(2, 13, 8, .60);
+        rgba(
+          2,
+          13,
+          8,
+          .60
+        );
 
-      color: var(--ouro-claro);
+      color:
+        var(--ouro-claro);
     }
 
     .botao-enviar:disabled {
@@ -1136,7 +1478,8 @@
     ========================================================= */
 
     .tela-central {
-      width: min(100%, 620px);
+      width:
+        min(100%, 620px);
 
       min-height: 100vh;
       min-height: 100dvh;
@@ -1146,43 +1489,63 @@
       padding:
         calc(
           35px +
-          env(safe-area-inset-top, 0px)
+          env(
+            safe-area-inset-top,
+            0px
+          )
         )
-        clamp(28px, 7vw, 50px)
+        clamp(
+          28px,
+          7vw,
+          50px
+        )
         calc(
           35px +
-          env(safe-area-inset-bottom, 0px)
+          env(
+            safe-area-inset-bottom,
+            0px
+          )
         );
 
       display: flex;
+
       flex-direction: column;
 
       align-items: center;
       justify-content: center;
 
       text-align: center;
+    }
+
+    .mini-marca {
+      color:
+        var(--ouro-claro);
 
       font-family:
         "Montserrat",
         Arial,
         sans-serif;
-    }
-
-    .mini-marca {
-      color: var(--ouro-claro);
 
       font-size: 10px;
+
       font-weight: 500;
 
       letter-spacing: 4px;
 
-      text-transform: uppercase;
+      text-transform:
+        uppercase;
     }
 
     .titulo-pos-envio {
       margin-top: 34px;
 
-      color: var(--ouro-claro);
+      color:
+        var(--ouro-claro);
+
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
 
       font-size:
         clamp(
@@ -1195,7 +1558,8 @@
 
       letter-spacing: 4px;
 
-      text-transform: uppercase;
+      text-transform:
+        uppercase;
     }
 
     .texto-pos-envio {
@@ -1203,7 +1567,13 @@
 
       margin-top: 20px;
 
-      color: var(--branco);
+      color:
+        var(--branco);
+
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
 
       font-size:
         clamp(
@@ -1216,11 +1586,13 @@
     }
 
     .acoes-pos-envio {
-      width: min(100%, 380px);
+      width:
+        min(100%, 380px);
 
       margin-top: 48px;
 
       display: flex;
+
       flex-direction: column;
 
       gap: 13px;
@@ -1270,7 +1642,8 @@
       .convite-minimal,
       .rsvp-pagina,
       .tela-central {
-        width: min(92vw, 620px);
+        width:
+          min(92vw, 620px);
       }
 
     }
@@ -1279,11 +1652,24 @@
 </head>
 
 
-<body>
+<body class="animacao-bloqueada">
 
+
+  <!-- =====================================================
+       AVISO INICIAL
+  ====================================================== -->
+
+  <div id="toque-revelar">
+    Toque para revelar
+  </div>
+
+
+  <!-- =====================================================
+       AVISO DE SCROLL DEPOIS DA ANIMAÇÃO
+  ====================================================== -->
 
   <div id="scroll-hint">
-    Role para revelar
+    Role para continuar
   </div>
 
 
@@ -1333,6 +1719,8 @@
       <div id="brilhos"></div>
 
 
+      <!-- FRAMES 01 A 04 -->
+
       <img
         src="01.png"
         class="fullscreen-image frame-envelope active"
@@ -1356,6 +1744,9 @@
         class="fullscreen-image frame-envelope"
         alt=""
       >
+
+
+      <!-- 05 É O ENVELOPE FINAL E É ELE QUE DESCE -->
 
       <img
         id="envelope-final"
@@ -1391,9 +1782,11 @@
         <div class="bloco-data revelar">
 
           <div class="data-vertical">
+
             <span>16</span>
             <span>01</span>
             <span>27</span>
+
           </div>
 
         </div>
@@ -1573,12 +1966,29 @@
               Selecione
             </option>
 
-            <option value="33/34">33/34</option>
-            <option value="35/36">35/36</option>
-            <option value="37/38">37/38</option>
-            <option value="39/40">39/40</option>
-            <option value="41/42">41/42</option>
-            <option value="43/44">43/44</option>
+            <option value="33/34">
+              33/34
+            </option>
+
+            <option value="35/36">
+              35/36
+            </option>
+
+            <option value="37/38">
+              37/38
+            </option>
+
+            <option value="39/40">
+              39/40
+            </option>
+
+            <option value="41/42">
+              41/42
+            </option>
+
+            <option value="43/44">
+              43/44
+            </option>
 
           </select>
 
@@ -1704,7 +2114,9 @@
   </section>
 
 
-  <!-- GOOGLE FORMS INVISÍVEL -->
+  <!-- =====================================================
+       GOOGLE FORMS INVISÍVEL
+  ====================================================== -->
 
   <iframe
     id="google-form-target"
@@ -1735,75 +2147,131 @@
        ELEMENTOS
     ========================================================= */
 
-    const animationSection =
-      document.getElementById("animacao-principal");
+    const body =
+      document.body;
+
+    const stage =
+      document.getElementById(
+        "stage"
+      );
+
+    const toqueRevelar =
+      document.getElementById(
+        "toque-revelar"
+      );
 
     const scrollHint =
-      document.getElementById("scroll-hint");
+      document.getElementById(
+        "scroll-hint"
+      );
+
+    const animationSection =
+      document.getElementById(
+        "animacao-principal"
+      );
 
     const envelopeFrames =
-      document.querySelectorAll(".frame-envelope");
+      document.querySelectorAll(
+        ".frame-envelope"
+      );
 
     const envelopeFinal =
-      document.getElementById("envelope-final");
+      document.getElementById(
+        "envelope-final"
+      );
 
     const folha13 =
-      document.getElementById("folha-13");
+      document.getElementById(
+        "folha-13"
+      );
 
     const folha14 =
-      document.getElementById("folha-14");
+      document.getElementById(
+        "folha-14"
+      );
 
     const imagem15 =
-      document.getElementById("imagem-15");
+      document.getElementById(
+        "imagem-15"
+      );
 
     const imagem16 =
-      document.getElementById("imagem-16");
+      document.getElementById(
+        "imagem-16"
+      );
 
     const brilhos =
-      document.getElementById("brilhos");
+      document.getElementById(
+        "brilhos"
+      );
 
     const telaRsvp =
-      document.getElementById("tela-rsvp");
+      document.getElementById(
+        "tela-rsvp"
+      );
 
     const telaEnviado =
-      document.getElementById("tela-enviado");
+      document.getElementById(
+        "tela-enviado"
+      );
 
     const telaAgradecimento =
-      document.getElementById("tela-agradecimento");
+      document.getElementById(
+        "tela-agradecimento"
+      );
 
     const formRsvp =
-      document.getElementById("form-rsvp");
+      document.getElementById(
+        "form-rsvp"
+      );
 
     const botaoEnviar =
-      document.getElementById("botao-enviar");
+      document.getElementById(
+        "botao-enviar"
+      );
 
-    let ticking = false;
-    let envioEmAndamento = false;
+
+    let animacaoIniciada =
+      false;
+
+    let animacaoConcluida =
+      false;
+
+    let ticking =
+      false;
+
+    let envioEmAndamento =
+      false;
 
 
     /* =========================================================
-       FUNÇÕES
+       UTILIDADES
     ========================================================= */
 
-    function clamp(value) {
+    function esperar(ms) {
 
-      return Math.max(
-        0,
-        Math.min(1, value)
+      return new Promise(
+        function(resolve) {
+
+          setTimeout(
+            resolve,
+            ms
+          );
+
+        }
       );
 
     }
 
 
-    function rangeProgress(
-      progress,
-      start,
-      end
-    ) {
+    function clamp(value) {
 
-      return clamp(
-        (progress - start) /
-        (end - start)
+      return Math.max(
+        0,
+        Math.min(
+          1,
+          value
+        )
       );
 
     }
@@ -1824,46 +2292,46 @@
        ENVELOPE
     ========================================================= */
 
-    function hideEnvelopeFrames() {
+    function esconderTodosFrames() {
 
       envelopeFrames.forEach(
         function(frame) {
 
-          frame.classList.remove("active");
+          frame.classList.remove(
+            "active"
+          );
 
         }
+      );
+
+      envelopeFinal.classList.remove(
+        "active"
       );
 
     }
 
 
-    function showEnvelopeFrame(index) {
+    function mostrarFrame(index) {
 
-      hideEnvelopeFrames();
+      esconderTodosFrames();
 
-      envelopeFinal
-        .classList
-        .remove("active");
+      if (
+        index >= 0 &&
+        index < envelopeFrames.length
+      ) {
 
-      index =
-        Math.max(
-          0,
-          Math.min(
-            envelopeFrames.length - 1,
-            index
-          )
-        );
+        envelopeFrames[index]
+          .classList
+          .add("active");
 
-      envelopeFrames[index]
-        .classList
-        .add("active");
+      }
 
     }
 
 
-    function showEnvelopeFinal() {
+    function mostrarEnvelopeFinal() {
 
-      hideEnvelopeFrames();
+      esconderTodosFrames();
 
       envelopeFinal
         .classList
@@ -1876,7 +2344,8 @@
        BRILHOS
     ========================================================= */
 
-    const quantidadeBrilhos = 26;
+    const quantidadeBrilhos =
+      28;
 
 
     for (
@@ -1886,7 +2355,9 @@
     ) {
 
       const brilho =
-        document.createElement("img");
+        document.createElement(
+          "img"
+        );
 
       brilho.src =
         "brilho.png";
@@ -1898,48 +2369,290 @@
         "";
 
       brilho.style.left =
-        (2 + Math.random() * 94) + "%";
+        (
+          3 +
+          Math.random() * 94
+        ) + "%";
 
       brilho.style.top =
-        (2 + Math.random() * 94) + "%";
+        (
+          3 +
+          Math.random() * 92
+        ) + "%";
+
+
+      /*
+        PEQUENOS:
+        aproximadamente 3 a 9 px
+      */
 
       brilho.style.setProperty(
         "--tamanho",
-        (4 + Math.random() * 11) + "px"
+        (
+          3 +
+          Math.random() * 6
+        ) + "px"
       );
 
       brilho.style.setProperty(
         "--duracao",
-        (3.5 + Math.random() * 4) + "s"
+        (
+          3 +
+          Math.random() * 4
+        ) + "s"
       );
 
       brilho.style.setProperty(
         "--atraso",
-        (-Math.random() * 8) + "s"
+        (
+          -Math.random() * 8
+        ) + "s"
       );
 
       brilho.style.setProperty(
         "--intensidade",
-        (.35 + Math.random() * .60)
+        (
+          .32 +
+          Math.random() * .58
+        )
       );
 
-      brilhos.appendChild(brilho);
+      brilhos.appendChild(
+        brilho
+      );
 
     }
 
 
     /* =========================================================
-       ANIMAÇÃO PRINCIPAL
+       ANIMAÇÃO AUTOMÁTICA
+       DISPARADA PELO TOQUE
     ========================================================= */
 
-    function updateAnimation() {
+    async function iniciarAnimacao() {
+
+      if (animacaoIniciada) {
+        return;
+      }
+
+      animacaoIniciada =
+        true;
+
+
+      /* some o botão */
+
+      toqueRevelar
+        .classList
+        .add("escondido");
+
+
+      /*
+        FRAME 01 já está na tela.
+
+        Mantemos um pequeno tempo depois
+        do toque antes da primeira mudança.
+      */
+
+      await esperar(180);
+
+
+      /* 02 */
+
+      mostrarFrame(1);
+
+      await esperar(210);
+
+
+      /* 03 */
+
+      mostrarFrame(2);
+
+      await esperar(210);
+
+
+      /* 04 */
+
+      mostrarFrame(3);
+
+      await esperar(230);
+
+
+      /* 05 */
+
+      mostrarEnvelopeFinal();
+
+      await esperar(430);
+
+
+      /* =====================================================
+         05 DESCE
+      ===================================================== */
+
+      envelopeFinal
+        .classList
+        .add("descendo");
+
+      await esperar(900);
+
+
+      /*
+        Começa a mostrar a foto por trás.
+      */
+
+      imagem15
+        .classList
+        .add("visivel");
+
+      brilhos
+        .classList
+        .add("visivel");
+
+
+      /* =====================================================
+         13 SAI PARA ESQUERDA
+      ===================================================== */
+
+      folha13
+        .classList
+        .add("sair");
+
+      await esperar(650);
+
+
+      /* =====================================================
+         14 SAI PARA DIREITA
+      ===================================================== */
+
+      folha14
+        .classList
+        .add("sair");
+
+      await esperar(1050);
+
+
+      /* garante foto completamente visível */
+
+      imagem15
+        .classList
+        .add("visivel");
+
+      brilhos
+        .classList
+        .add("visivel");
+
+
+      /* remove envelope */
+
+      envelopeFinal
+        .classList
+        .remove("active");
+
+
+      /* =====================================================
+         TERMINOU NA FOTO 15
+      ===================================================== */
+
+      animacaoConcluida =
+        true;
+
+      stage
+        .classList
+        .add(
+          "animacao-concluida"
+        );
+
+
+      /*
+        AGORA LIBERA O SCROLL.
+      */
+
+      body
+        .classList
+        .remove(
+          "animacao-bloqueada"
+        );
+
+
+      /*
+        Mostra instrução para continuar.
+      */
+
+      scrollHint
+        .classList
+        .add("visivel");
+
+
+      atualizarPosAnimacao();
+
+    }
+
+
+    /* =========================================================
+       TOQUE
+    ========================================================= */
+
+    stage.addEventListener(
+      "click",
+      function() {
+
+        if (!animacaoIniciada) {
+
+          iniciarAnimacao();
+
+        }
+
+      }
+    );
+
+
+    stage.addEventListener(
+      "touchend",
+      function() {
+
+        if (!animacaoIniciada) {
+
+          iniciarAnimacao();
+
+        }
+
+      },
+      {
+        passive: true
+      }
+    );
+
+
+    /* =========================================================
+       DEPOIS DA FOTO 15:
+       SCROLL REVELA 16
+    ========================================================= */
+
+    function atualizarPosAnimacao() {
+
+      if (!animacaoConcluida) {
+
+        ticking =
+          false;
+
+        return;
+      }
+
 
       const rect =
         animationSection
           .getBoundingClientRect();
 
+
       const viewportHeight =
         window.innerHeight;
+
+
+      /*
+        A seção tem aproximadamente 2 telas.
+
+        A primeira é a foto 15.
+        A segunda é usada para revelar 16.
+      */
 
       const totalScroll =
         Math.max(
@@ -1948,6 +2661,7 @@
           viewportHeight
         );
 
+
       const progress =
         clamp(
           (-rect.top) /
@@ -1955,168 +2669,34 @@
         );
 
 
-      /* 01 → 05 */
+      /*
+        IMAGEM 16 COMEÇA SUAVE.
+      */
 
-      const openingProgress =
-        rangeProgress(
-          progress,
-          0,
-          .15
-        );
-
-      let openingState =
-        Math.floor(
-          openingProgress * 5
-        );
-
-      openingState =
-        Math.min(
-          4,
-          openingState
-        );
-
-
-      if (progress < .15) {
-
-        if (openingState < 4) {
-
-          showEnvelopeFrame(
-            openingState
-          );
-
-        }
-
-        else {
-
-          showEnvelopeFinal();
-
-        }
-
-      }
-
-
-      /* 05 DESCE */
-
-      const envelopeExit =
+      const logoProgress =
         easeInOut(
-          rangeProgress(
-            progress,
-            .15,
-            .31
+          clamp(
+            (
+              progress - .08
+            ) / .58
           )
         );
 
-
-      if (progress >= .15) {
-
-        showEnvelopeFinal();
-
-        envelopeFinal.style.transform =
-          `translate3d(
-            0,
-            ${122 * envelopeExit}%,
-            0
-          )`;
-
-      }
-
-      else {
-
-        envelopeFinal.style.transform =
-          "translate3d(0,0,0)";
-
-      }
-
-
-      if (progress >= .31) {
-
-        envelopeFinal
-          .classList
-          .remove("active");
-
-      }
-
-
-      /* 13 SAI */
-
-      const p13 =
-        easeInOut(
-          rangeProgress(
-            progress,
-            .31,
-            .48
-          )
-        );
-
-      folha13.style.transform =
-        `translate3d(
-          ${-120 * p13}%,
-          0,
-          0
-        )`;
-
-      folha13.style.opacity =
-        1 - p13;
-
-
-      /* 14 SAI */
-
-      const p14 =
-        easeInOut(
-          rangeProgress(
-            progress,
-            .48,
-            .65
-          )
-        );
-
-      folha14.style.transform =
-        `translate3d(
-          ${120 * p14}%,
-          0,
-          0
-        )`;
-
-      folha14.style.opacity =
-        1 - p14;
-
-
-      /* FOTO */
-
-      const foto =
-        easeInOut(
-          rangeProgress(
-            progress,
-            .31,
-            .65
-          )
-        );
-
-      imagem15.style.opacity =
-        foto;
-
-      brilhos.style.opacity =
-        foto;
-
-
-      /* IMAGEM 16 */
-
-      const logo =
-        easeInOut(
-          rangeProgress(
-            progress,
-            .69,
-            .88
-          )
-        );
 
       imagem16.style.opacity =
-        logo;
+        logoProgress;
 
 
-      /* CARD */
+      /*
+        Depois que começa a rolar,
+        escondemos a instrução.
+      */
 
-      if (progress >= .96) {
+      if (progress > .08) {
+
+        scrollHint
+          .classList
+          .remove("visivel");
 
         scrollHint
           .classList
@@ -2130,10 +2710,15 @@
           .classList
           .remove("escondido");
 
+        scrollHint
+          .classList
+          .add("visivel");
+
       }
 
 
-      ticking = false;
+      ticking =
+        false;
 
     }
 
@@ -2142,13 +2727,17 @@
       "scroll",
       function() {
 
-        if (!ticking) {
+        if (
+          animacaoConcluida &&
+          !ticking
+        ) {
+
+          ticking =
+            true;
 
           requestAnimationFrame(
-            updateAnimation
+            atualizarPosAnimacao
           );
-
-          ticking = true;
 
         }
 
@@ -2161,12 +2750,22 @@
 
     window.addEventListener(
       "resize",
-      updateAnimation
+      function() {
+
+        if (
+          animacaoConcluida
+        ) {
+
+          atualizarPosAnimacao();
+
+        }
+
+      }
     );
 
 
     /* =========================================================
-       REVELAÇÃO
+       REVELAÇÃO DO CONVITE
     ========================================================= */
 
     const elementosRevelar =
@@ -2189,7 +2788,9 @@
 
                 entry.target
                   .classList
-                  .add("visivel");
+                  .add(
+                    "visivel"
+                  );
 
               }
 
@@ -2222,34 +2823,38 @@
 
     function abrirTela(tela) {
 
-      tela.classList.add(
-        "aberto"
-      );
+      tela
+        .classList
+        .add("aberto");
 
       tela.setAttribute(
         "aria-hidden",
         "false"
       );
 
-      tela.scrollTop = 0;
+      tela.scrollTop =
+        0;
 
-      document.body
+      body
         .classList
-        .add("modal-aberto");
+        .add(
+          "modal-aberto"
+        );
 
     }
 
 
     function fecharTela(tela) {
 
-      tela.classList.remove(
-        "aberto"
-      );
+      tela
+        .classList
+        .remove("aberto");
 
       tela.setAttribute(
         "aria-hidden",
         "true"
       );
+
 
       if (
         !document.querySelector(
@@ -2257,9 +2862,11 @@
         )
       ) {
 
-        document.body
+        body
           .classList
-          .remove("modal-aberto");
+          .remove(
+            "modal-aberto"
+          );
 
       }
 
@@ -2275,9 +2882,11 @@
         .forEach(
           function(tela) {
 
-            tela.classList.remove(
-              "aberto"
-            );
+            tela
+              .classList
+              .remove(
+                "aberto"
+              );
 
             tela.setAttribute(
               "aria-hidden",
@@ -2287,36 +2896,46 @@
           }
         );
 
-      document.body
+      body
         .classList
-        .remove("modal-aberto");
+        .remove(
+          "modal-aberto"
+        );
 
     }
 
 
     /* =========================================================
-       RSVP
+       ABRIR RSVP
     ========================================================= */
 
     document
-      .getElementById("abrir-rsvp")
+      .getElementById(
+        "abrir-rsvp"
+      )
       .addEventListener(
         "click",
         function() {
 
-          abrirTela(telaRsvp);
+          abrirTela(
+            telaRsvp
+          );
 
         }
       );
 
 
     document
-      .getElementById("fechar-rsvp")
+      .getElementById(
+        "fechar-rsvp"
+      )
       .addEventListener(
         "click",
         function() {
 
-          fecharTela(telaRsvp);
+          fecharTela(
+            telaRsvp
+          );
 
         }
       );
@@ -2356,21 +2975,28 @@
             if (
               !envioEmAndamento
             ) {
+
               return;
+
             }
+
 
             envioEmAndamento =
               false;
 
+
             botaoEnviar.disabled =
               false;
+
 
             botaoEnviar.textContent =
               "Enviar resposta";
 
+
             fecharTela(
               telaRsvp
             );
+
 
             abrirTela(
               telaEnviado
@@ -2389,12 +3015,15 @@
     ========================================================= */
 
     document
-      .getElementById("voltar-inicio")
+      .getElementById(
+        "voltar-inicio"
+      )
       .addEventListener(
         "click",
         function() {
 
           fecharTodasAsTelas();
+
 
           window.scrollTo({
             top: 0,
@@ -2410,7 +3039,9 @@
     ========================================================= */
 
     document
-      .getElementById("concluir")
+      .getElementById(
+        "concluir"
+      )
       .addEventListener(
         "click",
         function() {
@@ -2418,6 +3049,7 @@
           fecharTela(
             telaEnviado
           );
+
 
           abrirTela(
             telaAgradecimento
@@ -2432,7 +3064,9 @@
     ========================================================= */
 
     document
-      .getElementById("reiniciar")
+      .getElementById(
+        "reiniciar"
+      )
       .addEventListener(
         "click",
         function() {
@@ -2441,22 +3075,15 @@
 
           formRsvp.reset();
 
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-          });
 
-          setTimeout(
-            updateAnimation,
-            500
-          );
+          window.location.reload();
 
         }
       );
 
 
     /* =========================================================
-       PRELOAD
+       PRELOAD DAS IMAGENS
     ========================================================= */
 
     [
@@ -2483,9 +3110,6 @@
 
       }
     );
-
-
-    updateAnimation();
 
   </script>
 
