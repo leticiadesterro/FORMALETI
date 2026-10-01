@@ -49,9 +49,7 @@ html {
 body {
   width: 100%;
   min-height: 100%;
-
   overflow-x: hidden;
-
   background: var(--verde);
   color: var(--branco);
 
@@ -74,7 +72,6 @@ body.modal-aberto {
 
 img {
   display: block;
-
   user-select: none;
   -webkit-user-select: none;
   -webkit-user-drag: none;
@@ -126,7 +123,6 @@ textarea {
 
 .fullscreen-image {
   position: absolute;
-
   inset: 0;
 
   width: 100%;
@@ -164,8 +160,7 @@ textarea {
     opacity .75s ease;
 
   will-change:
-    opacity,
-    transform;
+    opacity;
 }
 
 #imagem-15.visivel {
@@ -190,90 +185,11 @@ textarea {
     opacity .75s ease;
 
   will-change:
-    opacity,
-    transform;
+    opacity;
 }
 
 #imagem-16.visivel {
   opacity: 1;
-}
-
-
-/* =========================================================
-   QUICADA FINAL
-
-   15 e 16 se movem juntas.
-========================================================= */
-
-#imagem-15.quicando {
-  animation:
-    quicarFoto
-    2.25s
-    ease-in-out
-    infinite;
-}
-
-#imagem-16.quicando {
-  animation:
-    quicarOverlay
-    2.25s
-    ease-in-out
-    infinite;
-}
-
-
-@keyframes quicarFoto {
-
-  0%,
-  58%,
-  100% {
-    transform:
-      translate3d(0, 0, 0);
-  }
-
-  70% {
-    transform:
-      translate3d(0, -13px, 0);
-  }
-
-  80% {
-    transform:
-      translate3d(0, -4px, 0);
-  }
-
-}
-
-
-@keyframes quicarOverlay {
-
-  0%,
-  58%,
-  100% {
-    transform:
-      translate3d(0, -7.5%, 0)
-      scale(1.01);
-  }
-
-  70% {
-    transform:
-      translate3d(
-        0,
-        calc(-7.5% - 13px),
-        0
-      )
-      scale(1.01);
-  }
-
-  80% {
-    transform:
-      translate3d(
-        0,
-        calc(-7.5% - 4px),
-        0
-      )
-      scale(1.01);
-  }
-
 }
 
 
@@ -343,7 +259,6 @@ textarea {
 
 #brilhos {
   position: absolute;
-
   inset: 0;
 
   z-index: 8;
@@ -380,7 +295,6 @@ textarea {
     infinite;
 }
 
-
 @keyframes piscar {
 
   0%,
@@ -388,13 +302,18 @@ textarea {
   75%,
   100% {
     opacity: 0;
-    transform: scale(.72);
+
+    transform:
+      scale(.72);
   }
 
   48%,
   58% {
-    opacity: var(--intensidade);
-    transform: scale(1);
+    opacity:
+      var(--intensidade);
+
+    transform:
+      scale(1);
   }
 
 }
@@ -427,7 +346,8 @@ textarea {
   transform:
     translate3d(0, 0, 0);
 
-  will-change: transform;
+  will-change:
+    transform;
 }
 
 #envelope-final.active {
@@ -441,15 +361,6 @@ textarea {
 
   transform:
     translate3d(0, 122%, 0);
-}
-
-#envelope-final.subindo {
-  transition:
-    transform .82s
-    cubic-bezier(.55, .05, .35, 1);
-
-  transform:
-    translate3d(0, 0, 0);
 }
 
 
@@ -494,8 +405,11 @@ textarea {
   background:
     rgba(2, 13, 8, .88);
 
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter:
+    blur(12px);
+
+  -webkit-backdrop-filter:
+    blur(12px);
 
   color:
     var(--ouro-claro);
@@ -537,7 +451,6 @@ textarea {
   animation: none;
 }
 
-
 @keyframes respirar {
 
   0%,
@@ -553,6 +466,101 @@ textarea {
     transform:
       translateX(-50%)
       scale(1.025);
+
+    opacity: 1;
+  }
+
+}
+
+
+/* =========================================================
+   SETA DOURADA DE SCROLL
+========================================================= */
+
+#seta-scroll {
+  position: fixed;
+
+  z-index: 450;
+
+  left: 50%;
+
+  bottom:
+    calc(
+      30px +
+      env(safe-area-inset-bottom, 0px)
+    );
+
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transform:
+    translateX(-50%);
+
+  pointer-events: none;
+
+  transition:
+    opacity .45s ease,
+    visibility .45s ease;
+}
+
+#seta-scroll::before {
+  content: "";
+
+  width: 15px;
+  height: 15px;
+
+  border-right:
+    2px solid
+    var(--ouro-claro);
+
+  border-bottom:
+    2px solid
+    var(--ouro-claro);
+
+  transform:
+    rotate(45deg);
+
+  filter:
+    drop-shadow(
+      0 0 5px
+      rgba(222, 183, 102, .30)
+    );
+}
+
+#seta-scroll.visivel {
+  opacity: 1;
+  visibility: visible;
+
+  animation:
+    pularSeta
+    1.35s
+    ease-in-out
+    infinite;
+}
+
+@keyframes pularSeta {
+
+  0%,
+  100% {
+    transform:
+      translateX(-50%)
+      translateY(-7px);
+
+    opacity: .55;
+  }
+
+  50% {
+    transform:
+      translateX(-50%)
+      translateY(7px);
 
     opacity: 1;
   }
@@ -610,7 +618,7 @@ textarea {
 
 
 /* =========================================================
-   CONVITE
+   CONVITE CENTRALIZADO
 ========================================================= */
 
 .convite-minimal {
@@ -729,8 +737,7 @@ textarea {
 
 
 /* =========================================================
-   DATA PRINCIPAL
-   BODONI MODA
+   DATA PRINCIPAL — BODONI
 ========================================================= */
 
 .bloco-data {
@@ -954,7 +961,7 @@ textarea {
 
 
 /* =========================================================
-   RSVP BUTTON
+   BOTÃO RSVP
 ========================================================= */
 
 .botao-rsvp-minimal {
@@ -1009,12 +1016,16 @@ textarea {
   -webkit-appearance: none;
   appearance: none;
 
-  backdrop-filter: blur(7px);
-  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter:
+    blur(7px);
+
+  -webkit-backdrop-filter:
+    blur(7px);
 }
 
 .botao-rsvp-minimal:active {
-  transform: scale(.985);
+  transform:
+    scale(.985);
 
   background:
     var(--ouro-claro);
@@ -1097,7 +1108,8 @@ textarea {
 
   overflow-y: auto;
 
-  -webkit-overflow-scrolling: touch;
+  -webkit-overflow-scrolling:
+    touch;
 
   background:
     linear-gradient(
@@ -1598,12 +1610,22 @@ textarea {
 
 
 <!-- =====================================================
-     TOQUE
+     TOQUE PARA REVELAR
 ====================================================== -->
 
 <div id="toque-revelar">
   Toque para revelar
 </div>
+
+
+<!-- =====================================================
+     SETA DOURADA
+====================================================== -->
+
+<div
+  id="seta-scroll"
+  aria-hidden="true"
+></div>
 
 
 <!-- =====================================================
@@ -2051,7 +2073,7 @@ textarea {
 
 
 <!-- =====================================================
-     GOOGLE FORM INVISÍVEL
+     GOOGLE FORMS INVISÍVEL
 ====================================================== -->
 
 <iframe
@@ -2088,10 +2110,19 @@ const body =
 document.body;
 
 const stage =
-document.getElementById("stage");
+document.getElementById(
+  "stage"
+);
 
 const toque =
-document.getElementById("toque-revelar");
+document.getElementById(
+  "toque-revelar"
+);
+
+const setaScroll =
+document.getElementById(
+  "seta-scroll"
+);
 
 const frames =
 Array.from(
@@ -2183,7 +2214,7 @@ false;
 
 
 /* =========================================================
-   TEMPO
+   ESPERAR
 ========================================================= */
 
 function esperar(ms) {
@@ -2221,11 +2252,15 @@ function mostrarFrame(numero) {
 
   envelope05
     .classList
-    .remove("active");
+    .remove(
+      "active"
+    );
 
   frames[numero]
     .classList
-    .add("active");
+    .add(
+      "active"
+    );
 
 }
 
@@ -2305,7 +2340,7 @@ for (
 
 
 /* =========================================================
-   ABRIR
+   ABRIR ANIMAÇÃO
 ========================================================= */
 
 async function abrirAnimacao() {
@@ -2323,6 +2358,13 @@ async function abrirAnimacao() {
 
   retornoDisparado =
   false;
+
+
+  setaScroll
+    .classList
+    .remove(
+      "visivel"
+    );
 
 
   toque
@@ -2346,39 +2388,38 @@ async function abrirAnimacao() {
 
 
   /*
-    01 já está visível.
-
-    Os frames são rápidos de propósito
-    para parecer uma abertura contínua.
+    01 já está na tela.
+    01 → 04 rápidos.
   */
 
-  await esperar(100);
+  await esperar(90);
 
 
   /* 02 */
 
   mostrarFrame(1);
 
-  await esperar(105);
+  await esperar(100);
 
 
   /* 03 */
 
   mostrarFrame(2);
 
-  await esperar(105);
+  await esperar(100);
 
 
   /* 04 */
 
   mostrarFrame(3);
 
-  await esperar(115);
+  await esperar(110);
 
 
   /* 05 */
 
   esconderFrames();
+
 
   envelope05
     .classList
@@ -2390,12 +2431,18 @@ async function abrirAnimacao() {
   envelope05
     .classList
     .remove(
-      "descendo",
-      "subindo"
+      "descendo"
     );
 
 
-  await esperar(190);
+  envelope05.style.transition =
+  "";
+
+  envelope05.style.transform =
+  "";
+
+
+  await esperar(180);
 
 
   /* =====================================================
@@ -2409,13 +2456,12 @@ async function abrirAnimacao() {
     );
 
 
-  await esperar(540);
+  await esperar(500);
 
 
-  /*
-    Foto começa a aparecer antes
-    do envelope terminar completamente.
-  */
+  /* =====================================================
+     FOTO 15 COMEÇA A APARECER
+  ===================================================== */
 
   foto15
     .classList
@@ -2431,11 +2477,11 @@ async function abrirAnimacao() {
     );
 
 
-  await esperar(180);
+  await esperar(170);
 
 
   /* =====================================================
-     13 ABRE
+     13 SAI PARA A ESQUERDA
   ===================================================== */
 
   folha13
@@ -2445,11 +2491,11 @@ async function abrirAnimacao() {
     );
 
 
-  await esperar(400);
+  await esperar(390);
 
 
   /* =====================================================
-     14 ABRE
+     14 SAI PARA A DIREITA
   ===================================================== */
 
   folha14
@@ -2459,7 +2505,7 @@ async function abrirAnimacao() {
     );
 
 
-  await esperar(720);
+  await esperar(700);
 
 
   envelope05
@@ -2480,24 +2526,17 @@ async function abrirAnimacao() {
     );
 
 
-  await esperar(760);
+  await esperar(780);
 
 
   /* =====================================================
-     QUICADA
+     SETA DOURADA APARECE
   ===================================================== */
 
-  foto15
+  setaScroll
     .classList
     .add(
-      "quicando"
-    );
-
-
-  imagem16
-    .classList
-    .add(
-      "quicando"
+      "visivel"
     );
 
 
@@ -2513,7 +2552,7 @@ async function abrirAnimacao() {
 
 
   /*
-    LIBERA SCROLL
+    SOMENTE AGORA O SCROLL É LIBERADO.
   */
 
   body
@@ -2526,9 +2565,23 @@ async function abrirAnimacao() {
 
 
 /* =========================================================
-   FECHAR
+   FECHAR ANIMAÇÃO
 
-   É O CAMINHO INVERSO REAL.
+   16
+   ↓
+   14
+   ↓
+   13
+   ↓
+   05
+   ↓
+   04
+   ↓
+   03
+   ↓
+   02
+   ↓
+   01
 ========================================================= */
 
 async function fecharAnimacao() {
@@ -2545,28 +2598,15 @@ async function fecharAnimacao() {
 
 
   /*
-    Para a quicada antes de começar
-    o fechamento.
+    SETA SOME PRIMEIRO.
   */
 
-  foto15
+  setaScroll
     .classList
     .remove(
-      "quicando"
+      "visivel"
     );
 
-
-  imagem16
-    .classList
-    .remove(
-      "quicando"
-    );
-
-
-  /*
-    Enquanto fecha, impedimos que outro
-    gesto de scroll atrapalhe a sequência.
-  */
 
   body
     .classList
@@ -2635,7 +2675,7 @@ async function fecharAnimacao() {
 
 
   /* =====================================================
-     05 VOLTA DE BAIXO
+     05 COMEÇA EMBAIXO
   ===================================================== */
 
   envelope05
@@ -2652,25 +2692,25 @@ async function fecharAnimacao() {
     );
 
 
-  /*
-    Primeiro colocamos fisicamente
-    a imagem 05 abaixo da tela.
-  */
-
   envelope05.style.transition =
   "none";
+
 
   envelope05.style.transform =
   "translate3d(0,122%,0)";
 
 
   /*
-    Força o navegador a registrar
-    a posição de baixo antes de subir.
+    FORÇA O NAVEGADOR A REGISTRAR
+    A POSIÇÃO INICIAL.
   */
 
   envelope05.offsetHeight;
 
+
+  /* =====================================================
+     05 SOBE
+  ===================================================== */
 
   envelope05.style.transition =
   "transform .82s cubic-bezier(.55,.05,.35,1)";
@@ -2683,10 +2723,9 @@ async function fecharAnimacao() {
   await esperar(820);
 
 
-  /*
-    Foto desaparece por trás do envelope
-    já fechado.
-  */
+  /* =====================================================
+     FOTO 15 SOME ATRÁS DO ENVELOPE
+  ===================================================== */
 
   foto15
     .classList
@@ -2712,6 +2751,7 @@ async function fecharAnimacao() {
   envelope05.style.transition =
   "";
 
+
   envelope05.style.transform =
   "";
 
@@ -2719,7 +2759,7 @@ async function fecharAnimacao() {
   mostrarFrame(3);
 
 
-  await esperar(115);
+  await esperar(110);
 
 
   /* =====================================================
@@ -2729,7 +2769,7 @@ async function fecharAnimacao() {
   mostrarFrame(2);
 
 
-  await esperar(105);
+  await esperar(100);
 
 
   /* =====================================================
@@ -2739,7 +2779,7 @@ async function fecharAnimacao() {
   mostrarFrame(1);
 
 
-  await esperar(105);
+  await esperar(100);
 
 
   /* =====================================================
@@ -2753,7 +2793,7 @@ async function fecharAnimacao() {
 
 
   /* =====================================================
-     FECHADO NOVAMENTE
+     TOTALMENTE FECHADO
   ===================================================== */
 
   estado =
@@ -2772,7 +2812,8 @@ async function fecharAnimacao() {
 
 
   /*
-    SOMENTE AGORA O BOTÃO VOLTA.
+    SÓ DEPOIS DE FECHAR TUDO
+    O "TOQUE PARA REVELAR" VOLTA.
   */
 
   toque
@@ -2798,7 +2839,7 @@ async function fecharAnimacao() {
 
 
 /* =========================================================
-   PRIMEIRO TOQUE
+   TOQUE INICIAL
 ========================================================= */
 
 stage.addEventListener(
@@ -2818,11 +2859,7 @@ stage.addEventListener(
 
 
 /* =========================================================
-   DETECTAR RETORNO PARA CIMA
-
-   Quando o usuário volta do convite e a
-   primeira tela começa a reaparecer,
-   inicia o fechamento.
+   SCROLL
 ========================================================= */
 
 window.addEventListener(
@@ -2839,13 +2876,29 @@ window.addEventListener(
 
 
     /*
-      Só pode fechar se:
+      ASSIM QUE A PESSOA COMEÇA
+      A DESCER, A SETA SOME.
+    */
 
-      1. animação está totalmente aberta;
-      2. usuário está realmente subindo;
-      3. voltou para a região superior
-         da primeira tela;
-      4. ainda não disparou o fechamento.
+    if (
+      estado === "aberto" &&
+      scrollAtual > 15
+    ) {
+
+      setaScroll
+        .classList
+        .remove(
+          "visivel"
+        );
+
+    }
+
+
+    /*
+      SE A PESSOA ESTIVER VOLTANDO
+      PARA CIMA E ENTRAR NOVAMENTE
+      NA ÁREA DA ANIMAÇÃO,
+      COMEÇA O FECHAMENTO.
     */
 
     if (
@@ -2876,7 +2929,7 @@ window.addEventListener(
 
 
 /* =========================================================
-   REVELAÇÃO DO CONVITE
+   REVELAR CONVITE
 ========================================================= */
 
 const elementosRevelar =
@@ -3027,7 +3080,7 @@ function fecharTodasAsTelas() {
 
 
 /* =========================================================
-   RSVP
+   ABRIR RSVP
 ========================================================= */
 
 document
@@ -3045,6 +3098,10 @@ document
   }
 );
 
+
+/* =========================================================
+   FECHAR RSVP
+========================================================= */
 
 document
 .getElementById(
@@ -3194,13 +3251,9 @@ document
 
     fecharTodasAsTelas();
 
+
     formRsvp.reset();
 
-
-    /*
-      Se estiver aberto, faz o fechamento
-      visual em vez de recarregar a página.
-    */
 
     if (
       estado === "aberto"
@@ -3247,11 +3300,13 @@ document
     const image =
     new Image();
 
+
     image.src =
     file;
 
   }
 );
+
 
 </script>
 
