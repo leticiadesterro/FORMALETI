@@ -7,7 +7,7 @@
 
 <meta
   name="viewport"
-  content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no"
+  content="width=device-width, initial-scale=1, viewport-fit=cover"
 >
 
 <meta name="theme-color" content="#020d08">
@@ -41,7 +41,6 @@
   --branco: #f4efe5;
   --ouro: #c89a46;
   --ouro-claro: #deb766;
-
   --largura-experiencia: 100vw;
 }
 
@@ -49,7 +48,6 @@ html {
   width: 100%;
   min-height: 100%;
   background: var(--verde-escuro);
-  overscroll-behavior-y: none;
 }
 
 body {
@@ -64,43 +62,6 @@ body {
   font-family: "Montserrat", Arial, sans-serif;
 
   -webkit-tap-highlight-color: transparent;
-
-  overscroll-behavior-y: none;
-}
-
-
-/* =========================================================
-   BLOQUEIO REAL DA ANIMAÇÃO
-
-   É ATIVADO:
-   - durante loading
-   - antes do primeiro toque
-   - durante toda a abertura
-
-   É REMOVIDO SOMENTE QUANDO 16 TERMINA DE APARECER.
-========================================================= */
-
-html.scroll-travado,
-body.scroll-travado {
-  overflow: hidden !important;
-  overscroll-behavior: none !important;
-}
-
-body.scroll-travado {
-  position: fixed;
-
-  left: 0;
-  right: 0;
-
-  width: 100%;
-
-  touch-action: none;
-
-  -webkit-overflow-scrolling: auto;
-}
-
-body.modal-aberto {
-  overflow: hidden;
 }
 
 img {
@@ -116,6 +77,33 @@ input,
 select,
 textarea {
   font: inherit;
+}
+
+
+/* =========================================================
+   TRAVA TEMPORÁRIA
+
+   ATENÇÃO:
+   NÃO usamos position:fixed no body.
+
+   O bloqueio forte é feito no JavaScript
+   cancelando touchmove/wheel.
+
+   Isso evita o Safari continuar preso depois da imagem 16.
+========================================================= */
+
+html.animacao-travada,
+body.animacao-travada {
+  overflow: hidden !important;
+  overscroll-behavior: none;
+}
+
+body.animacao-travada {
+  touch-action: none;
+}
+
+body.modal-aberto {
+  overflow: hidden;
 }
 
 
@@ -187,7 +175,7 @@ textarea {
 
 
 /* =========================================================
-   SOL E LUA
+   SOL + LUA
 ========================================================= */
 
 .carregamento-icones {
@@ -221,15 +209,25 @@ textarea {
 
   pointer-events: none;
 
-  will-change: opacity, transform;
+  will-change:
+    opacity,
+    transform;
 }
 
 #icone-sol {
-  animation: alternarSol 2.3s ease-in-out infinite;
+  animation:
+    alternarSol
+    2.3s
+    ease-in-out
+    infinite;
 }
 
 #icone-lua {
-  animation: alternarLua 2.3s ease-in-out infinite;
+  animation:
+    alternarLua
+    2.3s
+    ease-in-out
+    infinite;
 }
 
 
@@ -321,8 +319,6 @@ textarea {
 
   color: var(--ouro-claro);
 
-  font-family: "Montserrat", Arial, sans-serif;
-
   font-size: 10px;
 
   font-weight: 500;
@@ -333,7 +329,11 @@ textarea {
 
   text-transform: uppercase;
 
-  animation: pulsarCarregando 1.8s ease-in-out infinite;
+  animation:
+    pulsarCarregando
+    1.8s
+    ease-in-out
+    infinite;
 }
 
 
@@ -373,7 +373,6 @@ textarea {
   background: var(--verde-escuro);
 }
 
-
 #stage {
   position: relative;
 
@@ -406,7 +405,7 @@ textarea {
 
 
 /* =========================================================
-   IMAGENS
+   ARTES
 ========================================================= */
 
 .fullscreen-image {
@@ -424,11 +423,6 @@ textarea {
   pointer-events: none;
 }
 
-
-/* =========================================================
-   FUNDO
-========================================================= */
-
 #fundo {
   z-index: 1;
 }
@@ -443,9 +437,11 @@ textarea {
 
   opacity: 0;
 
-  transform: translate3d(0, 0, 0);
+  transform:
+    translate3d(0, 0, 0);
 
-  transition: opacity .75s ease;
+  transition:
+    opacity .75s ease;
 
   will-change: opacity;
 }
@@ -468,7 +464,8 @@ textarea {
     translate3d(0, -7.5%, 0)
     scale(1.01);
 
-  transition: opacity .75s ease;
+  transition:
+    opacity .75s ease;
 
   will-change: opacity;
 }
@@ -487,17 +484,22 @@ textarea {
 
   opacity: 1;
 
-  transform: translate3d(0, 0, 0);
+  transform:
+    translate3d(0, 0, 0);
 
   transition:
-    transform .78s cubic-bezier(.65, 0, .35, 1),
+    transform .78s
+    cubic-bezier(.65, 0, .35, 1),
     opacity .65s ease;
 
-  will-change: transform, opacity;
+  will-change:
+    transform,
+    opacity;
 }
 
 #folha-14.sair {
-  transform: translate3d(120%, 0, 0);
+  transform:
+    translate3d(120%, 0, 0);
 
   opacity: 0;
 }
@@ -512,17 +514,22 @@ textarea {
 
   opacity: 1;
 
-  transform: translate3d(0, 0, 0);
+  transform:
+    translate3d(0, 0, 0);
 
   transition:
-    transform .78s cubic-bezier(.65, 0, .35, 1),
+    transform .78s
+    cubic-bezier(.65, 0, .35, 1),
     opacity .65s ease;
 
-  will-change: transform, opacity;
+  will-change:
+    transform,
+    opacity;
 }
 
 #folha-13.sair {
-  transform: translate3d(-120%, 0, 0);
+  transform:
+    translate3d(-120%, 0, 0);
 
   opacity: 0;
 }
@@ -545,7 +552,8 @@ textarea {
 
   pointer-events: none;
 
-  transition: opacity .7s ease;
+  transition:
+    opacity .7s ease;
 }
 
 #brilhos.visivel {
@@ -556,6 +564,7 @@ textarea {
   position: absolute;
 
   width: var(--tamanho);
+
   height: auto;
 
   opacity: 0;
@@ -579,21 +588,24 @@ textarea {
   100% {
     opacity: 0;
 
-    transform: scale(.72);
+    transform:
+      scale(.72);
   }
 
   48%,
   58% {
-    opacity: var(--intensidade);
+    opacity:
+      var(--intensidade);
 
-    transform: scale(1);
+    transform:
+      scale(1);
   }
 
 }
 
 
 /* =========================================================
-   ENVELOPE 01–04
+   01–04
 ========================================================= */
 
 .frame-envelope {
@@ -603,9 +615,8 @@ textarea {
 
   visibility: hidden;
 
-  transform: translateZ(0);
-
-  will-change: opacity;
+  transform:
+    translateZ(0);
 
   pointer-events: none;
 }
@@ -628,9 +639,12 @@ textarea {
 
   visibility: hidden;
 
-  transform: translate3d(0, 0, 0);
+  transform:
+    translate3d(0, 0, 0);
 
-  will-change: transform, opacity;
+  will-change:
+    transform,
+    opacity;
 
   pointer-events: none;
 }
@@ -643,7 +657,8 @@ textarea {
 
 #envelope-final.descendo {
   transition:
-    transform .82s cubic-bezier(.55, .05, .35, 1);
+    transform .82s
+    cubic-bezier(.55, .05, .35, 1);
 
   transform:
     translate3d(0, 122%, 0);
@@ -667,12 +682,16 @@ textarea {
       env(safe-area-inset-bottom, 0px)
     );
 
-  transform: translateX(-50%);
+  transform:
+    translateX(-50%);
 
   min-width: 220px;
+
   min-height: 52px;
 
-  padding: 13px 27px;
+  padding:
+    13px
+    27px;
 
   display: flex;
 
@@ -683,36 +702,47 @@ textarea {
     1px solid
     rgba(222, 183, 102, .82);
 
-  border-radius: 999px;
+  border-radius:
+    999px;
 
   background:
     rgba(2, 13, 8, .88);
 
-  backdrop-filter: blur(12px);
+  backdrop-filter:
+    blur(12px);
 
-  -webkit-backdrop-filter: blur(12px);
+  -webkit-backdrop-filter:
+    blur(12px);
 
-  color: var(--ouro-claro);
+  color:
+    var(--ouro-claro);
 
-  font-family: "Montserrat", Arial, sans-serif;
+  font-size:
+    10px;
 
-  font-size: 10px;
+  font-weight:
+    600;
 
-  font-weight: 600;
+  line-height:
+    1;
 
-  line-height: 1;
+  letter-spacing:
+    2.2px;
 
-  letter-spacing: 2.2px;
+  text-transform:
+    uppercase;
 
-  text-transform: uppercase;
+  white-space:
+    nowrap;
 
-  white-space: nowrap;
+  pointer-events:
+    none;
 
-  pointer-events: none;
+  opacity:
+    0;
 
-  opacity: 0;
-
-  visibility: hidden;
+  visibility:
+    hidden;
 
   transition:
     opacity .35s ease,
@@ -763,7 +793,7 @@ textarea {
 
 
 /* =========================================================
-   SETA DOURADA
+   SETA
 ========================================================= */
 
 #seta-scroll {
@@ -779,21 +809,32 @@ textarea {
       env(safe-area-inset-bottom, 0px)
     );
 
-  width: 42px;
-  height: 42px;
+  width:
+    42px;
 
-  display: flex;
+  height:
+    42px;
 
-  align-items: center;
-  justify-content: center;
+  display:
+    flex;
 
-  opacity: 0;
+  align-items:
+    center;
 
-  visibility: hidden;
+  justify-content:
+    center;
 
-  transform: translateX(-50%);
+  opacity:
+    0;
 
-  pointer-events: none;
+  visibility:
+    hidden;
+
+  transform:
+    translateX(-50%);
+
+  pointer-events:
+    none;
 
   transition:
     opacity .45s ease,
@@ -803,8 +844,11 @@ textarea {
 #seta-scroll::before {
   content: "";
 
-  width: 15px;
-  height: 15px;
+  width:
+    15px;
+
+  height:
+    15px;
 
   border-right:
     2px solid
@@ -814,7 +858,8 @@ textarea {
     2px solid
     var(--ouro-claro);
 
-  transform: rotate(45deg);
+  transform:
+    rotate(45deg);
 
   filter:
     drop-shadow(
@@ -824,9 +869,11 @@ textarea {
 }
 
 #seta-scroll.visivel {
-  opacity: 1;
+  opacity:
+    1;
 
-  visibility: visible;
+  visibility:
+    visible;
 
   animation:
     pularSeta
@@ -844,7 +891,8 @@ textarea {
       translateX(-50%)
       translateY(-7px);
 
-    opacity: .55;
+    opacity:
+      .55;
   }
 
   50% {
@@ -852,7 +900,8 @@ textarea {
       translateX(-50%)
       translateY(7px);
 
-    opacity: 1;
+    opacity:
+      1;
   }
 
 }
@@ -863,21 +912,32 @@ textarea {
 ========================================================= */
 
 #continuacao {
-  position: relative;
+  position:
+    relative;
 
-  z-index: 20;
+  z-index:
+    20;
 
-  width: var(--largura-experiencia);
+  width:
+    var(--largura-experiencia);
 
-  max-width: 100%;
+  max-width:
+    100%;
 
-  height: 100vh;
-  height: 100svh;
-  height: 100dvh;
+  height:
+    100vh;
 
-  margin: 0 auto;
+  height:
+    100svh;
 
-  overflow: hidden;
+  height:
+    100dvh;
+
+  margin:
+    0 auto;
+
+  overflow:
+    hidden;
 
   background:
     var(--verde)
@@ -891,19 +951,29 @@ textarea {
 }
 
 #continuacao::before {
-  content: "";
+  content:
+    "";
 
-  position: absolute;
+  position:
+    absolute;
 
-  z-index: 1;
+  z-index:
+    1;
 
-  top: 0;
-  left: 0;
+  top:
+    0;
 
-  width: 100%;
-  height: 12vh;
+  left:
+    0;
 
-  pointer-events: none;
+  width:
+    100%;
+
+  height:
+    12vh;
+
+  pointer-events:
+    none;
 
   background:
     linear-gradient(
@@ -920,60 +990,79 @@ textarea {
 ========================================================= */
 
 .convite-minimal {
-  position: relative;
+  position:
+    relative;
 
-  z-index: 5;
+  z-index:
+    5;
 
-  width: 100%;
-  height: 100%;
+  width:
+    100%;
 
-  margin: 0 auto;
+  height:
+    100%;
+
+  margin:
+    0 auto;
 
   padding:
     env(safe-area-inset-top, 0px)
     clamp(22px, 6vw, 44px)
     env(safe-area-inset-bottom, 0px);
 
-  display: flex;
+  display:
+    flex;
 
-  align-items: center;
-  justify-content: center;
+  align-items:
+    center;
 
-  text-align: center;
+  justify-content:
+    center;
+
+  text-align:
+    center;
 }
 
 .convite-conteudo {
-  width: 100%;
+  width:
+    100%;
 
-  display: flex;
+  display:
+    flex;
 
-  flex-direction: column;
+  flex-direction:
+    column;
 
-  align-items: center;
-  justify-content: center;
+  align-items:
+    center;
+
+  justify-content:
+    center;
 }
 
-
-/* =========================================================
-   SAVE THE DATE
-========================================================= */
-
 .save-minimal {
-  color: var(--ouro-claro);
+  color:
+    var(--ouro-claro);
 
-  font-family: "Montserrat", Arial, sans-serif;
+  font-family:
+    "Montserrat",
+    Arial,
+    sans-serif;
 
   font-size:
     clamp(18px, 5vw, 24px);
 
-  font-weight: 500;
+  font-weight:
+    500;
 
-  line-height: 1;
+  line-height:
+    1;
 
   letter-spacing:
     clamp(3px, 1.2vw, 6px);
 
-  text-transform: uppercase;
+  text-transform:
+    uppercase;
 }
 
 
@@ -982,13 +1071,20 @@ textarea {
 ========================================================= */
 
 .separador-superior {
-  position: relative;
+  position:
+    relative;
 
-  width: 1px;
-  height: 18px;
+  width:
+    1px;
 
-  margin-top: 17px;
-  margin-bottom: 14px;
+  height:
+    18px;
+
+  margin-top:
+    17px;
+
+  margin-bottom:
+    14px;
 
   background:
     linear-gradient(
@@ -999,15 +1095,23 @@ textarea {
 }
 
 .separador-superior::after {
-  content: "";
+  content:
+    "";
 
-  position: absolute;
+  position:
+    absolute;
 
-  left: 50%;
-  bottom: -2px;
+  left:
+    50%;
 
-  width: 5px;
-  height: 5px;
+  bottom:
+    -2px;
+
+  width:
+    5px;
+
+  height:
+    5px;
 
   border:
     1px solid
@@ -1020,25 +1124,35 @@ textarea {
 
 
 /* =========================================================
-   DATA PRINCIPAL
+   DATA
 ========================================================= */
 
 .bloco-data {
-  display: flex;
+  display:
+    flex;
 
-  align-items: center;
-  justify-content: center;
+  align-items:
+    center;
+
+  justify-content:
+    center;
 }
 
 .data-vertical {
-  display: flex;
+  display:
+    flex;
 
-  flex-direction: column;
+  flex-direction:
+    column;
 
-  align-items: center;
-  justify-content: center;
+  align-items:
+    center;
 
-  color: var(--branco);
+  justify-content:
+    center;
+
+  color:
+    var(--branco);
 
   font-family:
     "Bodoni Moda",
@@ -1048,19 +1162,25 @@ textarea {
   font-size:
     clamp(67px, 18vw, 88px);
 
-  font-weight: 400;
+  font-weight:
+    400;
 
-  line-height: .78;
+  line-height:
+    .78;
 
-  letter-spacing: -3px;
+  letter-spacing:
+    -3px;
 
-  font-variant-numeric: lining-nums;
+  font-variant-numeric:
+    lining-nums;
 }
 
 .data-vertical span {
-  display: block;
+  display:
+    block;
 
-  line-height: .78;
+  line-height:
+    .78;
 }
 
 
@@ -1072,48 +1192,67 @@ textarea {
   margin-top:
     clamp(28px, 3.8vh, 39px);
 
-  display: flex;
+  display:
+    flex;
 
-  flex-direction: column;
+  flex-direction:
+    column;
 
-  align-items: center;
+  align-items:
+    center;
 }
 
 .nome-baile {
-  color: var(--ouro-claro);
+  color:
+    var(--ouro-claro);
 
-  font-family: "Montserrat", Arial, sans-serif;
+  font-family:
+    "Montserrat",
+    Arial,
+    sans-serif;
 
   font-size:
     clamp(18px, 5vw, 24px);
 
-  font-weight: 500;
+  font-weight:
+    500;
 
-  line-height: 1.25;
+  line-height:
+    1.25;
 
   letter-spacing:
     clamp(2px, .8vw, 4px);
 
-  text-transform: uppercase;
+  text-transform:
+    uppercase;
 }
 
 .local-baile {
-  margin-top: 10px;
+  margin-top:
+    10px;
 
-  color: var(--branco);
+  color:
+    var(--branco);
 
-  font-family: "Montserrat", Arial, sans-serif;
+  font-family:
+    "Montserrat",
+    Arial,
+    sans-serif;
 
   font-size:
     clamp(13px, 3.5vw, 16px);
 
-  font-weight: 400;
+  font-weight:
+    400;
 
-  line-height: 1;
+  line-height:
+    1;
 
-  letter-spacing: 2.5px;
+  letter-spacing:
+    2.5px;
 
-  text-transform: uppercase;
+  text-transform:
+    uppercase;
 }
 
 
@@ -1122,12 +1261,14 @@ textarea {
 ========================================================= */
 
 .eventos-minimal {
-  width: 100%;
+  width:
+    100%;
 
   margin-top:
     clamp(28px, 4vh, 40px);
 
-  display: grid;
+  display:
+    grid;
 
   grid-template-columns:
     minmax(0, 1fr)
@@ -1138,66 +1279,90 @@ textarea {
 }
 
 .evento-minimal {
-  min-width: 0;
+  min-width:
+    0;
 
-  display: flex;
+  display:
+    flex;
 
-  flex-direction: column;
+  flex-direction:
+    column;
 
-  align-items: center;
+  align-items:
+    center;
 }
 
 .evento-minimal h2 {
-  color: var(--ouro-claro);
+  color:
+    var(--ouro-claro);
 
-  font-family: "Montserrat", Arial, sans-serif;
+  font-family:
+    "Montserrat",
+    Arial,
+    sans-serif;
 
   font-size:
     clamp(13px, 3.5vw, 17px);
 
-  font-weight: 500;
+  font-weight:
+    500;
 
-  line-height: 1.35;
+  line-height:
+    1.35;
 
   letter-spacing:
     clamp(1px, .45vw, 2px);
 
-  text-transform: uppercase;
+  text-transform:
+    uppercase;
 }
 
 .evento-minimal time {
-  display: block;
+  display:
+    block;
 
-  margin-top: 9px;
+  margin-top:
+    9px;
 
-  color: var(--branco);
+  color:
+    var(--branco);
 
-  font-family: "Montserrat", Arial, sans-serif;
+  font-family:
+    "Montserrat",
+    Arial,
+    sans-serif;
 
   font-size:
     clamp(12px, 3.2vw, 15px);
 
-  font-weight: 400;
+  font-weight:
+    400;
 
-  line-height: 1;
+  line-height:
+    1;
 
-  letter-spacing: 1.3px;
+  letter-spacing:
+    1.3px;
 }
 
 
 /* =========================================================
-   RSVP
+   BOTÃO RSVP
 ========================================================= */
 
 .botao-rsvp-minimal {
-  width: min(100%, 400px);
+  width:
+    min(100%, 400px);
 
-  min-height: 59px;
+  min-height:
+    59px;
 
   margin-top:
     clamp(29px, 4vh, 41px);
 
-  padding: 14px 18px;
+  padding:
+    14px
+    18px;
 
   border:
     1px solid
@@ -1206,67 +1371,95 @@ textarea {
   background:
     rgba(2, 13, 8, .56);
 
-  color: var(--ouro-claro);
+  color:
+    var(--ouro-claro);
 
-  font-family: "Montserrat", Arial, sans-serif;
+  font-family:
+    "Montserrat",
+    Arial,
+    sans-serif;
 
   font-size:
     clamp(13px, 3.4vw, 16px);
 
-  font-weight: 600;
+  font-weight:
+    600;
 
-  line-height: 1.2;
+  line-height:
+    1.2;
 
-  letter-spacing: 2px;
+  letter-spacing:
+    2px;
 
-  text-transform: uppercase;
+  text-transform:
+    uppercase;
 
-  cursor: pointer;
+  cursor:
+    pointer;
 
-  -webkit-appearance: none;
-  appearance: none;
+  -webkit-appearance:
+    none;
 
-  backdrop-filter: blur(7px);
+  appearance:
+    none;
 
-  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter:
+    blur(7px);
+
+  -webkit-backdrop-filter:
+    blur(7px);
 }
 
 .botao-rsvp-minimal:active {
-  transform: scale(.985);
+  transform:
+    scale(.985);
 
-  background: var(--ouro-claro);
+  background:
+    var(--ouro-claro);
 
-  color: var(--verde);
+  color:
+    var(--verde);
 }
 
 .forma-final {
-  margin-top: 14px;
+  margin-top:
+    14px;
 
-  color: var(--ouro-claro);
+  color:
+    var(--ouro-claro);
 
-  font-family: "Montserrat", Arial, sans-serif;
+  font-family:
+    "Montserrat",
+    Arial,
+    sans-serif;
 
   font-size:
     clamp(11px, 2.8vw, 13px);
 
-  font-weight: 500;
+  font-weight:
+    500;
 
-  line-height: 1;
+  line-height:
+    1;
 
-  letter-spacing: 3px;
+  letter-spacing:
+    3px;
 
-  text-transform: uppercase;
+  text-transform:
+    uppercase;
 }
 
 
 /* =========================================================
-   REVELAR
+   REVELAÇÃO
 ========================================================= */
 
 .revelar {
-  opacity: 0;
+  opacity:
+    0;
 
-  transform: translateY(8px);
+  transform:
+    translateY(8px);
 
   transition:
     opacity .8s ease,
@@ -1274,9 +1467,11 @@ textarea {
 }
 
 .revelar.visivel {
-  opacity: 1;
+  opacity:
+    1;
 
-  transform: translateY(0);
+  transform:
+    translateY(0);
 }
 
 
@@ -1285,28 +1480,41 @@ textarea {
 ========================================================= */
 
 .tela-modal {
-  position: fixed;
+  position:
+    fixed;
 
-  z-index: 1000;
+  z-index:
+    1000;
 
-  inset: 0;
+  inset:
+    0;
 
-  width: 100%;
+  width:
+    100%;
 
-  height: 100vh;
-  height: 100dvh;
+  height:
+    100vh;
 
-  overflow-y: auto;
+  height:
+    100dvh;
 
-  -webkit-overflow-scrolling: touch;
+  overflow-y:
+    auto;
 
-  background: var(--verde-escuro);
+  -webkit-overflow-scrolling:
+    touch;
 
-  opacity: 0;
+  background:
+    var(--verde-escuro);
 
-  visibility: hidden;
+  opacity:
+    0;
 
-  transform: translateY(14px);
+  visibility:
+    hidden;
+
+  transform:
+    translateY(14px);
 
   transition:
     opacity .45s ease,
@@ -1315,21 +1523,26 @@ textarea {
 }
 
 .tela-modal.aberto {
-  opacity: 1;
+  opacity:
+    1;
 
-  visibility: visible;
+  visibility:
+    visible;
 
-  transform: translateY(0);
+  transform:
+    translateY(0);
 }
-
 
 .rsvp-pagina,
 .tela-central {
-  width: var(--largura-experiencia);
+  width:
+    var(--largura-experiencia);
 
-  max-width: 100%;
+  max-width:
+    100%;
 
-  margin: 0 auto;
+  margin:
+    0 auto;
 
   background:
     linear-gradient(
@@ -1347,12 +1560,15 @@ textarea {
 
 
 /* =========================================================
-   RSVP FORM
+   FORMULÁRIO
 ========================================================= */
 
 .rsvp-pagina {
-  min-height: 100vh;
-  min-height: 100dvh;
+  min-height:
+    100vh;
+
+  min-height:
+    100dvh;
 
   padding:
     calc(
@@ -1367,157 +1583,210 @@ textarea {
 }
 
 .rsvp-voltar {
-  border: 0;
+  border:
+    0;
 
-  padding: 11px 0;
+  padding:
+    11px 0;
 
-  background: transparent;
+  background:
+    transparent;
 
-  color: var(--ouro-claro);
+  color:
+    var(--ouro-claro);
 
-  font-family: "Montserrat", Arial, sans-serif;
+  font-size:
+    11px;
 
-  font-size: 11px;
+  font-weight:
+    600;
 
-  font-weight: 600;
+  letter-spacing:
+    2px;
 
-  letter-spacing: 2px;
+  text-transform:
+    uppercase;
 
-  text-transform: uppercase;
-
-  cursor: pointer;
+  cursor:
+    pointer;
 }
 
 .rsvp-marca {
-  margin-top: 30px;
-  margin-bottom: 42px;
+  margin-top:
+    30px;
 
-  color: var(--ouro-claro);
+  margin-bottom:
+    42px;
 
-  font-family: "Montserrat", Arial, sans-serif;
+  color:
+    var(--ouro-claro);
 
   font-size:
     clamp(10px, 2.7vw, 12px);
 
-  font-weight: 500;
+  font-weight:
+    500;
 
-  letter-spacing: 4px;
+  letter-spacing:
+    4px;
 
-  text-align: center;
+  text-align:
+    center;
 
-  text-transform: uppercase;
+  text-transform:
+    uppercase;
 }
 
 #form-rsvp {
-  width: 100%;
+  width:
+    100%;
 
-  display: flex;
+  display:
+    flex;
 
-  flex-direction: column;
+  flex-direction:
+    column;
 
-  gap: 30px;
+  gap:
+    30px;
 }
 
 .campo-rsvp {
-  width: 100%;
+  width:
+    100%;
 
-  display: flex;
+  display:
+    flex;
 
-  flex-direction: column;
+  flex-direction:
+    column;
 
-  gap: 11px;
+  gap:
+    11px;
 
-  border: 0;
+  border:
+    0;
 }
 
 .campo-rsvp[hidden] {
-  display: none !important;
+  display:
+    none !important;
 }
 
 .campo-rsvp > span,
 .campo-rsvp legend {
-  color: var(--ouro-claro);
-
-  font-family: "Montserrat", Arial, sans-serif;
+  color:
+    var(--ouro-claro);
 
   font-size:
     clamp(10px, 2.6vw, 12px);
 
-  font-weight: 600;
+  font-weight:
+    600;
 
-  line-height: 1.45;
+  line-height:
+    1.45;
 
-  letter-spacing: 1.5px;
+  letter-spacing:
+    1.5px;
 
-  text-transform: uppercase;
+  text-transform:
+    uppercase;
 }
 
 .campo-rsvp small {
-  opacity: .58;
+  opacity:
+    .58;
 
-  font-size: 8px;
+  font-size:
+    8px;
 }
 
 .campo-rsvp input[type="text"],
 .campo-rsvp select,
 .campo-rsvp textarea {
-  width: 100%;
+  width:
+    100%;
 
-  min-height: 58px;
+  min-height:
+    58px;
 
   border:
     1px solid
     rgba(222, 183, 102, .58);
 
-  border-radius: 0;
+  border-radius:
+    0;
 
-  outline: none;
+  outline:
+    none;
 
-  padding: 16px;
+  padding:
+    16px;
 
   background:
     rgba(1, 10, 6, .72);
 
-  color: var(--branco);
+  color:
+    var(--branco);
 
-  font-family: "Montserrat", Arial, sans-serif;
+  font-family:
+    "Montserrat",
+    Arial,
+    sans-serif;
 
-  font-size: 16px;
+  font-size:
+    16px;
 
-  -webkit-appearance: none;
-  appearance: none;
+  -webkit-appearance:
+    none;
+
+  appearance:
+    none;
 }
 
 .campo-rsvp input:focus,
 .campo-rsvp select:focus,
 .campo-rsvp textarea:focus {
-  border-color: var(--ouro-claro);
+  border-color:
+    var(--ouro-claro);
 }
 
 .campo-rsvp textarea {
-  min-height: 120px;
+  min-height:
+    120px;
 
-  resize: vertical;
+  resize:
+    vertical;
 }
 
 .campo-rsvp select option {
-  background: var(--verde);
+  background:
+    var(--verde);
 
-  color: var(--branco);
+  color:
+    var(--branco);
 }
 
 .opcao-rsvp {
-  width: 100%;
+  width:
+    100%;
 
-  min-height: 60px;
+  min-height:
+    60px;
 
-  padding: 14px 15px;
+  padding:
+    14px
+    15px;
 
-  display: flex;
+  display:
+    flex;
 
-  align-items: center;
+  align-items:
+    center;
 
-  gap: 12px;
+  gap:
+    12px;
 
   border:
     1px solid
@@ -1526,23 +1795,28 @@ textarea {
   background:
     rgba(1, 10, 6, .64);
 
-  color: var(--branco);
-
-  font-family: "Montserrat", Arial, sans-serif;
+  color:
+    var(--branco);
 
   font-size:
     clamp(13px, 3.5vw, 15px);
 
-  cursor: pointer;
+  cursor:
+    pointer;
 }
 
 .opcao-rsvp input {
-  width: 19px;
-  height: 19px;
+  width:
+    19px;
 
-  flex-shrink: 0;
+  height:
+    19px;
 
-  accent-color: var(--ouro);
+  flex-shrink:
+    0;
+
+  accent-color:
+    var(--ouro);
 }
 
 
@@ -1553,23 +1827,30 @@ textarea {
 .botao-enviar,
 .botao-dourado,
 .botao-contorno {
-  width: 100%;
+  width:
+    100%;
 
-  min-height: 62px;
+  min-height:
+    62px;
 
-  padding: 15px 20px;
+  padding:
+    15px
+    20px;
 
-  font-family: "Montserrat", Arial, sans-serif;
+  font-size:
+    11px;
 
-  font-size: 11px;
+  font-weight:
+    600;
 
-  font-weight: 600;
+  letter-spacing:
+    2.5px;
 
-  letter-spacing: 2.5px;
+  text-transform:
+    uppercase;
 
-  text-transform: uppercase;
-
-  cursor: pointer;
+  cursor:
+    pointer;
 }
 
 .botao-enviar,
@@ -1578,9 +1859,11 @@ textarea {
     1px solid
     var(--ouro-claro);
 
-  background: var(--ouro);
+  background:
+    var(--ouro);
 
-  color: var(--verde);
+  color:
+    var(--verde);
 }
 
 .botao-contorno {
@@ -1591,11 +1874,13 @@ textarea {
   background:
     rgba(2, 13, 8, .60);
 
-  color: var(--ouro-claro);
+  color:
+    var(--ouro-claro);
 }
 
 .botao-enviar:disabled {
-  opacity: .55;
+  opacity:
+    .55;
 }
 
 
@@ -1604,8 +1889,11 @@ textarea {
 ========================================================= */
 
 .tela-central {
-  min-height: 100vh;
-  min-height: 100dvh;
+  min-height:
+    100vh;
+
+  min-height:
+    100dvh;
 
   padding:
     calc(
@@ -1618,66 +1906,91 @@ textarea {
       env(safe-area-inset-bottom, 0px)
     );
 
-  display: flex;
+  display:
+    flex;
 
-  flex-direction: column;
+  flex-direction:
+    column;
 
-  align-items: center;
-  justify-content: center;
+  align-items:
+    center;
 
-  text-align: center;
+  justify-content:
+    center;
+
+  text-align:
+    center;
 }
 
 .mini-marca {
-  color: var(--ouro-claro);
+  color:
+    var(--ouro-claro);
 
-  font-size: 10px;
+  font-size:
+    10px;
 
-  font-weight: 500;
+  font-weight:
+    500;
 
-  letter-spacing: 4px;
+  letter-spacing:
+    4px;
 
-  text-transform: uppercase;
+  text-transform:
+    uppercase;
 }
 
 .titulo-pos-envio {
-  margin-top: 34px;
+  margin-top:
+    34px;
 
-  color: var(--ouro-claro);
+  color:
+    var(--ouro-claro);
 
   font-size:
     clamp(17px, 4.5vw, 22px);
 
-  font-weight: 500;
+  font-weight:
+    500;
 
-  letter-spacing: 4px;
+  letter-spacing:
+    4px;
 
-  text-transform: uppercase;
+  text-transform:
+    uppercase;
 }
 
 .texto-pos-envio {
-  max-width: 360px;
+  max-width:
+    360px;
 
-  margin-top: 20px;
+  margin-top:
+    20px;
 
-  color: var(--branco);
+  color:
+    var(--branco);
 
   font-size:
     clamp(12px, 3.3vw, 15px);
 
-  line-height: 1.7;
+  line-height:
+    1.7;
 }
 
 .acoes-pos-envio {
-  width: min(100%, 380px);
+  width:
+    min(100%, 380px);
 
-  margin-top: 48px;
+  margin-top:
+    48px;
 
-  display: flex;
+  display:
+    flex;
 
-  flex-direction: column;
+  flex-direction:
+    column;
 
-  gap: 13px;
+  gap:
+    13px;
 }
 
 
@@ -1688,7 +2001,8 @@ textarea {
 @media (max-height: 750px) {
 
   .convite-conteudo {
-    transform: scale(.90);
+    transform:
+      scale(.90);
   }
 
 }
@@ -1696,26 +2010,8 @@ textarea {
 @media (max-height: 670px) {
 
   .convite-conteudo {
-    transform: scale(.82);
-  }
-
-}
-
-
-/* =========================================================
-   CELULAR ESTREITO
-========================================================= */
-
-@media (max-width: 360px) {
-
-  .convite-minimal,
-  .rsvp-pagina {
-    padding-left: 19px;
-    padding-right: 19px;
-  }
-
-  .eventos-minimal {
-    gap: 13px;
+    transform:
+      scale(.82);
   }
 
 }
@@ -1728,35 +2024,43 @@ textarea {
 @media (min-width: 700px) {
 
   .save-minimal {
-    font-size: 22px;
+    font-size:
+      22px;
   }
 
   .data-vertical {
-    font-size: 84px;
+    font-size:
+      84px;
   }
 
   .nome-baile {
-    font-size: 22px;
+    font-size:
+      22px;
   }
 
   .local-baile {
-    font-size: 15px;
+    font-size:
+      15px;
   }
 
   .evento-minimal h2 {
-    font-size: 15px;
+    font-size:
+      15px;
   }
 
   .evento-minimal time {
-    font-size: 14px;
+    font-size:
+      14px;
   }
 
   .botao-rsvp-minimal {
-    font-size: 14px;
+    font-size:
+      14px;
   }
 
   .forma-final {
-    font-size: 12px;
+    font-size:
+      12px;
   }
 
 }
@@ -1769,15 +2073,18 @@ textarea {
 @media (min-width: 1100px) {
 
   .save-minimal {
-    font-size: 21px;
+    font-size:
+      21px;
   }
 
   .data-vertical {
-    font-size: 82px;
+    font-size:
+      82px;
   }
 
   .nome-baile {
-    font-size: 21px;
+    font-size:
+      21px;
   }
 
 }
@@ -1787,7 +2094,7 @@ textarea {
 </head>
 
 
-<body class="scroll-travado">
+<body>
 
 
 <!-- =====================================================
@@ -1813,6 +2120,7 @@ textarea {
     >
 
   </div>
+
 
   <p class="texto-carregando">
     Carregando
@@ -2199,6 +2507,7 @@ textarea {
       Forma Leti • 2026
     </p>
 
+
     <h2 class="titulo-pos-envio">
       Resposta enviada
     </h2>
@@ -2274,10 +2583,6 @@ textarea {
 </section>
 
 
-<!-- =====================================================
-     GOOGLE FORM
-====================================================== -->
-
 <iframe
   id="google-form-target"
   name="google-form-target"
@@ -2294,7 +2599,6 @@ textarea {
 
 
 <script>
-
 
 /* =========================================================
    CONFIGURAÇÃO
@@ -2372,7 +2676,7 @@ document.getElementById("tamanho-havaianas");
 
 
 /* =========================================================
-   ESTADOS
+   ESTADO
 ========================================================= */
 
 let estado =
@@ -2381,24 +2685,24 @@ let estado =
 let sitePronto =
 false;
 
-let retornoDisparado =
-false;
+let scrollBloqueado =
+true;
 
-let envioEmAndamento =
+let retornoDisparado =
 false;
 
 let ultimoScroll =
 0;
 
-let scrollSalvo =
-0;
+let envioEmAndamento =
+false;
 
-let travaAtiva =
-true;
+let toqueProcessado =
+false;
 
 
 /* =========================================================
-   UTILIDADE
+   ESPERAR
 ========================================================= */
 
 function esperar(ms) {
@@ -2412,93 +2716,129 @@ function esperar(ms) {
 
 
 /* =========================================================
-   TRAVA DE SCROLL
-
-   Essa é a parte principal da correção.
-
-   Não dependemos apenas de overflow:hidden.
-
-   Também:
-   - fixamos o body;
-   - cancelamos touchmove;
-   - cancelamos wheel;
-   - cancelamos teclas de navegação.
-
+   BLOQUEIO DE SCROLL
 ========================================================= */
 
 function bloquearScroll() {
 
-  if (travaAtiva) {
-    return;
-  }
-
-  travaAtiva =
+  scrollBloqueado =
   true;
-
-  scrollSalvo =
-  window.scrollY || 0;
 
 
   html.classList.add(
-    "scroll-travado"
+    "animacao-travada"
   );
+
 
   body.classList.add(
-    "scroll-travado"
+    "animacao-travada"
   );
 
 
-  body.style.top =
-  `-${scrollSalvo}px`;
-
-}
-
-
-function liberarScroll() {
-
-  if (!travaAtiva) {
-    return;
-  }
-
-
-  travaAtiva =
-  false;
-
-
-  const posicao =
-  scrollSalvo;
-
-
-  html.classList.remove(
-    "scroll-travado"
-  );
-
-  body.classList.remove(
-    "scroll-travado"
-  );
-
-
-  body.style.top =
-  "";
-
+  /*
+    Garante que a primeira tela
+    permaneça exatamente no topo.
+  */
 
   window.scrollTo(
     0,
-    posicao
+    0
   );
 
 }
 
 
 /* =========================================================
-   BLOQUEIO DE GESTOS
+   LIBERAÇÃO DE SCROLL
 
-   PASSIVE FALSE é essencial no iPhone.
+   ESTA É A CORREÇÃO PRINCIPAL.
 ========================================================= */
 
-function bloquearTouchMove(evento) {
+function liberarScroll() {
 
-  if (travaAtiva) {
+  /*
+    Primeiro mudamos a variável.
+
+    Assim os listeners de touchmove/wheel
+    param IMEDIATAMENTE de cancelar gestos.
+  */
+
+  scrollBloqueado =
+  false;
+
+
+  /*
+    Remove TODA a trava CSS.
+  */
+
+  html.classList.remove(
+    "animacao-travada"
+  );
+
+
+  body.classList.remove(
+    "animacao-travada"
+  );
+
+
+  /*
+    Segurança extra:
+    nenhum estilo residual fica no body/html.
+  */
+
+  html.style.overflow =
+  "";
+
+  html.style.touchAction =
+  "";
+
+  body.style.overflow =
+  "";
+
+  body.style.position =
+  "";
+
+  body.style.top =
+  "";
+
+  body.style.left =
+  "";
+
+  body.style.right =
+  "";
+
+  body.style.width =
+  "";
+
+  body.style.touchAction =
+  "";
+
+
+  /*
+    Força o navegador a recalcular
+    o layout antes do próximo swipe.
+  */
+
+  void body.offsetHeight;
+
+
+  window.scrollTo(
+    0,
+    0
+  );
+
+}
+
+
+/* =========================================================
+   INTERCEPTAR GESTOS SOMENTE QUANDO BLOQUEADO
+========================================================= */
+
+function interceptarTouchMove(evento) {
+
+  if (
+    scrollBloqueado
+  ) {
 
     evento.preventDefault();
 
@@ -2507,9 +2847,11 @@ function bloquearTouchMove(evento) {
 }
 
 
-function bloquearWheel(evento) {
+function interceptarWheel(evento) {
 
-  if (travaAtiva) {
+  if (
+    scrollBloqueado
+  ) {
 
     evento.preventDefault();
 
@@ -2518,14 +2860,18 @@ function bloquearWheel(evento) {
 }
 
 
-function bloquearTeclado(evento) {
+function interceptarTeclado(evento) {
 
-  if (!travaAtiva) {
+  if (
+    !scrollBloqueado
+  ) {
+
     return;
+
   }
 
 
-  const teclasBloqueadas = [
+  const teclas = [
 
     "ArrowDown",
     "ArrowUp",
@@ -2539,7 +2885,7 @@ function bloquearTeclado(evento) {
 
 
   if (
-    teclasBloqueadas.includes(
+    teclas.includes(
       evento.key
     )
   ) {
@@ -2553,7 +2899,7 @@ function bloquearTeclado(evento) {
 
 document.addEventListener(
   "touchmove",
-  bloquearTouchMove,
+  interceptarTouchMove,
   {
     passive: false
   }
@@ -2562,7 +2908,7 @@ document.addEventListener(
 
 window.addEventListener(
   "wheel",
-  bloquearWheel,
+  interceptarWheel,
   {
     passive: false
   }
@@ -2571,103 +2917,7 @@ window.addEventListener(
 
 window.addEventListener(
   "keydown",
-  bloquearTeclado,
-  {
-    passive: false
-  }
-);
-
-
-/* =========================================================
-   PROTEÇÃO EXTRA
-
-   Se algum navegador conseguir alterar scroll
-   durante a abertura, devolvemos imediatamente ao topo.
-========================================================= */
-
-window.addEventListener(
-  "scroll",
-  function() {
-
-    if (
-      estado === "carregando" ||
-      estado === "fechado" ||
-      estado === "abrindo"
-    ) {
-
-      if (
-        window.scrollY !== 0
-      ) {
-
-        window.scrollTo(
-          0,
-          0
-        );
-
-      }
-
-      return;
-
-    }
-
-
-    const scrollAtual =
-    window.scrollY;
-
-
-    const subindo =
-    scrollAtual <
-    ultimoScroll;
-
-
-    /*
-      Depois de abrir, a seta desaparece
-      assim que a pessoa começa a descer.
-    */
-
-    if (
-      estado === "aberto" &&
-      scrollAtual > 15
-    ) {
-
-      setaScroll
-        .classList
-        .remove(
-          "visivel"
-        );
-
-    }
-
-
-    /*
-      Ao voltar para a primeira tela,
-      fecha a animação.
-    */
-
-    if (
-      estado === "aberto" &&
-      subindo &&
-      scrollAtual <
-      window.innerHeight * .72 &&
-      !retornoDisparado
-    ) {
-
-      retornoDisparado =
-      true;
-
-
-      fecharAnimacao();
-
-    }
-
-
-    ultimoScroll =
-    scrollAtual;
-
-  },
-  {
-    passive: true
-  }
+  interceptarTeclado
 );
 
 
@@ -2811,7 +3061,9 @@ const imagensCriticas = [
   "15.png",
   "16.png",
 
-  "brilho.png"
+  "brilho.png",
+
+  "fundo final.png"
 
 ];
 
@@ -2834,18 +3086,22 @@ function carregarEDecodificar(src) {
       );
 
 
-      let terminou =
+      let resolvido =
       false;
 
 
       function finalizar() {
 
-        if (terminou) {
+        if (
+          resolvido
+        ) {
+
           return;
+
         }
 
 
-        terminou =
+        resolvido =
         true;
 
 
@@ -2932,11 +3188,10 @@ function carregarEDecodificar(src) {
 
 
 /* =========================================================
-   PREPARAR SITE
+   PREPARAR
 ========================================================= */
 
 async function prepararSite() {
-
 
   if (
     "scrollRestoration"
@@ -2955,23 +3210,8 @@ async function prepararSite() {
   );
 
 
-  /*
-    A classe já começa travada no HTML.
-
-    Ajustamos a variável para representar
-    corretamente esse estado inicial.
-  */
-
-  travaAtiva =
-  false;
-
-
   bloquearScroll();
 
-
-  /*
-    Carrega e decodifica tudo.
-  */
 
   await Promise.all(
     imagensCriticas.map(
@@ -2979,10 +3219,6 @@ async function prepararSite() {
     )
   );
 
-
-  /*
-    Espera o navegador desenhar.
-  */
 
   await new Promise(
     function(resolve) {
@@ -3029,32 +3265,14 @@ async function prepararSite() {
     .classList
     .add("pronto");
 
-
-  /*
-    IMPORTANTE:
-
-    NÃO liberamos o scroll aqui.
-
-    A pessoa está na imagem 01
-    e precisa tocar para revelar.
-
-    Mesmo antes do toque,
-    não consegue arrastar para o convite.
-  */
-
 }
 
 
 /* =========================================================
-   ABERTURA
+   ABRIR
 ========================================================= */
 
 async function abrirAnimacao() {
-
-  /*
-    Segundo toque durante a animação
-    simplesmente não faz nada.
-  */
 
   if (
     !sitePronto ||
@@ -3074,30 +3292,7 @@ async function abrirAnimacao() {
   false;
 
 
-  /*
-    Garante topo absoluto.
-  */
-
-  window.scrollTo(
-    0,
-    0
-  );
-
-
-  /*
-    Garante que scroll está bloqueado.
-  */
-
-  if (!travaAtiva) {
-
-    bloquearScroll();
-
-  }
-
-
-  setaScroll
-    .classList
-    .remove("visivel");
+  bloquearScroll();
 
 
   toque
@@ -3110,10 +3305,14 @@ async function abrirAnimacao() {
     .add("escondido");
 
 
+  setaScroll
+    .classList
+    .remove("visivel");
+
+
   /* 01 → 02 */
 
   await esperar(90);
-
 
   mostrarFrame(1);
 
@@ -3122,14 +3321,12 @@ async function abrirAnimacao() {
 
   await esperar(100);
 
-
   mostrarFrame(2);
 
 
   /* 03 → 04 */
 
   await esperar(100);
-
 
   mostrarFrame(3);
 
@@ -3176,7 +3373,7 @@ async function abrirAnimacao() {
 
 
   /* =====================================================
-     FOTO 15
+     15
   ===================================================== */
 
   foto15
@@ -3231,20 +3428,15 @@ async function abrirAnimacao() {
 
 
   /*
-    ESPERA A TRANSIÇÃO DA 16 TERMINAR.
-
-    ATÉ AQUI:
-    touchmove continua bloqueado.
-    wheel continua bloqueado.
-    teclado continua bloqueado.
-    body continua fixo.
+    A imagem 16 tem transition de .75s.
+    Esperamos terminar completamente.
   */
 
   await esperar(800);
 
 
   /* =====================================================
-     ANIMAÇÃO TERMINOU
+     LIBERA O USUÁRIO
   ===================================================== */
 
   estado =
@@ -3257,44 +3449,41 @@ async function abrirAnimacao() {
 
 
   /*
-    SOMENTE AGORA LIBERAMOS A PÁGINA.
+    PRIMEIRO liberamos completamente o scroll.
   */
-
-  scrollSalvo =
-  0;
-
 
   liberarScroll();
 
 
   /*
-    Garantimos que continua no topo
-    depois de remover position:fixed.
+    E só então mostramos a seta.
   */
 
-  window.scrollTo(
-    0,
-    0
+  requestAnimationFrame(
+    function() {
+
+      requestAnimationFrame(
+        function() {
+
+          setaScroll
+            .classList
+            .add("visivel");
+
+        }
+      );
+
+    }
   );
 
 
   ultimoScroll =
   0;
 
-
-  /*
-    Agora aparece a seta.
-  */
-
-  setaScroll
-    .classList
-    .add("visivel");
-
 }
 
 
 /* =========================================================
-   FECHAMENTO REVERSO
+   FECHAR
 ========================================================= */
 
 async function fecharAnimacao() {
@@ -3318,7 +3507,10 @@ async function fecharAnimacao() {
 
 
   /*
-    Primeiro retornamos visualmente ao topo.
+    Primeiro voltamos ao topo SEM travar.
+
+    Portanto o navegador ainda consegue
+    executar o scroll normalmente.
   */
 
   window.scrollTo({
@@ -3328,33 +3520,18 @@ async function fecharAnimacao() {
 
 
   /*
-    Pequeno tempo para a primeira tela
-    ocupar o viewport.
+    Esperamos o topo.
   */
 
-  await esperar(250);
+  await esperar(400);
 
 
   /*
-    Agora travamos novamente.
+    Agora sim travamos.
   */
-
-  scrollSalvo =
-  0;
-
 
   bloquearScroll();
 
-
-  window.scrollTo(
-    0,
-    0
-  );
-
-
-  /* =====================================================
-     16 SOME
-  ===================================================== */
 
   imagem16
     .classList
@@ -3364,9 +3541,7 @@ async function fecharAnimacao() {
   await esperar(600);
 
 
-  /* =====================================================
-     14 VOLTA
-  ===================================================== */
+  /* 14 VOLTA */
 
   folha14
     .classList
@@ -3376,9 +3551,7 @@ async function fecharAnimacao() {
   await esperar(500);
 
 
-  /* =====================================================
-     13 VOLTA
-  ===================================================== */
+  /* 13 VOLTA */
 
   folha13
     .classList
@@ -3388,18 +3561,14 @@ async function fecharAnimacao() {
   await esperar(650);
 
 
-  /* =====================================================
-     BRILHOS SOMEM
-  ===================================================== */
+  /* BRILHOS */
 
   brilhos
     .classList
     .remove("visivel");
 
 
-  /* =====================================================
-     05 APARECE EMBAIXO
-  ===================================================== */
+  /* 05 EMBAIXO */
 
   envelope05
     .classList
@@ -3419,17 +3588,10 @@ async function fecharAnimacao() {
   "translate3d(0,122%,0)";
 
 
-  /*
-    força layout para garantir
-    que a animação de subida seja executada.
-  */
-
   void envelope05.offsetHeight;
 
 
-  /* =====================================================
-     05 SOBE
-  ===================================================== */
+  /* 05 SOBE */
 
   envelope05.style.transition =
   "transform .82s cubic-bezier(.55,.05,.35,1)";
@@ -3442,9 +3604,7 @@ async function fecharAnimacao() {
   await esperar(820);
 
 
-  /* =====================================================
-     FOTO 15 SOME
-  ===================================================== */
+  /* 15 SOME */
 
   foto15
     .classList
@@ -3454,9 +3614,7 @@ async function fecharAnimacao() {
   await esperar(130);
 
 
-  /* =====================================================
-     05 → 04
-  ===================================================== */
+  /* 05 → 04 */
 
   envelope05
     .classList
@@ -3501,10 +3659,6 @@ async function fecharAnimacao() {
   await esperar(180);
 
 
-  /* =====================================================
-     TOTALMENTE FECHADO
-  ===================================================== */
-
   estado =
   "fechado";
 
@@ -3529,30 +3683,19 @@ async function fecharAnimacao() {
 
 
   /*
-    NÃO LIBERAMOS SCROLL.
-
-    Voltamos ao estado inicial:
-    envelope 01 + Toque para revelar.
-
-    A pessoa precisa tocar novamente
-    para assistir a animação.
+    Continua travado aqui de propósito.
+    Só poderá navegar depois de tocar
+    e chegar novamente à imagem 16.
   */
 
 }
 
 
 /* =========================================================
-   TOQUE PARA REVELAR
-
-   pointerdown evita atraso em celular,
-   mas só dispara UMA vez.
+   TOQUE
 ========================================================= */
 
-let toqueProcessado =
-false;
-
-
-function iniciarPorToque(evento) {
+function iniciarAnimacao(evento) {
 
   if (
     !sitePronto ||
@@ -3566,11 +3709,13 @@ function iniciarPorToque(evento) {
 
 
   /*
-    Evita que o mesmo gesto vire
-    um scroll no navegador.
+    Cancelamos apenas o gesto que iniciou
+    a animação.
   */
 
-  if (evento.cancelable) {
+  if (
+    evento.cancelable
+  ) {
 
     evento.preventDefault();
 
@@ -3596,12 +3741,108 @@ function iniciarPorToque(evento) {
 
 stage.addEventListener(
   "pointerdown",
-  iniciarPorToque
+  iniciarAnimacao
 );
 
 
 /* =========================================================
-   REVELAÇÃO DA SEGUNDA PÁGINA
+   SCROLL DEPOIS DA ABERTURA
+========================================================= */
+
+window.addEventListener(
+  "scroll",
+  function() {
+
+    /*
+      Durante loading/fechado/abrindo,
+      qualquer tentativa é devolvida ao topo.
+  */
+
+    if (
+      estado === "carregando" ||
+      estado === "fechado" ||
+      estado === "abrindo"
+    ) {
+
+      if (
+        window.scrollY !== 0
+      ) {
+
+        window.scrollTo(
+          0,
+          0
+        );
+
+      }
+
+      return;
+
+    }
+
+
+    const scrollAtual =
+    window.scrollY;
+
+
+    const subindo =
+    scrollAtual <
+    ultimoScroll;
+
+
+    /*
+      Quando começa a descer,
+      a seta desaparece.
+  */
+
+    if (
+      estado === "aberto" &&
+      scrollAtual > 15
+    ) {
+
+      setaScroll
+        .classList
+        .remove("visivel");
+
+    }
+
+
+    /*
+      VOLTOU PARA A PRIMEIRA TELA.
+
+      IMPORTANTE:
+      isso só existe quando estado === aberto,
+      portanto nunca interfere com a abertura.
+  */
+
+    if (
+      estado === "aberto" &&
+      subindo &&
+      scrollAtual <
+      window.innerHeight * .72 &&
+      !retornoDisparado
+    ) {
+
+      retornoDisparado =
+      true;
+
+
+      fecharAnimacao();
+
+    }
+
+
+    ultimoScroll =
+    scrollAtual;
+
+  },
+  {
+    passive: true
+  }
+);
+
+
+/* =========================================================
+   REVELAÇÃO
 ========================================================= */
 
 const elementosRevelar =
@@ -3710,7 +3951,9 @@ function fecharTela(tela) {
 function fecharTodasAsTelas() {
 
   document
-    .querySelectorAll(".tela-modal")
+    .querySelectorAll(
+      ".tela-modal"
+    )
     .forEach(
       function(tela) {
 
@@ -3803,7 +4046,9 @@ function atualizarHavaianas() {
   confirmou;
 
 
-  if (!confirmou) {
+  if (
+    !confirmou
+  ) {
 
     tamanhoHavaianas.value =
     "";
@@ -3829,7 +4074,7 @@ atualizarHavaianas();
 
 
 /* =========================================================
-   GOOGLE FORM
+   GOOGLE FORMS
 ========================================================= */
 
 formRsvp.action =
@@ -3863,8 +4108,12 @@ formRsvp.addEventListener(
     setTimeout(
       function() {
 
-        if (!envioEmAndamento) {
+        if (
+          !envioEmAndamento
+        ) {
+
           return;
+
         }
 
 
@@ -3983,33 +4232,6 @@ document
 
 
 /* =========================================================
-   FUNDO FINAL
-========================================================= */
-
-function carregarImagensSecundarias() {
-
-  const secundarias = [
-    "fundo final.png"
-  ];
-
-
-  secundarias.forEach(
-    function(src) {
-
-      const imagem =
-      new Image();
-
-
-      imagem.src =
-      src;
-
-    }
-  );
-
-}
-
-
-/* =========================================================
    INICIALIZAÇÃO
 ========================================================= */
 
@@ -4023,20 +4245,14 @@ window.addEventListener(
     );
 
 
-    prepararSite()
-      .then(
-        carregarImagensSecundarias
-      );
+    prepararSite();
 
   }
 );
 
 
 /* =========================================================
-   PROTEÇÃO AO VOLTAR PARA A ABA
-
-   Evita o navegador restaurar a página
-   no meio da segunda tela antes da abertura.
+   RESTAURAÇÃO DO NAVEGADOR
 ========================================================= */
 
 window.addEventListener(
