@@ -15,7 +15,6 @@
 <title>Save the Date | Letícia Destêrro</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link
@@ -49,7 +48,9 @@ html {
 body {
   width: 100%;
   min-height: 100%;
+
   overflow-x: hidden;
+
   background: var(--verde);
   color: var(--branco);
 
@@ -72,6 +73,7 @@ body.modal-aberto {
 
 img {
   display: block;
+
   user-select: none;
   -webkit-user-select: none;
   -webkit-user-drag: none;
@@ -82,6 +84,213 @@ input,
 select,
 textarea {
   font: inherit;
+}
+
+
+/* =========================================================
+   TELA DE CARREGAMENTO
+========================================================= */
+
+#tela-carregamento {
+  position: fixed;
+
+  z-index: 9999;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  height: 100dvh;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  background: var(--verde);
+
+  opacity: 1;
+  visibility: visible;
+
+  transition:
+    opacity .65s ease,
+    visibility .65s ease;
+
+  pointer-events: all;
+}
+
+#tela-carregamento.pronto {
+  opacity: 0;
+  visibility: hidden;
+
+  pointer-events: none;
+}
+
+.carregamento-icones {
+  position: relative;
+
+  width: 92px;
+  height: 92px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.icone-carregamento {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 82px;
+  height: 82px;
+
+  object-fit: contain;
+
+  opacity: 0;
+
+  transform:
+    translate(-50%, -50%)
+    scale(.82);
+
+  pointer-events: none;
+}
+
+#icone-sol {
+  animation:
+    alternarSol
+    2.4s
+    ease-in-out
+    infinite;
+}
+
+#icone-lua {
+  animation:
+    alternarLua
+    2.4s
+    ease-in-out
+    infinite;
+}
+
+@keyframes alternarSol {
+
+  0% {
+    opacity: 0;
+    transform:
+      translate(-50%, -50%)
+      scale(.82);
+  }
+
+  10% {
+    opacity: 1;
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+
+  40% {
+    opacity: 1;
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+
+  50% {
+    opacity: 0;
+    transform:
+      translate(-50%, -50%)
+      scale(.86);
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translate(-50%, -50%)
+      scale(.82);
+  }
+
+}
+
+@keyframes alternarLua {
+
+  0%,
+  45% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      scale(.82);
+  }
+
+  55% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+
+  90% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+
+  100% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      scale(.86);
+  }
+
+}
+
+.texto-carregando {
+  margin-top: 26px;
+
+  color: var(--ouro-claro);
+
+  font-family:
+    "Montserrat",
+    Arial,
+    sans-serif;
+
+  font-size: 10px;
+
+  font-weight: 500;
+
+  line-height: 1;
+
+  letter-spacing: 4px;
+
+  text-transform: uppercase;
+
+  animation:
+    pulsarCarregando
+    1.8s
+    ease-in-out
+    infinite;
+}
+
+@keyframes pulsarCarregando {
+
+  0%,
+  100% {
+    opacity: .45;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
 }
 
 
@@ -123,6 +332,7 @@ textarea {
 
 .fullscreen-image {
   position: absolute;
+
   inset: 0;
 
   width: 100%;
@@ -159,8 +369,7 @@ textarea {
   transition:
     opacity .75s ease;
 
-  will-change:
-    opacity;
+  will-change: opacity;
 }
 
 #imagem-15.visivel {
@@ -184,8 +393,7 @@ textarea {
   transition:
     opacity .75s ease;
 
-  will-change:
-    opacity;
+  will-change: opacity;
 }
 
 #imagem-16.visivel {
@@ -259,6 +467,7 @@ textarea {
 
 #brilhos {
   position: absolute;
+
   inset: 0;
 
   z-index: 8;
@@ -321,16 +530,29 @@ textarea {
 
 /* =========================================================
    ENVELOPE 01 → 04
+
+   TODOS FICAM MONTADOS.
+   NÃO USAMOS DISPLAY:NONE.
 ========================================================= */
 
 .frame-envelope {
   z-index: 10;
 
-  display: none;
+  opacity: 0;
+  visibility: hidden;
+
+  transform:
+    translateZ(0);
+
+  will-change:
+    opacity;
+
+  pointer-events: none;
 }
 
 .frame-envelope.active {
-  display: block;
+  opacity: 1;
+  visibility: visible;
 }
 
 
@@ -341,17 +563,22 @@ textarea {
 #envelope-final {
   z-index: 10;
 
-  display: none;
+  opacity: 0;
+  visibility: hidden;
 
   transform:
     translate3d(0, 0, 0);
 
   will-change:
-    transform;
+    transform,
+    opacity;
+
+  pointer-events: none;
 }
 
 #envelope-final.active {
-  display: block;
+  opacity: 1;
+  visibility: visible;
 }
 
 #envelope-final.descendo {
@@ -433,15 +660,23 @@ textarea {
 
   pointer-events: none;
 
+  opacity: 0;
+  visibility: hidden;
+
+  transition:
+    opacity .35s ease,
+    visibility .35s ease;
+}
+
+#toque-revelar.pronto {
+  opacity: 1;
+  visibility: visible;
+
   animation:
     respirar
     2.1s
     ease-in-out
     infinite;
-
-  transition:
-    opacity .35s ease,
-    visibility .35s ease;
 }
 
 #toque-revelar.escondido {
@@ -474,7 +709,7 @@ textarea {
 
 
 /* =========================================================
-   SETA DOURADA DE SCROLL
+   SETA DOURADA
 ========================================================= */
 
 #seta-scroll {
@@ -618,7 +853,7 @@ textarea {
 
 
 /* =========================================================
-   CONVITE CENTRALIZADO
+   CONVITE
 ========================================================= */
 
 .convite-minimal {
@@ -737,7 +972,7 @@ textarea {
 
 
 /* =========================================================
-   DATA PRINCIPAL — BODONI
+   DATA PRINCIPAL
 ========================================================= */
 
 .bloco-data {
@@ -961,7 +1196,7 @@ textarea {
 
 
 /* =========================================================
-   BOTÃO RSVP
+   RSVP
 ========================================================= */
 
 .botao-rsvp-minimal {
@@ -1034,11 +1269,6 @@ textarea {
     var(--verde);
 }
 
-
-/* =========================================================
-   FORMA LETI
-========================================================= */
-
 .forma-final {
   margin-top: 14px;
 
@@ -1068,7 +1298,7 @@ textarea {
 
 
 /* =========================================================
-   REVELAR
+   REVELAÇÃO
 ========================================================= */
 
 .revelar {
@@ -1141,11 +1371,6 @@ textarea {
   transform:
     translateY(0);
 }
-
-
-/* =========================================================
-   RSVP
-========================================================= */
 
 .rsvp-pagina {
   width:
@@ -1610,6 +1835,37 @@ textarea {
 
 
 <!-- =====================================================
+     TELA DE CARREGAMENTO
+====================================================== -->
+
+<div id="tela-carregamento">
+
+  <div class="carregamento-icones">
+
+    <img
+      id="icone-sol"
+      class="icone-carregamento"
+      src="Sol.png"
+      alt=""
+    >
+
+    <img
+      id="icone-lua"
+      class="icone-carregamento"
+      src="Lua.png"
+      alt=""
+    >
+
+  </div>
+
+  <p class="texto-carregando">
+    Carregando
+  </p>
+
+</div>
+
+
+<!-- =====================================================
      TOQUE PARA REVELAR
 ====================================================== -->
 
@@ -1921,29 +2177,12 @@ textarea {
             Selecione
           </option>
 
-          <option value="33/34">
-            33/34
-          </option>
-
-          <option value="35/36">
-            35/36
-          </option>
-
-          <option value="37/38">
-            37/38
-          </option>
-
-          <option value="39/40">
-            39/40
-          </option>
-
-          <option value="41/42">
-            41/42
-          </option>
-
-          <option value="43/44">
-            43/44
-          </option>
+          <option value="33/34">33/34</option>
+          <option value="35/36">35/36</option>
+          <option value="37/38">37/38</option>
+          <option value="39/40">39/40</option>
+          <option value="41/42">41/42</option>
+          <option value="43/44">43/44</option>
 
         </select>
 
@@ -2044,11 +2283,9 @@ textarea {
       Forma Leti • 2026
     </p>
 
-
     <h2 class="titulo-pos-envio">
       Obrigada
     </h2>
-
 
     <p class="texto-pos-envio">
       Por fazer parte deste momento.
@@ -2108,6 +2345,11 @@ const GOOGLE_FORM_ACTION =
 
 const body =
 document.body;
+
+const telaCarregamento =
+document.getElementById(
+  "tela-carregamento"
+);
 
 const stage =
 document.getElementById(
@@ -2192,24 +2434,18 @@ document.getElementById(
 ========================================================= */
 
 let estado =
-"fechado";
-
-/*
-
-fechado
-abrindo
-aberto
-fechando
-
-*/
+"carregando";
 
 let ultimoScroll =
-window.scrollY;
+0;
 
 let retornoDisparado =
 false;
 
 let envioEmAndamento =
+false;
+
+let sitePronto =
 false;
 
 
@@ -2226,6 +2462,266 @@ function esperar(ms) {
         ms
       )
   );
+
+}
+
+
+/* =========================================================
+   PRELOAD REAL + DECODE
+
+   ESSAS SÃO AS IMAGENS QUE PRECISAM ESTAR
+   100% PRONTAS ANTES DO PRIMEIRO TOQUE.
+========================================================= */
+
+const imagensCriticas = [
+
+  "fundo.png",
+
+  "01.png",
+  "02.png",
+  "03.png",
+  "04.png",
+  "05.png",
+
+  "13.png",
+  "14.png",
+  "15.png",
+  "16.png",
+
+  "brilho.png"
+
+];
+
+
+/*
+  Mantemos referências aos objetos Image
+  para o navegador não descartá-los.
+*/
+
+const cacheImagens =
+[];
+
+
+function carregarEDecodificar(src) {
+
+  return new Promise(
+    function(resolve) {
+
+      const imagem =
+      new Image();
+
+
+      cacheImagens.push(
+        imagem
+      );
+
+
+      imagem.onload =
+      async function() {
+
+        /*
+          O arquivo terminou de baixar.
+
+          Agora esperamos a decodificação.
+        */
+
+        try {
+
+          if (
+            typeof imagem.decode ===
+            "function"
+          ) {
+
+            await imagem.decode();
+
+          }
+
+        }
+
+        catch (erro) {
+
+          /*
+            Alguns navegadores podem rejeitar
+            decode() mesmo com a imagem carregada.
+
+            Nesse caso, onload já garante
+            que podemos prosseguir.
+          */
+
+        }
+
+
+        resolve();
+
+      };
+
+
+      imagem.onerror =
+      function() {
+
+        /*
+          Não deixamos a tela de loading
+          presa para sempre se algum arquivo
+          der erro.
+
+          A própria imagem do HTML continuará
+          tentando carregar normalmente.
+        */
+
+        console.warn(
+          "Não foi possível pré-carregar:",
+          src
+        );
+
+
+        resolve();
+
+      };
+
+
+      imagem.src =
+      src;
+
+
+      /*
+        Caso a imagem já esteja em cache.
+      */
+
+      if (
+        imagem.complete &&
+        imagem.naturalWidth > 0
+      ) {
+
+        (async function() {
+
+          try {
+
+            if (
+              typeof imagem.decode ===
+              "function"
+            ) {
+
+              await imagem.decode();
+
+            }
+
+          }
+
+          catch (erro) {}
+
+
+          resolve();
+
+        })();
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   PREPARAR O SITE
+========================================================= */
+
+async function prepararSite() {
+
+  /*
+    Sempre começa no topo.
+  */
+
+  if (
+    "scrollRestoration"
+    in history
+  ) {
+
+    history.scrollRestoration =
+    "manual";
+
+  }
+
+
+  window.scrollTo(
+    0,
+    0
+  );
+
+
+  /*
+    Espera TODAS as imagens críticas.
+  */
+
+  await Promise.all(
+    imagensCriticas.map(
+      carregarEDecodificar
+    )
+  );
+
+
+  /*
+    Dá dois frames para o navegador
+    efetivamente pintar os elementos
+    já carregados.
+  */
+
+  await new Promise(
+    resolve =>
+      requestAnimationFrame(
+        () =>
+          requestAnimationFrame(
+            resolve
+          )
+      )
+  );
+
+
+  /*
+    Estado inicial.
+  */
+
+  mostrarFrame(0);
+
+
+  estado =
+  "fechado";
+
+
+  sitePronto =
+  true;
+
+
+  /*
+    Some o loading.
+  */
+
+  telaCarregamento
+    .classList
+    .add(
+      "pronto"
+    );
+
+
+  /*
+    Espera um pouco da transição
+    antes de liberar o botão.
+  */
+
+  await esperar(350);
+
+
+  toque
+    .classList
+    .add(
+      "pronto"
+    );
+
+
+  /*
+    Continua sem scroll.
+    Só será liberado depois da animação.
+  */
 
 }
 
@@ -2250,11 +2746,13 @@ function mostrarFrame(numero) {
 
   esconderFrames();
 
+
   envelope05
     .classList
     .remove(
       "active"
     );
+
 
   frames[numero]
     .classList
@@ -2280,14 +2778,18 @@ for (
     "img"
   );
 
+
   brilho.src =
   "brilho.png";
+
 
   brilho.className =
   "brilho";
 
+
   brilho.alt =
   "";
+
 
   brilho.style.left =
   (
@@ -2295,11 +2797,13 @@ for (
     Math.random() * 94
   ) + "%";
 
+
   brilho.style.top =
   (
     3 +
     Math.random() * 92
   ) + "%";
+
 
   brilho.style.setProperty(
     "--tamanho",
@@ -2309,6 +2813,7 @@ for (
     ) + "px"
   );
 
+
   brilho.style.setProperty(
     "--duracao",
     (
@@ -2317,12 +2822,14 @@ for (
     ) + "s"
   );
 
+
   brilho.style.setProperty(
     "--atraso",
     (
       -Math.random() * 8
     ) + "s"
   );
+
 
   brilho.style.setProperty(
     "--intensidade",
@@ -2331,6 +2838,7 @@ for (
       Math.random() * .58
     )
   );
+
 
   brilhos.appendChild(
     brilho
@@ -2346,6 +2854,7 @@ for (
 async function abrirAnimacao() {
 
   if (
+    !sitePronto ||
     estado !== "fechado"
   ) {
     return;
@@ -2369,6 +2878,13 @@ async function abrirAnimacao() {
 
   toque
     .classList
+    .remove(
+      "pronto"
+    );
+
+
+  toque
+    .classList
     .add(
       "escondido"
     );
@@ -2386,11 +2902,6 @@ async function abrirAnimacao() {
     0
   );
 
-
-  /*
-    01 já está na tela.
-    01 → 04 rápidos.
-  */
 
   await esperar(90);
 
@@ -2438,6 +2949,7 @@ async function abrirAnimacao() {
   envelope05.style.transition =
   "";
 
+
   envelope05.style.transform =
   "";
 
@@ -2460,7 +2972,7 @@ async function abrirAnimacao() {
 
 
   /* =====================================================
-     FOTO 15 COMEÇA A APARECER
+     FOTO 15
   ===================================================== */
 
   foto15
@@ -2481,7 +2993,7 @@ async function abrirAnimacao() {
 
 
   /* =====================================================
-     13 SAI PARA A ESQUERDA
+     13 SAI
   ===================================================== */
 
   folha13
@@ -2495,7 +3007,7 @@ async function abrirAnimacao() {
 
 
   /* =====================================================
-     14 SAI PARA A DIREITA
+     14 SAI
   ===================================================== */
 
   folha14
@@ -2530,7 +3042,7 @@ async function abrirAnimacao() {
 
 
   /* =====================================================
-     SETA DOURADA APARECE
+     SETA APARECE
   ===================================================== */
 
   setaScroll
@@ -2551,10 +3063,6 @@ async function abrirAnimacao() {
     );
 
 
-  /*
-    SOMENTE AGORA O SCROLL É LIBERADO.
-  */
-
   body
     .classList
     .remove(
@@ -2566,22 +3074,6 @@ async function abrirAnimacao() {
 
 /* =========================================================
    FECHAR ANIMAÇÃO
-
-   16
-   ↓
-   14
-   ↓
-   13
-   ↓
-   05
-   ↓
-   04
-   ↓
-   03
-   ↓
-   02
-   ↓
-   01
 ========================================================= */
 
 async function fecharAnimacao() {
@@ -2596,10 +3088,6 @@ async function fecharAnimacao() {
   estado =
   "fechando";
 
-
-  /*
-    SETA SOME PRIMEIRO.
-  */
 
   setaScroll
     .classList
@@ -2700,11 +3188,6 @@ async function fecharAnimacao() {
   "translate3d(0,122%,0)";
 
 
-  /*
-    FORÇA O NAVEGADOR A REGISTRAR
-    A POSIÇÃO INICIAL.
-  */
-
   envelope05.offsetHeight;
 
 
@@ -2724,7 +3207,7 @@ async function fecharAnimacao() {
 
 
   /* =====================================================
-     FOTO 15 SOME ATRÁS DO ENVELOPE
+     FOTO 15 SOME
   ===================================================== */
 
   foto15
@@ -2762,38 +3245,29 @@ async function fecharAnimacao() {
   await esperar(110);
 
 
-  /* =====================================================
-     04 → 03
-  ===================================================== */
+  /* 04 → 03 */
 
   mostrarFrame(2);
 
-
   await esperar(100);
 
 
-  /* =====================================================
-     03 → 02
-  ===================================================== */
+  /* 03 → 02 */
 
   mostrarFrame(1);
 
-
   await esperar(100);
 
 
-  /* =====================================================
-     02 → 01
-  ===================================================== */
+  /* 02 → 01 */
 
   mostrarFrame(0);
-
 
   await esperar(180);
 
 
   /* =====================================================
-     TOTALMENTE FECHADO
+     FECHADO
   ===================================================== */
 
   estado =
@@ -2811,15 +3285,17 @@ async function fecharAnimacao() {
     );
 
 
-  /*
-    SÓ DEPOIS DE FECHAR TUDO
-    O "TOQUE PARA REVELAR" VOLTA.
-  */
-
   toque
     .classList
     .remove(
       "escondido"
+    );
+
+
+  toque
+    .classList
+    .add(
+      "pronto"
     );
 
 
@@ -2839,7 +3315,7 @@ async function fecharAnimacao() {
 
 
 /* =========================================================
-   TOQUE INICIAL
+   TOQUE
 ========================================================= */
 
 stage.addEventListener(
@@ -2847,6 +3323,7 @@ stage.addEventListener(
   function() {
 
     if (
+      sitePronto &&
       estado === "fechado"
     ) {
 
@@ -2876,8 +3353,8 @@ window.addEventListener(
 
 
     /*
-      ASSIM QUE A PESSOA COMEÇA
-      A DESCER, A SETA SOME.
+      COMEÇOU A DESCER:
+      SETA SOME.
     */
 
     if (
@@ -2895,10 +3372,8 @@ window.addEventListener(
 
 
     /*
-      SE A PESSOA ESTIVER VOLTANDO
-      PARA CIMA E ENTRAR NOVAMENTE
-      NA ÁREA DA ANIMAÇÃO,
-      COMEÇA O FECHAMENTO.
+      VOLTOU PARA CIMA:
+      FECHA O ENVELOPE.
     */
 
     if (
@@ -3080,7 +3555,7 @@ function fecharTodasAsTelas() {
 
 
 /* =========================================================
-   ABRIR RSVP
+   RSVP
 ========================================================= */
 
 document
@@ -3098,10 +3573,6 @@ document
   }
 );
 
-
-/* =========================================================
-   FECHAR RSVP
-========================================================= */
 
 document
 .getElementById(
@@ -3277,32 +3748,52 @@ document
 
 
 /* =========================================================
-   PRELOAD
+   CARREGAR FUNDO DA SEGUNDA PÁGINA DEPOIS
+
+   NÃO ATRASA O PRIMEIRO TOQUE.
 ========================================================= */
 
-[
-  "01.png",
-  "02.png",
-  "03.png",
-  "04.png",
-  "05.png",
-  "13.png",
-  "14.png",
-  "15.png",
-  "16.png",
-  "brilho.png",
-  "fundo.png",
-  "fundo final.png"
-]
-.forEach(
-  function(file) {
+function carregarImagensSecundarias() {
 
-    const image =
-    new Image();
+  const secundarias = [
+    "fundo final.png"
+  ];
 
 
-    image.src =
-    file;
+  secundarias.forEach(
+    function(src) {
+
+      const img =
+      new Image();
+
+
+      img.src =
+      src;
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   INICIALIZAÇÃO
+========================================================= */
+
+window.addEventListener(
+  "load",
+  function() {
+
+    window.scrollTo(
+      0,
+      0
+    );
+
+
+    prepararSite()
+      .then(
+        carregarImagensSecundarias
+      );
 
   }
 );
