@@ -4326,8 +4326,10 @@ atualizarHavaianas();
 
 
 /* =========================================================
-   GOOGLE FORMS — FETCH / NO-CORS
-   Mesmo método usado no Save the Date Isapalooza
+   RSVP — ENVIO PELO VERCEL
+   O navegador envia para /api/rsvp.
+   A função do Vercel abre o Google Forms público, obtém os
+   parâmetros atuais da sessão e então envia a resposta.
 ========================================================= */
 
 formRsvp.addEventListener(
@@ -4337,12 +4339,8 @@ formRsvp.addEventListener(
     event.preventDefault();
 
 
-    if (
-      envioEmAndamento
-    ) {
-
+    if (envioEmAndamento) {
       return;
-
     }
 
 
@@ -4382,95 +4380,65 @@ formRsvp.addEventListener(
       : "";
 
 
-    if (
-      !nome ||
-      !presenca
-    ) {
-
-      return;
-
-    }
-
-
-    envioEmAndamento =
-    true;
-
-
-    botaoEnviar.disabled =
-    true;
-
-
-    botaoEnviar.textContent =
-    "Enviando...";
-
-
-    const formData =
-    new FormData();
-
-
-    formData.append(
-      "entry.62577334",
-      nome
-    );
-
-
-    formData.append(
-      "entry.877086558",
-      presenca
-    );
-
-
-    /*
-      O tamanho só é enviado quando o campo está habilitado
-      e existe uma numeração selecionada.
-    */
-    if (
+    const tamanho =
+    (
       !tamanhoHavaianas.disabled &&
       tamanhoHavaianas.value
-    ) {
+    )
+      ? tamanhoHavaianas.value
+      : "";
 
-      formData.append(
-        "entry.240675889",
-        tamanhoHavaianas.value
-      );
 
+    if (!nome || !presenca) {
+      return;
     }
 
 
-    if (
-      mensagem
-    ) {
+    envioEmAndamento = true;
 
-      formData.append(
-        "entry.2606285",
-        mensagem
-      );
-
-    }
+    botaoEnviar.disabled = true;
+    botaoEnviar.textContent = "Enviando...";
 
 
     try {
 
+      const resposta =
       await fetch(
-        GOOGLE_FORM_ACTION,
+        "/api/rsvp",
         {
           method: "POST",
-          mode: "no-cors",
-          body: formData
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            nome: nome,
+            presenca: presenca,
+            tamanho: tamanho,
+            mensagem: mensagem
+          })
         }
       );
 
 
-      envioEmAndamento =
-      false;
+      const resultado =
+      await resposta.json();
 
 
-      botaoEnviar.disabled =
-      false;
+      if (
+        !resposta.ok ||
+        !resultado.ok
+      ) {
+        throw new Error(
+          resultado.error ||
+          "O Google Forms não confirmou o envio."
+        );
+      }
 
 
-      botaoEnviar.textContent =
-      "Enviar resposta";
+      envioEmAndamento = false;
+
+      botaoEnviar.disabled = false;
+      botaoEnviar.textContent = "Enviar resposta";
 
 
       fecharTela(
@@ -4491,16 +4459,10 @@ formRsvp.addEventListener(
       );
 
 
-      envioEmAndamento =
-      false;
+      envioEmAndamento = false;
 
-
-      botaoEnviar.disabled =
-      false;
-
-
-      botaoEnviar.textContent =
-      "Enviar resposta";
+      botaoEnviar.disabled = false;
+      botaoEnviar.textContent = "Enviar resposta";
 
 
       alert(
