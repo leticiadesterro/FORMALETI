@@ -2495,13 +2495,7 @@ body.modal-aberto {
     </p>
 
 
-    <form
-      id="form-rsvp"
-      action="https://docs.google.com/forms/d/e/1FAIpQLSejMylO76VoWtWNbiHgJSzJbu15dI3I4nLhm6wOWNdAiYjmbA/formResponse"
-      method="POST"
-      target="google-form-target"
-      accept-charset="UTF-8"
-    >
+    <form id="form-rsvp">
 
 
       <label class="campo-rsvp">
@@ -2607,10 +2601,6 @@ body.modal-aberto {
 
       </label>
 
-
-      <input type="hidden" name="fvv" value="1">
-      <input type="hidden" name="draftResponse" value="[]">
-      <input type="hidden" name="pageHistory" value="0">
 
       <button
         id="botao-enviar"
@@ -4336,22 +4326,66 @@ atualizarHavaianas();
 
 
 /* =========================================================
-   GOOGLE FORMS
+   GOOGLE FORMS — FETCH / NO-CORS
+   Mesmo método usado no Save the Date Isapalooza
 ========================================================= */
-
-const googleFormTarget =
-document.getElementById("google-form-target");
-
 
 formRsvp.addEventListener(
   "submit",
-  function(event) {
+  async function(event) {
+
+    event.preventDefault();
+
 
     if (
       envioEmAndamento
     ) {
 
-      event.preventDefault();
+      return;
+
+    }
+
+
+    const nomeInput =
+    formRsvp.querySelector(
+      'input[name="entry.62577334"]'
+    );
+
+
+    const presencaInput =
+    formRsvp.querySelector(
+      'input[name="entry.877086558"]:checked'
+    );
+
+
+    const mensagemInput =
+    formRsvp.querySelector(
+      'textarea[name="entry.2606285"]'
+    );
+
+
+    const nome =
+    nomeInput
+      ? nomeInput.value.trim()
+      : "";
+
+
+    const presenca =
+    presencaInput
+      ? presencaInput.value
+      : "";
+
+
+    const mensagem =
+    mensagemInput
+      ? mensagemInput.value.trim()
+      : "";
+
+
+    if (
+      !nome ||
+      !presenca
+    ) {
 
       return;
 
@@ -4369,47 +4403,111 @@ formRsvp.addEventListener(
     botaoEnviar.textContent =
     "Enviando...";
 
-  }
-);
+
+    const formData =
+    new FormData();
 
 
-googleFormTarget.addEventListener(
-  "load",
-  function() {
+    formData.append(
+      "entry.62577334",
+      nome
+    );
+
+
+    formData.append(
+      "entry.877086558",
+      presenca
+    );
+
 
     /*
-      O iframe dispara "load" também quando a página é aberta.
-      A confirmação só é considerada depois de um submit real.
+      O tamanho só é enviado quando o campo está habilitado
+      e existe uma numeração selecionada.
     */
     if (
-      !envioEmAndamento
+      !tamanhoHavaianas.disabled &&
+      tamanhoHavaianas.value
     ) {
 
-      return;
+      formData.append(
+        "entry.240675889",
+        tamanhoHavaianas.value
+      );
 
     }
 
 
-    envioEmAndamento =
-    false;
+    if (
+      mensagem
+    ) {
+
+      formData.append(
+        "entry.2606285",
+        mensagem
+      );
+
+    }
 
 
-    botaoEnviar.disabled =
-    false;
+    try {
+
+      await fetch(
+        GOOGLE_FORM_ACTION,
+        {
+          method: "POST",
+          mode: "no-cors",
+          body: formData
+        }
+      );
 
 
-    botaoEnviar.textContent =
-    "Enviar resposta";
+      envioEmAndamento =
+      false;
 
 
-    fecharTela(
-      telaRsvp
-    );
+      botaoEnviar.disabled =
+      false;
 
 
-    abrirTela(
-      telaEnviado
-    );
+      botaoEnviar.textContent =
+      "Enviar resposta";
+
+
+      fecharTela(
+        telaRsvp
+      );
+
+
+      abrirTela(
+        telaEnviado
+      );
+
+
+    } catch (error) {
+
+      console.error(
+        "Erro ao enviar RSVP:",
+        error
+      );
+
+
+      envioEmAndamento =
+      false;
+
+
+      botaoEnviar.disabled =
+      false;
+
+
+      botaoEnviar.textContent =
+      "Enviar resposta";
+
+
+      alert(
+        "Não foi possível enviar a resposta. Tente novamente."
+      );
+
+    }
 
   }
 );
