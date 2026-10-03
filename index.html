@@ -2495,7 +2495,13 @@ body.modal-aberto {
     </p>
 
 
-    <form id="form-rsvp">
+    <form
+      id="form-rsvp"
+      action="https://docs.google.com/forms/d/e/1FAIpQLSejMylO76VoWtWNbiHgJSzJbu15dI3I4nLhm6wOWNdAiYjmbA/formResponse"
+      method="POST"
+      target="google-form-target"
+      accept-charset="UTF-8"
+    >
 
 
       <label class="campo-rsvp">
@@ -2601,6 +2607,10 @@ body.modal-aberto {
 
       </label>
 
+
+      <input type="hidden" name="fvv" value="1">
+      <input type="hidden" name="draftResponse" value="[]">
+      <input type="hidden" name="pageHistory" value="0">
 
       <button
         id="botao-enviar"
@@ -4329,21 +4339,24 @@ atualizarHavaianas();
    GOOGLE FORMS
 ========================================================= */
 
-formRsvp.action =
-GOOGLE_FORM_ACTION;
-
-
-formRsvp.method =
-"POST";
-
-
-formRsvp.target =
-"google-form-target";
+const googleFormTarget =
+document.getElementById("google-form-target");
 
 
 formRsvp.addEventListener(
   "submit",
-  function() {
+  function(event) {
+
+    if (
+      envioEmAndamento
+    ) {
+
+      event.preventDefault();
+
+      return;
+
+    }
+
 
     envioEmAndamento =
     true;
@@ -4356,42 +4369,46 @@ formRsvp.addEventListener(
     botaoEnviar.textContent =
     "Enviando...";
 
-
-    setTimeout(
-      function() {
-
-        if (
-          !envioEmAndamento
-        ) {
-
-          return;
-
-        }
+  }
+);
 
 
-        envioEmAndamento =
-        false;
+googleFormTarget.addEventListener(
+  "load",
+  function() {
+
+    /*
+      O iframe dispara "load" também quando a página é aberta.
+      A confirmação só é considerada depois de um submit real.
+    */
+    if (
+      !envioEmAndamento
+    ) {
+
+      return;
+
+    }
 
 
-        botaoEnviar.disabled =
-        false;
+    envioEmAndamento =
+    false;
 
 
-        botaoEnviar.textContent =
-        "Enviar resposta";
+    botaoEnviar.disabled =
+    false;
 
 
-        fecharTela(
-          telaRsvp
-        );
+    botaoEnviar.textContent =
+    "Enviar resposta";
 
 
-        abrirTela(
-          telaEnviado
-        );
+    fecharTela(
+      telaRsvp
+    );
 
-      },
-      900
+
+    abrirTela(
+      telaEnviado
     );
 
   }
