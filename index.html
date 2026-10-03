@@ -476,6 +476,96 @@ body.modal-aberto {
 
 
 /* =========================================================
+   CONTAGEM REGRESSIVA — 16/01/2027 ÀS 21H
+========================================================= */
+
+#contagem-regressiva {
+  position: absolute;
+  z-index: 9;
+
+  left: 50%;
+  top: 78%;
+
+  width: min(88%, 420px);
+
+  transform: translate(-50%, 8px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  opacity: 0;
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transition:
+    opacity .65s ease,
+    transform .65s ease,
+    visibility .65s ease;
+}
+
+#contagem-regressiva.visivel {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+.contagem-legenda {
+  margin-bottom: 8px;
+
+  color: var(--ouro-claro);
+
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: clamp(8px, 2.1vw, 10px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.contagem-valores {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  gap: clamp(8px, 2.6vw, 15px);
+}
+
+.contagem-item {
+  min-width: 43px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contagem-numero {
+  color: var(--branco);
+
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: clamp(17px, 4.7vw, 23px);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: 1px;
+  font-variant-numeric: tabular-nums;
+}
+
+.contagem-unidade {
+  margin-top: 6px;
+
+  color: var(--ouro-claro);
+
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: clamp(6px, 1.7vw, 8px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
    14
 ========================================================= */
 
@@ -2181,6 +2271,42 @@ body.modal-aberto {
     >
 
 
+    <div
+      id="contagem-regressiva"
+      aria-label="Contagem regressiva para o baile de formatura"
+    >
+
+      <p class="contagem-legenda">
+        Faltam
+      </p>
+
+      <div class="contagem-valores">
+
+        <div class="contagem-item">
+          <span id="contador-dias" class="contagem-numero">000</span>
+          <span class="contagem-unidade">dias</span>
+        </div>
+
+        <div class="contagem-item">
+          <span id="contador-horas" class="contagem-numero">00</span>
+          <span class="contagem-unidade">horas</span>
+        </div>
+
+        <div class="contagem-item">
+          <span id="contador-minutos" class="contagem-numero">00</span>
+          <span class="contagem-unidade">min</span>
+        </div>
+
+        <div class="contagem-item">
+          <span id="contador-segundos" class="contagem-numero">00</span>
+          <span class="contagem-unidade">seg</span>
+        </div>
+
+      </div>
+
+    </div>
+
+
     <img
       id="folha-14"
       class="fullscreen-image"
@@ -2651,6 +2777,21 @@ document.getElementById("imagem-15");
 const imagem16 =
 document.getElementById("imagem-16");
 
+const contagemRegressiva =
+document.getElementById("contagem-regressiva");
+
+const contadorDias =
+document.getElementById("contador-dias");
+
+const contadorHoras =
+document.getElementById("contador-horas");
+
+const contadorMinutos =
+document.getElementById("contador-minutos");
+
+const contadorSegundos =
+document.getElementById("contador-segundos");
+
 const brilhos =
 document.getElementById("brilhos");
 
@@ -2700,6 +2841,106 @@ false;
 
 let toqueProcessado =
 false;
+
+
+/* =========================================================
+   CONTAGEM REGRESSIVA
+========================================================= */
+
+const DATA_BAILE =
+new Date("2027-01-16T21:00:00-03:00");
+
+
+function atualizarContagemRegressiva() {
+
+  const agora =
+  new Date();
+
+
+  let diferenca =
+  DATA_BAILE.getTime() -
+  agora.getTime();
+
+
+  if (
+    diferenca <= 0
+  ) {
+
+    contadorDias.textContent =
+    "000";
+
+    contadorHoras.textContent =
+    "00";
+
+    contadorMinutos.textContent =
+    "00";
+
+    contadorSegundos.textContent =
+    "00";
+
+    return;
+
+  }
+
+
+  const dias =
+  Math.floor(
+    diferenca / 86400000
+  );
+
+
+  diferenca %=
+  86400000;
+
+
+  const horas =
+  Math.floor(
+    diferenca / 3600000
+  );
+
+
+  diferenca %=
+  3600000;
+
+
+  const minutos =
+  Math.floor(
+    diferenca / 60000
+  );
+
+
+  diferenca %=
+  60000;
+
+
+  const segundos =
+  Math.floor(
+    diferenca / 1000
+  );
+
+
+  contadorDias.textContent =
+  String(dias).padStart(3, "0");
+
+  contadorHoras.textContent =
+  String(horas).padStart(2, "0");
+
+  contadorMinutos.textContent =
+  String(minutos).padStart(2, "0");
+
+  contadorSegundos.textContent =
+  String(segundos).padStart(2, "0");
+
+}
+
+
+atualizarContagemRegressiva();
+
+
+setInterval(
+  atualizarContagemRegressiva,
+  1000
+);
 
 
 /* =========================================================
@@ -3428,6 +3669,11 @@ async function abrirAnimacao() {
     .add("visivel");
 
 
+  contagemRegressiva
+    .classList
+    .add("visivel");
+
+
   /*
     A imagem 16 tem transition de .75s.
     Esperamos terminar completamente.
@@ -3532,6 +3778,11 @@ async function fecharAnimacao() {
   */
 
   bloquearScroll();
+
+
+  contagemRegressiva
+    .classList
+    .remove("visivel");
 
 
   imagem16
