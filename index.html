@@ -2495,7 +2495,13 @@ body.modal-aberto {
     </p>
 
 
-    <form id="form-rsvp">
+    <form
+      id="form-rsvp"
+      action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSejMylO76VoWtWNbiHgJSzJbu15dI3I4nLhm6wOWNdAiYjmbA/formResponse"
+      method="POST"
+      target="google-form-target"
+      accept-charset="UTF-8"
+    >
 
 
       <label class="campo-rsvp">
@@ -2732,7 +2738,7 @@ body.modal-aberto {
 ========================================================= */
 
 const GOOGLE_FORM_ACTION =
-"https://docs.google.com/forms/d/e/1FAIpQLSejMylO76VoWtWNbiHgJSzJbu15dI3I4nLhm6wOWNdAiYjmbA/formResponse";
+"https://docs.google.com/forms/u/0/d/e/1FAIpQLSejMylO76VoWtWNbiHgJSzJbu15dI3I4nLhm6wOWNdAiYjmbA/formResponse";
 
 
 /* =========================================================
@@ -4326,150 +4332,105 @@ atualizarHavaianas();
 
 
 /* =========================================================
-   RSVP — ENVIO PELO VERCEL
-   O navegador envia para /api/rsvp.
-   A função do Vercel abre o Google Forms público, obtém os
-   parâmetros atuais da sessão e então envia a resposta.
+   GOOGLE FORMS — POST HTML NATIVO
 ========================================================= */
+
+formRsvp.action =
+GOOGLE_FORM_ACTION;
+
+formRsvp.method =
+"POST";
+
+formRsvp.target =
+"google-form-target";
+
+formRsvp.acceptCharset =
+"UTF-8";
+
 
 formRsvp.addEventListener(
   "submit",
-  async function(event) {
+  function(event) {
 
-    event.preventDefault();
+    /*
+      IMPORTANTE:
+      não usamos preventDefault no envio válido.
+      O navegador faz o POST HTML real diretamente
+      ao Google Forms e a resposta abre no iframe oculto.
+    */
 
+    if (
+      envioEmAndamento
+    ) {
 
-    if (envioEmAndamento) {
+      event.preventDefault();
+
       return;
+
     }
 
 
-    const nomeInput =
-    formRsvp.querySelector(
-      'input[name="entry.62577334"]'
-    );
+    if (
+      !formRsvp.checkValidity()
+    ) {
 
+      event.preventDefault();
 
-    const presencaInput =
-    formRsvp.querySelector(
-      'input[name="entry.877086558"]:checked'
-    );
+      formRsvp.reportValidity();
 
-
-    const mensagemInput =
-    formRsvp.querySelector(
-      'textarea[name="entry.2606285"]'
-    );
-
-
-    const nome =
-    nomeInput
-      ? nomeInput.value.trim()
-      : "";
-
-
-    const presenca =
-    presencaInput
-      ? presencaInput.value
-      : "";
-
-
-    const mensagem =
-    mensagemInput
-      ? mensagemInput.value.trim()
-      : "";
-
-
-    const tamanho =
-    (
-      !tamanhoHavaianas.disabled &&
-      tamanhoHavaianas.value
-    )
-      ? tamanhoHavaianas.value
-      : "";
-
-
-    if (!nome || !presenca) {
       return;
+
     }
 
 
-    envioEmAndamento = true;
-
-    botaoEnviar.disabled = true;
-    botaoEnviar.textContent = "Enviando...";
+    envioEmAndamento =
+    true;
 
 
-    try {
+    botaoEnviar.disabled =
+    true;
 
-      const resposta =
-      await fetch(
-        "/api/rsvp",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            nome: nome,
-            presenca: presenca,
-            tamanho: tamanho,
-            mensagem: mensagem
-          })
+
+    botaoEnviar.textContent =
+    "Enviando...";
+
+
+    setTimeout(
+      function() {
+
+        if (
+          !envioEmAndamento
+        ) {
+
+          return;
+
         }
-      );
 
 
-      const resultado =
-      await resposta.json();
+        envioEmAndamento =
+        false;
 
 
-      if (
-        !resposta.ok ||
-        !resultado.ok
-      ) {
-        throw new Error(
-          resultado.error ||
-          "O Google Forms não confirmou o envio."
+        botaoEnviar.disabled =
+        false;
+
+
+        botaoEnviar.textContent =
+        "Enviar resposta";
+
+
+        fecharTela(
+          telaRsvp
         );
-      }
 
 
-      envioEmAndamento = false;
+        abrirTela(
+          telaEnviado
+        );
 
-      botaoEnviar.disabled = false;
-      botaoEnviar.textContent = "Enviar resposta";
-
-
-      fecharTela(
-        telaRsvp
-      );
-
-
-      abrirTela(
-        telaEnviado
-      );
-
-
-    } catch (error) {
-
-      console.error(
-        "Erro ao enviar RSVP:",
-        error
-      );
-
-
-      envioEmAndamento = false;
-
-      botaoEnviar.disabled = false;
-      botaoEnviar.textContent = "Enviar resposta";
-
-
-      alert(
-        "Não foi possível enviar a resposta. Tente novamente."
-      );
-
-    }
+      },
+      1800
+    );
 
   }
 );
